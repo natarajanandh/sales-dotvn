@@ -1,0 +1,26 @@
+#loopedslider
+{
+   width: 203px;
+}
+
+.container
+{
+   height:170px;
+   overflow:hidden;
+   position:relative;
+}
+.slides
+{
+   position:absolute;
+   top:0;
+   left:0;
+}
+.slides > div {
+   position:absolute;
+   top:0;
+   padding:0 0 0 5px;
+   display:none;
+}
+.slidearrow{position: absolute; top:11px; padding: 0; width:207px; z-index: 999;}
+.previous{}
+.next{float:right;}
