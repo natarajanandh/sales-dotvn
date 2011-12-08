@@ -1,0 +1,112 @@
+#referafriend{
+    display:none;
+    position: absolute;
+    top:50%;
+    left:50%;
+    z-index:9999;
+    width:350px;
+    margin:-300px 0 0 -150px;
+    /*background-color: #fff;*/
+}
+#referafriend[id]{ /* IE6 and below Can't See This */
+    position:fixed;
+}
+/*#referafriend h3 {margin-bottom: 20px;}*/
+#referafriend h4 {padding: 4px 0;}
+#referafriend .group-select {margin: 0;}
+
+#referafriend-overlay{
+    display:none;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:5000;   
+    background-color:#000;
+    -moz-opacity: 0.3;
+    opacity:.30;
+    filter: alpha(opacity=30);
+}
+
+#referafriend-overlay[id]{ /* IE6 and below Can't See This */
+    position:fixed;
+}
+
+#referafriend.done #rafLoadMessage{
+	display:none;
+}
+#referafriend.done #rafContent{
+	display:block;
+}
+#referafriend.loading #rafContent{
+	display:none;
+}
+#referafriend.loading #rafLoadMessage{
+	font-size: 1.1em;
+	font-weight: bold;
+	color: #000;
+	display:block;
+	background-color: #fff;
+	width: 100px;
+	padding: 10px;
+	margin: 250px 0 0 120px;
+}
+
+.referafriend-please-wait {
+	padding-right:7px;
+}
+/*
+#referafriend.done img{
+	width:100%;
+	height:100%;
+}
+*/
+#raf-invite .group-select { 
+    margin:28px 0; 
+    border:1px solid #bbafa0;
+    padding:22px 25px 12px 25px;
+    background:#fbfaf6;
+}
+
+#raf-invite .group-select li .input-box .input-text,#raf-invite .group-select li .input-box textarea { 
+width:275px;
+}
+
+#raf-invite .button-set{ 
+border-top:1px solid #E4E4E4; 
+clear:both; 
+margin-top:4em; 
+padding-top:8px; 
+text-align:right; 
+} 
+ 
+ 
+#raf-invite .buttonlist li span a, .rightlink li span a, .form-button, button.button span { 
+     display:inline;
+}
+
+.raf-right{
+	text-align: right;margin-right:20px;
+}
+
+.form-button-alt#referafriend-button {
+    background-color: #36DAFF;
+    border: 1px solid #6A4307;
+    color: black;
+    cursor: pointer;
+   padding:3px 10px 3px 30px;text-decoration: none;
+}
+
+.form-button-alt#referafriend-button span {
+    background: none;
+    border: none;
+    font-weight: bold;
+}
+#referafriend-form span.required {
+    color: #EB340A;
+}
+
+/* Refer a Friend */
+.clsrefer{background:url(../images/refer_submit.jpg) no-repeat;width:79px;height:27px;border:none;margin-left:10px;cursor:pointer;}
+.clsrefercancel{background:url(../images/refer_cancel.jpg) no-repeat;width:79px;height:27px;border:none;cursor:pointer;}

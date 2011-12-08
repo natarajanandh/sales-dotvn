@@ -1,0 +1,15 @@
+/********************* Only IE7 and Below CSS *********************/
+
+/*.city-left{background:url(../images/cityleft.png); width:13px; height:35px;}
+.city-right{background:url(../images/cityright.png); width:13px; height:35px;}*/
+
+.searchinput input{position:relative;z-index:2;behavior: url(http://www.webstreetsmart.com/groupclone-test/skin/frontend/default/inspire-blue/images/ie-css3.htc);}
+.selectcity select{position:relative;z-index:3;behavior: url(http://www.webstreetsmart.com/groupclone-test/skin/frontend/default/inspire-blue/images/ie-css3.htc);}
+.col-main .contpad{position:relative;z-index:5;behavior: url(http://www.webstreetsmart.com/groupclone-test/skin/frontend/default/inspire-blue/images/ie-css3.htc);}
+/*.leftbox_middle{position:relative;z-index:6;behavior: url(http://www.webstreetsmart.com/groupclone-test/skin/frontend/default/inspire-blue/images/ie-css3.htc);}
+.dealstatus{position:relative;z-index:7;behavior: url(http://www.webstreetsmart.com/groupclone-test/skin/frontend/default/inspire-blue/images/ie-css3.htc);}*/
+.block-title{position:relative;z-index:8;-behavior: url(http://www.webstreetsmart.com/groupclone-test/skin/frontend/default/inspire-blue/images/ie-css3.htc);}
+.bottombox{position:relative;z-index:9;behavior: url(http://www.webstreetsmart.com/groupclone-test/skin/frontend/default/inspire-blue/images/ie-css3.htc);}
+.footer-content .top .follow-us{position:relative;z-index:10;behavior: url(http://www.webstreetsmart.com/groupclone-test/skin/frontend/default/inspire-blue/images/ie-css3.htc);}
+.footerdollar{position:relative;z-index:11;behavior: url(http://www.webstreetsmart.com/groupclone-test/skin/frontend/default/inspire-blue/images/ie-css3.htc);}
+.header-bottom ul.clsmenuul li a:hover, .header-bottom ul.clsmenuul li.active a:link, .header-bottom ul.clsmenuul li.active a:visited{position:relative;z-index:12;behavior: url(http://www.webstreetsmart.com/groupclone-test/skin/frontend/default/inspire-blue/images/ie-css3.htc);}

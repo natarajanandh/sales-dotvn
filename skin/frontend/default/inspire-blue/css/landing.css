@@ -1,0 +1,130 @@
+html, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{margin:0; padding:0; border:0; outline:0}
+
+ol, ul{list-style:none}
+.floatleft{float:left}
+.floatright{float:right}
+
+.clear{clear:both; height:0px; font-size:0px}
+.clearfix:after{ clear:both;  display:block;  content:"";  height:0px;  visibility:hidden}
+.clearfix{ display:inline-block}
+
+* html .clearfix{ height:1%}
+.clearfix{ display:block}
+li.clearfix{ display:list-item}
+
+
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 20px; }
+
+h3 {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  line-height: 16px; }
+
+fieldset {
+  border: none;
+  padding: 0; }
+
+.button {
+  text-indent: -9999px;
+  cursor: pointer;
+  border: none;
+  display: block;
+  font-size: 0;
+  line-height: 0; }
+
+  * {
+  margin: 0; }
+
+html {
+  height: 100%; }
+  html body.landing {
+    border-top: 10px solid #000;
+    overflow: hidden;
+    height: 100%;
+    font: 70%/1.5 Helvetica, Arial, FreeSans, sans-serif; }
+ .logo {
+ 
+    width: 291px;
+    height: 60px; margin:0 auto;}
+    html h1#logo a {
+      width: 100%;
+      height: 100%;
+      display: block;
+      text-indent: -9999px; }
+    * html h1#logo {
+      background: none;
+      filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/groupon/logo_groupon.png', sizingMethod='image'); }
+
+  html .container {
+    width: 960px;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -120px;
+  padding-top:50px;
+
+  }
+  html .main {
+   padding-top:15px; background:#333;width:100% }
+  html .logo_three_steps {
+    float: left; }
+  html .save_three_steps {
+    float: right;
+    margin: -115px 160px 0 0; }
+  html .page_content {
+    background: url(../images/white-bg.png) no-repeat;
+  margin:0 auto ;
+    width: 480px;
+    padding: 30px;
+height:180px;
+  }
+ 
+
+
+
+
+  html .button_container {float:left; padding:20px 0 0 90px;}
+
+
+
+    html .button_container .continue {
+      background: url(../images/today-deal-btn.png) no-repeat 0 0;
+      width: 150px !important;
+      height:42px;
+      float: left;margin:5px 0 0 0; }
+       html .button_container .subscribe {
+      background: url(../images/subscribe-but.png) no-repeat 0 0;
+      width: 150px !important;
+      height: 42px;
+      float:left;margin:5px 0 0 0; }
+
+  html .city_name {
+    float: left;
+    position: absolute;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    text-shadow: 0.025em 0.025em 0.025em black;
+    letter-spacing: -1px; }
+
+body.landing {
+  background: url(../images/bg-drinks.jpg) no-repeat 40px 0 #2fcff1; }
+
+.city_name {
+  margin: -90px 0 0 495px; }
+/* form changes shankar  CSS */
+/* -------------------------------------- */
+  #confirm-city{float:left;margin:25px 0 0 10px; font-family: Helvetica, sans-serif; font-size: 16px; font-weight: bold;}
+  #confirm-city .confirm-city-box{background:url(../images/city-bg-box.jpg) no-repeat;width:204px;height:32px;float:left;margin:12px 0 0 0;border:none;}
+  #enter-mail{float:left;margin:25px 0 0 30px;font-family: Helvetica, sans-serif; font-size: 16px; font-weight: bold;}
+  #enter-mail .mail-box{background:url(../images/mail-bg-box.jpg) no-repeat;width:204px;height:32px;margin:12px 0 0 0;}
+  #enter-mail .mail-box input{width:195px;font-size:12px;border:none;margin:8px 0 0 5px;}
+
+ /* Form Validation */
+.validation-advice { clear:both; min-height:13px; margin:3px 0 5px; padding-left:17px; font-size:10px; line-height:13px; background:url(../images/validation_advice_bg.gif) 2px 1px no-repeat; color:#f00; }
+#checkout-step-billing .validation-advice { clear:both; min-height:13px; margin:0px; padding-left:17px; font-size:10px; line-height:13px; background:url(../images/validation_advice_bg.gif) 2px 1px no-repeat; color:#f00; }
+.validation-failed { border:1px dashed #f00 !important; background:#faebe7 !important; }
+.validation-passed {}
