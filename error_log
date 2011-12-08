@@ -1,0 +1,7 @@
+[13-Aug-2010 12:31:26] PHP Fatal error:  Out of memory (allocated 21495808) (tried to allocate 70149 bytes) in /home/harbeson/public_html/a/app/code/core/Mage/Core/Block/Abstract.php on line 778
+[13-Aug-2010 13:28:49] PHP Fatal error:  Undefined class constant 'XML_PATH_EMAIL_RECIPIENT' in /home/harbeson/public_html/a/app/code/core/Mage/Adminhtml/controllers/Catalog/ProductController.php on line 709
+[13-Aug-2010 14:59:38] PHP Parse error:  syntax error, unexpected '}' in /home/harbeson/public_html/a/app/design/frontend/default/inspire-blue/template/catalog/product/list.phtml on line 362
+[14-Aug-2010 04:16:15] PHP Fatal error:  Out of memory (allocated 20971520) (tried to allocate 72357 bytes) in /home/harbeson/public_html/a/app/code/core/Mage/Core/Block/Template.php on line 223
+[14-Aug-2010 08:20:25] PHP Fatal error:  Out of memory (allocated 21233664) (tried to allocate 81921 bytes) in /home/harbeson/public_html/a/app/design/adminhtml/default/default/template/page.phtml on line 79
+[14-Aug-2010 09:36:22] PHP Fatal error:  Can't use method return value in write context in /home/harbeson/public_html/a/app/design/frontend/default/inspire-blue/template/page/html/header.phtml on line 88
+[14-Aug-2010 09:36:22] PHP Fatal error:  Can't use method return value in write context in /home/harbeson/public_html/a/app/design/frontend/default/inspire-blue/template/page/html/header.phtml on line 88
