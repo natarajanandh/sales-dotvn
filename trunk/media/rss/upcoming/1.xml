@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+  <channel>
+    <title><![CDATA[Groupclone Feeds]]></title>
+    <link>http://www.groupclone.net</link>
+    <description><![CDATA[]]></description>
+    <pubDate>Tue, 25 Oct 2011 07:05:11 +0000</pubDate>
+    <generator>Zend_Feed</generator>
+    <language>en_US</language>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+  </channel>
+</rss>
