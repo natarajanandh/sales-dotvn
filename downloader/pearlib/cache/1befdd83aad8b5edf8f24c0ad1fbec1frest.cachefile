@@ -1,0 +1,18 @@
+a:14:{s:7:"attribs";a:2:{s:5:"xmlns";s:36:"http://pear.php.net/dtd/rest.release";s:18:"xsi:schemaLocation";s:81:"http://pear.php.net/dtd/rest.release     http://pear.php.net/dtd/rest.release.xsd";}s:1:"p";a:2:{s:7:"attribs";a:1:{s:10:"xlink:href";s:47:"/Chiara_PEAR_Server_REST/p/phoenix_moneybookers";}s:8:"_content";s:20:"Phoenix_Moneybookers";}s:1:"c";s:32:"connect.magentocommerce.com/core";s:1:"v";s:5:"1.2.2";s:2:"st";s:6:"stable";s:1:"l";s:5:"mixed";s:1:"m";s:5:"dimav";s:1:"s";s:40:"Moneybookers payment gateway integration";s:1:"d";s:588:"Moneybookers payment gateway official integration, implemented by Phoenix Medien GmbH. Provides integration for payment options powered by Moneybookers, as separate payment methods:
+All Credit Cards / Visa, Mastercard, AMEX, JCB, Diners - International
+CartaSi - Italy
+Lastschrift (ELV) - Germany
+Dankort - Denmark
+Nordea Solo - Sweden
+eNETS - Singapore
+Carte Bleue - France
+Giropay - Germany
+iDeal - Netherlands
+Laser - Ireland
+EPS Online-Überweisung - Austria
+POLi - Australia
+Postepay - Italy
+Przelewy24 - Poland
+Sofortüberweisung - Germany
+Nordea Solo - Finland
+Moneybookers eWallet";s:2:"da";s:19:"2010-07-26 16:27:23";s:1:"n";s:5:"1.2.2";s:1:"f";s:6:"178865";s:1:"g";s:70:"http://connect.magentocommerce.com/core/get/Phoenix_Moneybookers-1.2.2";s:1:"x";a:1:{s:7:"attribs";a:1:{s:10:"xlink:href";s:17:"package.1.2.2.xml";}}}

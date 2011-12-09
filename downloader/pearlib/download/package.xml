@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Auguria_Sponsorship</name>
+ <channel>connect.magentocommerce.com/community</channel>
+ <summary>This module allows customers to earn fidelity and sponsorship points.
+Customers can invit friends on your site and when their friends buy products, they earn sponsorship points. If a godchild sponsor a person, the sponsor will earn a percentage too.
+When customers buy, they can win fidelity points. 
+These points can then be exchanged against cash, discounts or gifts (not yet implemented).</summary>
+ <description>The module consists of :
+- A form to send invitations: when an invitation is sent, the guest mail is registered , and the customer id too.
+- A system of affiliation: The link sent through invitations refer to a controller that will create a cookie and a session to identify a person invited. We can equally put such links on third party sites.
+- Account creation: When creating an account, it checks whether an invitation was sent to the email used for registration. If this is not the case, we check if a session cookie or affiliation exists. If there is a link, the user who registers become the godson of the customer who invits him.
+- A monitoring points for the client: the client have an interface for monitoring points in his account. He can see his godson. He can ask for trade his points.
+- Increment of points: Fidelity points and sponsorship points are inserted in the command, at the checkout cart. Upon payment of the command, points are awarded to customers.
+- Definition of rules: the management of points can be made through the catalog rules prices or cart rules prices.
+- Module configuration: The administration interface allows you to enable or disable  fidelity points or sponsorship points. Enabling or no exchange of cash, gift or coupon. You can also define the max cash without siret number, the period of calcul of the max cash, if an order is required to sponsor, the period of validity for an invitation, the period of validity of a sponsorship whithout an order, number of levels for sponsorship calculation points, the percentage on indirect sponsorship sales, the maximum number of invitations that you can send per hour, the header message, the body message and the footer message.
+- An administration interface: allows to see the list of invitations sent, monitor requests for trade of points.
+
+Once installed, you must:
+- Create one or several catalog or cart rules for increment fidelity and sponsorship points
+- Edit CMS Page on sponsorship information
+- If you enable automatic sponsorship recall, activate magento cron</description>
+ <lead>
+  <name>Auguria</name>
+  <user>Auguria</user>
+  <email>magento@auguria.net</email>
+  <active>yes</active>
+ </lead>
+ <date>2010-06-21</date>
+ <time>16:06:21</time>
+ <version>
+  <release>1.0.4</release>
+  <api>1.4</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license uri="http://opensource.org/licenses/osl-3.0.php">OSL 3.0</license>
+ <notes>
+If you have ideas for improvements or find bugs, please send them to Franck Charpentier  at www.auguria.net, with Auguria LastReviews  as part of the subject line.
+ </notes>
+ <contents>
+  <dir name="/">
+   <dir name="adminhtml">
+    <dir name="default">
+     <dir name="default">
+      <dir name="layout">
+       <file md5sum="934da279981ddb250e116b956a262c0c" name="sponsorship.xml" role="magedesign" />
+      </dir> <!-- /adminhtml/default/default/layout -->
+     </dir> <!-- /adminhtml/default/default -->
+    </dir> <!-- /adminhtml/default -->
+   </dir> <!-- /adminhtml -->
+   <dir name="app">
+    <dir name="etc">
+     <dir name="modules">
+      <file md5sum="2ace21d88c17b2636514543e866169eb" name="Auguria_Sponsorship.xml" role="mage" />
+     </dir> <!-- /app/etc/modules -->
+    </dir> <!-- /app/etc -->
+   </dir> <!-- /app -->
+   <dir name="Auguria">
+    <dir name="Sponsorship">
+     <dir name="Block">
+      <dir name="Adminhtml">
+       <dir name="Change">
+        <dir name="Edit">
+         <dir name="Tab">
+          <file md5sum="cd94427577e45107683ea305a557f9d8" name="Form.php" role="magecommunity" />
+         </dir> <!-- /Auguria/Sponsorship/Block/Adminhtml/Change/Edit/Tab -->
+         <file md5sum="ae7412b583874b8fffc05cc3897f1a2b" name="Form.php" role="magecommunity" />
+         <file md5sum="14027188a77ed427a54211d61471c962" name="Tabs.php" role="magecommunity" />
+        </dir> <!-- /Auguria/Sponsorship/Block/Adminhtml/Change/Edit -->
+        <file md5sum="5c266273137c23f763d39d93f5ef82b4" name="Edit.php" role="magecommunity" />
+        <file md5sum="9962a69732ae93157eb99ff663608203" name="Grid.php" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Block/Adminhtml/Change -->
+       <dir name="Link">
+        <dir name="Edit">
+         <dir name="Tab">
+          <file md5sum="98a2a13987cb165ee5233dcef0927daa" name="Form.php" role="magecommunity" />
+         </dir> <!-- /Auguria/Sponsorship/Block/Adminhtml/Link/Edit/Tab -->
+         <file md5sum="e6e087ae96b24d4edbe9e1f578e7a55a" name="Form.php" role="magecommunity" />
+         <file md5sum="7d67a25094cf51ced551a8b3e21155c1" name="Tabs.php" role="magecommunity" />
+        </dir> <!-- /Auguria/Sponsorship/Block/Adminhtml/Link/Edit -->
+        <file md5sum="bb82a0a9cd963648d7e6e34c616a0122" name="Edit.php" role="magecommunity" />
+        <file md5sum="a141a2ecd313131a3282885b7781268c" name="Grid.php" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Block/Adminhtml/Link -->
+       <dir name="Openinviter">
+        <dir name="Edit">
+         <dir name="Tab">
+          <file md5sum="195714b736feb365b208346ab8323385" name="Form.php" role="magecommunity" />
+         </dir> <!-- /Auguria/Sponsorship/Block/Adminhtml/Openinviter/Edit/Tab -->
+         <file md5sum="b4bdc64549563f0117f65c66f97d0fb8" name="Form.php" role="magecommunity" />
+         <file md5sum="41a6ef79001601dacba231c9eefd4749" name="Tabs.php" role="magecommunity" />
+        </dir> <!-- /Auguria/Sponsorship/Block/Adminhtml/Openinviter/Edit -->
+        <file md5sum="2297909cf7059abd6b15080abe9dc586" name="Edit.php" role="magecommunity" />
+        <file md5sum="d7c4af65017cbcb83831af451b1488ce" name="Grid.php" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Block/Adminhtml/Openinviter -->
+       <dir name="Sponsorship">
+        <dir name="Edit">
+         <dir name="Tab">
+          <file md5sum="686b9a9a14d57e0f2e7edcf3d4e0416a" name="Form.php" role="magecommunity" />
+         </dir> <!-- /Auguria/Sponsorship/Block/Adminhtml/Sponsorship/Edit/Tab -->
+         <file md5sum="a3a2352db1c72663af0caa289287a9d2" name="Form.php" role="magecommunity" />
+         <file md5sum="257863f6b317e37110dacc86b783565b" name="Tabs.php" role="magecommunity" />
+        </dir> <!-- /Auguria/Sponsorship/Block/Adminhtml/Sponsorship/Edit -->
+        <file md5sum="40ea8077f12545878ddc0cd0ad2f8cad" name="Edit.php" role="magecommunity" />
+        <file md5sum="83a98d5005f4b89dfa275ddea3355c16" name="Grid.php" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Block/Adminhtml/Sponsorship -->
+       <dir name="Widget">
+        <dir name="Grid">
+         <file md5sum="35c8a336e1a0e2dcc8d48b558cee9253" name="Renderer.php" role="magecommunity" />
+        </dir> <!-- /Auguria/Sponsorship/Block/Adminhtml/Widget/Grid -->
+       </dir> <!-- /Auguria/Sponsorship/Block/Adminhtml/Widget -->
+       <file md5sum="bec41dc1406063e264b15c9755cf3a5c" name="Change.php" role="magecommunity" />
+       <file md5sum="922a5716b419d7becb0150cae3bda3de" name="Link.php" role="magecommunity" />
+       <file md5sum="291020a06d499b7b12e37e53e1963a08" name="Openinviter.php" role="magecommunity" />
+       <file md5sum="634e37981a47519ba1063be166fc511f" name="Sponsorship.php" role="magecommunity" />
+      </dir> <!-- /Auguria/Sponsorship/Block/Adminhtml -->
+      <dir name="Customer">
+       <dir name="Account">
+        <file md5sum="365a9fc8dfc660fcef3dbbe0a131d289" name="PointsDetail.php" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Block/Customer/Account -->
+       <dir name="Form">
+        <file md5sum="33cd49ab1ceed2816feb1d45b1c7a69b" name="Boost.php" role="magecommunity" />
+        <file md5sum="92a71fe4f081b6c3b85cc645419fac04" name="PointsChange.php" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Block/Customer/Form -->
+       <dir name="Widget">
+        <file md5sum="3c82b2d67f219ae56ac37526f72268fe" name="Name.php" role="magecommunity" />
+        <file md5sum="ba25badce7295811fe5deeafa284c114" name="Virement.php" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Block/Customer/Widget -->
+      </dir> <!-- /Auguria/Sponsorship/Block/Customer -->
+      <dir name="Promo">
+       <dir name="Catalog">
+        <dir name="Edit">
+         <dir name="Tab">
+          <file md5sum="f5926196fd291cb45c13b5a8e1c018b6" name="Actions.php" role="magecommunity" />
+         </dir> <!-- /Auguria/Sponsorship/Block/Promo/Catalog/Edit/Tab -->
+        </dir> <!-- /Auguria/Sponsorship/Block/Promo/Catalog/Edit -->
+       </dir> <!-- /Auguria/Sponsorship/Block/Promo/Catalog -->
+       <dir name="Quote">
+        <dir name="Edit">
+         <dir name="Tab">
+          <file md5sum="4ff4de9b5e4d5200111d602625f91362" name="Actions.php" role="magecommunity" />
+         </dir> <!-- /Auguria/Sponsorship/Block/Promo/Quote/Edit/Tab -->
+        </dir> <!-- /Auguria/Sponsorship/Block/Promo/Quote/Edit -->
+       </dir> <!-- /Auguria/Sponsorship/Block/Promo/Quote -->
+      </dir> <!-- /Auguria/Sponsorship/Block/Promo -->
+      <file md5sum="3051e44a791ccab457a37cef01357bd5" name="Openinviter.php" role="magecommunity" />
+      <file md5sum="40c257095b22fe117401af276b1f4bd7" name="Sponsorship.php" role="magecommunity" />
+     </dir> <!-- /Auguria/Sponsorship/Block -->
+     <dir name="controllers">
+      <dir name="Adminhtml">
+       <file md5sum="73c1db83413cdf077562f8fb8d4bd8ec" name="ChangeController.php" role="magecommunity" />
+       <file md5sum="8f6c0efd94f22c15ffd2dd0f287a0e5e" name="LinkController.php" role="magecommunity" />
+       <file md5sum="82c2500286cb627c56d8655b79380d77" name="OpeninviterController.php" role="magecommunity" />
+       <file md5sum="fff66a866f773ed8f6d3708c9e0d644f" name="SponsorshipController.php" role="magecommunity" />
+      </dir> <!-- /Auguria/Sponsorship/controllers/Adminhtml -->
+      <dir name="Customer">
+       <file md5sum="2986c03548b6ff85c2ba016dea953598" name="AccountController.php" role="magecommunity" />
+      </dir> <!-- /Auguria/Sponsorship/controllers/Customer -->
+      <file md5sum="c23cca5dfd34c8975f785e7973aa4d79" name="BoostController.php" role="magecommunity" />
+      <file md5sum="7911af35af4a33da338f6d9db0f6b224" name="FidelitypointsController.php" role="magecommunity" />
+      <file md5sum="e394a4d3f448e40f5461c16c80acefbf" name="IndexController.php" role="magecommunity" />
+      <file md5sum="af603cc580fd7f6ea6507a43696b4edb" name="OpeninviterController.php" role="magecommunity" />
+      <file md5sum="b81147d898f8903d5167ab0eed14a8ed" name="SponsorController.php" role="magecommunity" />
+      <file md5sum="71a221400c548c44d73a4715078ec51a" name="SponsorpointsController.php" role="magecommunity" />
+     </dir> <!-- /Auguria/Sponsorship/controllers -->
+     <dir name="etc">
+      <file md5sum="7d68a1700db09ce6df509bdca2e8b89a" name="config.xml" role="magecommunity" />
+      <file md5sum="169c05a57f8aa8019435e9b425e0d5aa" name="system.xml" role="magecommunity" />
+     </dir> <!-- /Auguria/Sponsorship/etc -->
+     <dir name="Helper">
+      <file md5sum="10e2e7c3408665a07464cd6c20bf1550" name="Data.php" role="magecommunity" />
+      <file md5sum="9dde8399b8afb7e45347c1b7bc667c3a" name="Mail.php" role="magecommunity" />
+     </dir> <!-- /Auguria/Sponsorship/Helper -->
+     <dir name="Lib">
+      <dir name="OpenInviter">
+       <dir name="conf">
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="abv.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="aol.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="apropo.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="atlas.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="aussiemail.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="azet.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="badoo.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="bebo.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="bigstring.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="bookcrossing.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="bordermail.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="brazencareerist.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="canoe.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="care2.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="clevergo.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="cyworld.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="doramail.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="eons.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="evite.conf" role="magecommunity" />
+        <file md5sum="12cfb187449596c39774c4ac193295cc" name="facebook.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="faces.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="famiva.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="fastmail.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="fdcareer.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="flickr.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="flingr.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="flixster.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="fm5.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="freemail.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="friendfeed.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="friendster.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="gawab.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="gmail.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="gmx_net.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="graffiti.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="hi5.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="hotmail.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="hushmail.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="hyves.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="inbox.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="india.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="indiatimes.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="inet.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="interia.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="katamail.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="kids.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="kincafe.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="konnects.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="koolro.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="lastfm.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="libero.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="linkedin.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="livejournal.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="lovento.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="lycos.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="mail2world.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="mail_com.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="mail_in.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="mail_ru.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="meinvz.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="meta.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="mevio.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="motortopia.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="msn.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="multiply.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="mycatspace.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="mydogspace.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="mynet.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="myspace.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="netaddress.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="netlog.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="ning.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="nz11.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="o2.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="operamail.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="orkut.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="perfspot.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="plaxo.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="plazes.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="plurk.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="pochta.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="popstarmail.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="rambler.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="rediff.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="sapo.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="skyrock.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="tagged.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="techemail.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="terra.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="twitter.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="uk2.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="vimeo.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="virgilio.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="vkontakte.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="walla.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="web_de.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="wpl.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="xanga.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="xing.conf" role="magecommunity" />
+        <file md5sum="6e2fad3c6d126d7da250cb8976a9ad4f" name="xuqa.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="yahoo.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="yandex.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="youtube.conf" role="magecommunity" />
+        <file md5sum="42ed0b97cb6919d0cd402831bccc1ea3" name="zapak.conf" role="magecommunity" />
+        <file md5sum="1d09309103e660729b492433acda9822" name="_hosted.conf" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Lib/OpenInviter/conf -->
+       <dir name="images">
+        <file md5sum="cccdfd4ed0795b767d2a01f531781c10" name="ers.gif" role="magecommunity" />
+        <file md5sum="6b4b170c9f10a0fa4b25307dd8f47e5b" name="oks.gif" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Lib/OpenInviter/images -->
+       <dir name="plugins">
+        <file md5sum="1685755eae909c468055b9b36c915822" name="abv.plg.php" role="magecommunity" />
+        <file md5sum="71a7666b0a145aae1ac5413ff789973d" name="aol.plg.php" role="magecommunity" />
+        <file md5sum="4426f976c1953383cf9d1f892aa9576e" name="apropo.plg.php" role="magecommunity" />
+        <file md5sum="0b8e4237970ae54ff20187f5e861f972" name="atlas.plg.php" role="magecommunity" />
+        <file md5sum="d40188b33455b3fd2e88cbde25f61709" name="aussiemail.plg.php" role="magecommunity" />
+        <file md5sum="e4a7c19450ca1ad84783a06ae3b1d61f" name="azet.plg.php" role="magecommunity" />
+        <file md5sum="b1d4863a173a80fc9d77331f1e60f2df" name="badoo.plg.php" role="magecommunity" />
+        <file md5sum="2d7db898c660380ee74963667bec6bae" name="bebo.plg.php" role="magecommunity" />
+        <file md5sum="bb2f4d7d968bf43b4a9fad9ff52fd2ad" name="bigstring.plg.php" role="magecommunity" />
+        <file md5sum="212a53a3a95659c56e15d6848549e25e" name="bookcrossing.plg.php" role="magecommunity" />
+        <file md5sum="30190fa3da58d63ddd7e30e6ab0190dc" name="bordermail.plg.php" role="magecommunity" />
+        <file md5sum="c68f39b6d7a07550abd63ed044ad85c2" name="brazencareerist.plg.php" role="magecommunity" />
+        <file md5sum="8b3ff7aefeb8d18a7199f6458ef89a16" name="canoe.plg.php" role="magecommunity" />
+        <file md5sum="c066e81973194cca90036c37c7740937" name="care2.plg.php" role="magecommunity" />
+        <file md5sum="9bd12fea0eb7f60043bcdca9116cb1bc" name="clevergo.plg.php" role="magecommunity" />
+        <file md5sum="1c960c9bb19897621dd4c26666dd5ae6" name="cyworld.plg.php" role="magecommunity" />
+        <file md5sum="81037085958f90a05111ad030c5a72f8" name="doramail.plg.php" role="magecommunity" />
+        <file md5sum="35009d6e25ae5584c554808b50145a19" name="eons.plg.php" role="magecommunity" />
+        <file md5sum="d6c8acf7c24c2848eccedb269928d6eb" name="evite.plg.php" role="magecommunity" />
+        <file md5sum="179983b943c1b96aa9421776eaecf991" name="facebook.plg.php" role="magecommunity" />
+        <file md5sum="f71786a835cf05eeec142b85df5a6baa" name="faces.plg.php" role="magecommunity" />
+        <file md5sum="eee1c0a9a6d645baf014245ca2e9c3e9" name="famiva.plg.php" role="magecommunity" />
+        <file md5sum="e90fc58235f2300042d7171bbeb8c8e3" name="fastmail.plg.php" role="magecommunity" />
+        <file md5sum="aad3d525fe09269de056f8ec03e43104" name="fdcareer.plg.php" role="magecommunity" />
+        <file md5sum="217a5e6b3393253da0c32d256f52fe20" name="flickr.plg.php" role="magecommunity" />
+        <file md5sum="c2b415851babadb8048609874b411979" name="flingr.plg.php" role="magecommunity" />
+        <file md5sum="773fad1c2c1775fcb74fb33f51d1fa24" name="flixster.plg.php" role="magecommunity" />
+        <file md5sum="0576df91534edaab3d6b333d1968781a" name="fm5.plg.php" role="magecommunity" />
+        <file md5sum="142951e9c20ce4447f44c6db7e5cc2e8" name="freemail.plg.php" role="magecommunity" />
+        <file md5sum="399c987766110735fdd301979997fe48" name="friendfeed.plg.php" role="magecommunity" />
+        <file md5sum="8b3402876a73bf91a84d3a6d8dbb1951" name="friendster.plg.php" role="magecommunity" />
+        <file md5sum="db1174c45ad0c35cce642a0dc1a825a1" name="gawab.plg.php" role="magecommunity" />
+        <file md5sum="a4a288e002543c4e167a8ff4540b3ee0" name="gmail.plg.php" role="magecommunity" />
+        <file md5sum="218b73370a1367455aeee09695bc4e2a" name="gmx_net.plg.php" role="magecommunity" />
+        <file md5sum="36f6a6f03fceb9b0e008c1a281a17eb2" name="graffiti.plg.php" role="magecommunity" />
+        <file md5sum="6fbabcad8d4c16eeb7374bbc27b8c979" name="hi5.plg.php" role="magecommunity" />
+        <file md5sum="3dece5995f04e557641c3ea0cea91cd9" name="hotmail.plg.php" role="magecommunity" />
+        <file md5sum="d3f9f339ac03c8aa2426f7a2fe4f2606" name="hushmail.plg.php" role="magecommunity" />
+        <file md5sum="4dca8f35b17070c42bd16fd86352baf3" name="hyves.plg.php" role="magecommunity" />
+        <file md5sum="34066ac6458b6506921e11dde302e3c2" name="inbox.plg.php" role="magecommunity" />
+        <file md5sum="cdd4e86f5b21122b2ebf898eb78b0311" name="india.plg.php" role="magecommunity" />
+        <file md5sum="bbbda190c92579f469f0b4712ba9806f" name="indiatimes.plg.php" role="magecommunity" />
+        <file md5sum="6bc3da45b492ba41012b25e501c05273" name="inet.plg.php" role="magecommunity" />
+        <file md5sum="3fb3cb41913d12228f162ac32539a848" name="interia.plg.php" role="magecommunity" />
+        <file md5sum="2c2c85f1cab23f236295e5340da10511" name="katamail.plg.php" role="magecommunity" />
+        <file md5sum="5fae2d825799b0793e2b131162ec8e07" name="kids.plg.php" role="magecommunity" />
+        <file md5sum="39f0d662293f3db3bd9b0bb9e57b8e27" name="kincafe.plg.php" role="magecommunity" />
+        <file md5sum="0fd4bc3f8361fb7e5f04d277b4f7f121" name="konnects.plg.php" role="magecommunity" />
+        <file md5sum="ebc1936657a99eb8b96ee178d9b7e15c" name="koolro.plg.php" role="magecommunity" />
+        <file md5sum="a293d4bde8a36b1868ddc432e1f201e6" name="lastfm.plg.php" role="magecommunity" />
+        <file md5sum="29cbf372f39d77fd0b62d0777ded4317" name="libero.plg.php" role="magecommunity" />
+        <file md5sum="12d71c803adf655dd865d9dd91fb1066" name="linkedin.plg.php" role="magecommunity" />
+        <file md5sum="c9c4bd30963d28eee5038841a7d7c788" name="livejournal.plg.php" role="magecommunity" />
+        <file md5sum="e26c7fe712efdd69fe3788b02ebf514b" name="lovento.plg.php" role="magecommunity" />
+        <file md5sum="41a133d41ef4627b353b0f33149629c0" name="lycos.plg.php" role="magecommunity" />
+        <file md5sum="5737b208425e9d03988303d1c20baac6" name="mail2world.plg.php" role="magecommunity" />
+        <file md5sum="5d2c20c61d5ba58c4e4c4fc6e162cb20" name="mail_com.plg.php" role="magecommunity" />
+        <file md5sum="bf443e42022a368819bcbb788baaa095" name="mail_in.plg.php" role="magecommunity" />
+        <file md5sum="a911e588bc6e8b790dad186ba2221d0c" name="mail_ru.plg.php" role="magecommunity" />
+        <file md5sum="bdfc89d072c231e39d7e3dccf12b1a22" name="meinvz.plg.php" role="magecommunity" />
+        <file md5sum="17bd2e282a8509a14c2d440ea02d8961" name="meta.plg.php" role="magecommunity" />
+        <file md5sum="d175cd50dc07d749e7118a3a3b836800" name="mevio.plg.php" role="magecommunity" />
+        <file md5sum="507c050bb6e0cc73884c427d4745c7a0" name="motortopia.plg.php" role="magecommunity" />
+        <file md5sum="2a205b0556aa7b8908dca3b15017db4f" name="msn.plg.php" role="magecommunity" />
+        <file md5sum="e4a780350ba171c890a84999a6389206" name="multiply.plg.php" role="magecommunity" />
+        <file md5sum="1282b9619ddfcba5d924c0e31ea74cc7" name="mycatspace.plg.php" role="magecommunity" />
+        <file md5sum="be44672096adbe4e2532d0a9df027b5f" name="mydogspace.plg.php" role="magecommunity" />
+        <file md5sum="a2a38a688707957e216d3868c8b1741e" name="mynet.plg.php" role="magecommunity" />
+        <file md5sum="7b84d123a8be4cc8b0c11b8fd01a0e6e" name="myspace.plg.php" role="magecommunity" />
+        <file md5sum="8e2ccf82123f831b2616c8d3a80f579f" name="netaddress.plg.php" role="magecommunity" />
+        <file md5sum="dfb64b43a3954bfa5d01d34d2cba4d80" name="netlog.plg.php" role="magecommunity" />
+        <file md5sum="e59cb73b203a22978ead363c49e48d3d" name="ning.plg.php" role="magecommunity" />
+        <file md5sum="b94995c177198c061b628ddc82d4c7fc" name="nz11.plg.php" role="magecommunity" />
+        <file md5sum="8e44c5027c493fff7be428ff034f0466" name="o2.plg.php" role="magecommunity" />
+        <file md5sum="5e3a90f0be46b03bcde54eebd76371c9" name="operamail.plg.php" role="magecommunity" />
+        <file md5sum="1a291548a82889b36f976bd091260aa5" name="orkut.plg.php" role="magecommunity" />
+        <file md5sum="9d4a9b33f8cf809e5c73bfc517af53db" name="perfspot.plg.php" role="magecommunity" />
+        <file md5sum="203f949a4e22b737de2003eb4d3c8af3" name="plaxo.plg.php" role="magecommunity" />
+        <file md5sum="f6d71432926c126d7f165e6c83a16854" name="plazes.plg.php" role="magecommunity" />
+        <file md5sum="e780f5cdd31029cc1b153a1c5b14a965" name="plurk.plg.php" role="magecommunity" />
+        <file md5sum="b5732832c05bf982a5950fa32ee4d62a" name="pochta.plg.php" role="magecommunity" />
+        <file md5sum="a36517a17fa2a461ab890861a4c452fd" name="popstarmail.plg.php" role="magecommunity" />
+        <file md5sum="2a72cbe3e0c12ca123f00f2d113ba02e" name="rambler.plg.php" role="magecommunity" />
+        <file md5sum="5679b17973310ecf1ba8b097d3acffaa" name="rediff.plg.php" role="magecommunity" />
+        <file md5sum="2bd76d540c454da5f014eba59074e835" name="sapo.plg.php" role="magecommunity" />
+        <file md5sum="4d7497a380a839f28611a21ddea55a89" name="skyrock.plg.php" role="magecommunity" />
+        <file md5sum="d3ade2b837b7550a09d26d3bc1bd9823" name="tagged.plg.php" role="magecommunity" />
+        <file md5sum="9894baf3c22e835dbcf62796327d9f99" name="techemail.plg.php" role="magecommunity" />
+        <file md5sum="094ae4ab8e63dd0f075a860c9aba2094" name="terra.plg.php" role="magecommunity" />
+        <file md5sum="13482b4ca74e66965a9e9233745b6316" name="twitter.plg.php" role="magecommunity" />
+        <file md5sum="ca5238d090e6a65709302a149caf5ffb" name="uk2.plg.php" role="magecommunity" />
+        <file md5sum="de5ab46f0cc5919b242c5b200f0ef724" name="vimeo.plg.php" role="magecommunity" />
+        <file md5sum="38df3729142bd2b40792b7a1793446b7" name="virgilio.plg.php" role="magecommunity" />
+        <file md5sum="7db9b7a03e8f4ee2d2d7f5192ec18912" name="vkontakte.plg.php" role="magecommunity" />
+        <file md5sum="5340dda0d54849d2e313ab97015db215" name="walla.plg.php" role="magecommunity" />
+        <file md5sum="d3ed9a0c556f08bc5c67f978c7be4727" name="web_de.plg.php" role="magecommunity" />
+        <file md5sum="b151407c39c360f49ffb9ca9fd73b32b" name="wpl.plg.php" role="magecommunity" />
+        <file md5sum="89b5c2c3db98e735e4d1f19fb1c81786" name="xanga.plg.php" role="magecommunity" />
+        <file md5sum="2ff8238e6c1e4a08fbe3759d6e627ee8" name="xing.plg.php" role="magecommunity" />
+        <file md5sum="1219e94f6ef0919025b2c93741e55fbd" name="xuqa.plg.php" role="magecommunity" />
+        <file md5sum="50ed7830c0eada02daa7094ca26da87b" name="yahoo.plg.php" role="magecommunity" />
+        <file md5sum="922e9adc2a936bd6e83aaf331bb7c0b7" name="yandex.plg.php" role="magecommunity" />
+        <file md5sum="fc05c436e6c2dd1c6c8fa336e7e893c5" name="youtube.plg.php" role="magecommunity" />
+        <file md5sum="2274bd725d3bda8df0ae9d45d3ce1470" name="zapak.plg.php" role="magecommunity" />
+        <file md5sum="5f7ba1cda90618b60ec44d9ea21afaa1" name="_base.php" role="magecommunity" />
+        <file md5sum="69514e56e1833df16884b6762bc620ce" name="_hosted.plg.php" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Lib/OpenInviter/plugins -->
+       <file md5sum="df781d645e37271f23432bb82b3360a2" name="autoupdate.php" role="magecommunity" />
+       <file md5sum="214c7c6c115e1c8a21b9db03bfb9f64f" name="config.php" role="magecommunity" />
+       <file md5sum="277c3d400c7488e54746141297a952cb" name="LICENSE.txt" role="magecommunity" />
+       <file md5sum="88e3be687de995aae52a8ce248c49bce" name="notifier.php" role="magecommunity" />
+       <file md5sum="3f4ec8433193611284fd5fe2e91a3898" name="openinviter.php" role="magecommunity" />
+       <file md5sum="6262372bc84e172c7fd89d9ac61f9794" name="POLICY.txt" role="magecommunity" />
+       <file md5sum="5af8362ab3e9f89f5e8560b2623f767a" name="stats.php" role="magecommunity" />
+      </dir> <!-- /Auguria/Sponsorship/Lib/OpenInviter -->
+      <file md5sum="4bd5cf3bd59121ffa9d15b9a60a56ca4" name="Html2Text.php" role="magecommunity" />
+     </dir> <!-- /Auguria/Sponsorship/Lib -->
+     <dir name="Model">
+      <dir name="Adminhtml">
+       <dir name="System">
+        <dir name="Config">
+         <dir name="Backend">
+          <dir name="Sponsorship">
+           <file md5sum="cb45db31cab4b797103d686e03404d6d" name="Entier.php" role="magecommunity" />
+           <file md5sum="35b76ecdc9065ae9aef1acdee66ab57c" name="Float.php" role="magecommunity" />
+           <file md5sum="56bfee472079b2e70d87eb5242fa3d64" name="Openinviter.php" role="magecommunity" />
+          </dir> <!-- /Auguria/Sponsorship/Model/Adminhtml/System/Config/Backend/Sponsorship -->
+         </dir> <!-- /Auguria/Sponsorship/Model/Adminhtml/System/Config/Backend -->
+        </dir> <!-- /Auguria/Sponsorship/Model/Adminhtml/System/Config -->
+       </dir> <!-- /Auguria/Sponsorship/Model/Adminhtml/System -->
+      </dir> <!-- /Auguria/Sponsorship/Model/Adminhtml -->
+      <dir name="Core">
+       <dir name="Email">
+        <file md5sum="5ad7985013fff5f28cd76bbec0a71c22" name="Template.php" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Model/Core/Email -->
+      </dir> <!-- /Auguria/Sponsorship/Model/Core -->
+      <dir name="Customer">
+       <file md5sum="1ee0fbe7c2ce96fac9f7dfc97e179a9e" name="Customer.php" role="magecommunity" />
+      </dir> <!-- /Auguria/Sponsorship/Model/Customer -->
+      <dir name="Mysql4">
+       <dir name="CatalogFidelityPoint">
+        <file md5sum="b151b96d8370ea1fe9e309559fb04573" name="Collection.php" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Model/Mysql4/CatalogFidelityPoint -->
+       <dir name="CatalogSponsorPoint">
+        <file md5sum="a56b2950a04ae446dcf82ad4bdfadb07" name="Collection.php" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Model/Mysql4/CatalogSponsorPoint -->
+       <dir name="Change">
+        <file md5sum="99a67418cc7b573f285c04a5d7f6020d" name="Collection.php" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Model/Mysql4/Change -->
+       <dir name="FidelityLog">
+        <file md5sum="7230b303a336da8167709168410c0531" name="Collection.php" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Model/Mysql4/FidelityLog -->
+       <dir name="Sponsorlog">
+        <file md5sum="8efa2fb23ec7a6ad2373395ff4739f1e" name="Collection.php" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Model/Mysql4/Sponsorlog -->
+       <dir name="Sponsorship">
+        <file md5sum="bea288d9bdc6faee88795895eb5bd6ee" name="Collection.php" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Model/Mysql4/Sponsorship -->
+       <dir name="Sponsorshipopeninviter">
+        <file md5sum="02d068c627dcfde82019855510d33c1f" name="Collection.php" role="magecommunity" />
+       </dir> <!-- /Auguria/Sponsorship/Model/Mysql4/Sponsorshipopeninviter -->
+       <file md5sum="ab4402569102622be8264d135768afbc" name="CatalogFidelityPoint.php" role="magecommunity" />
+       <file md5sum="f34d98e76da49afe1e2049dcb3c73626" name="CatalogSponsorPoint.php" role="magecommunity" />
+       <file md5sum="fcc6ad58aae6b4051fa997c03b5b5756" name="Change.php" role="magecommunity" />
+       <file md5sum="47a37a5374c82d3428a6bcc301316ce8" name="Fidelitylog.php" role="magecommunity" />
+       <file md5sum="2ee2d8879d6ac0be3432e1e5334d77cf" name="Rule.php" role="magecommunity" />
+       <file md5sum="97bde1eef9156b5a20f5f2f92a6fee03" name="Sponsorlog.php" role="magecommunity" />
+       <file md5sum="2c6d63261112e53a9c442ea3568e2e32" name="Sponsorship.php" role="magecommunity" />
+       <file md5sum="ad84d61baa3a105b6f9ff469ca4ba08a" name="Sponsorshipopeninviter.php" role="magecommunity" />
+      </dir> <!-- /Auguria/Sponsorship/Model/Mysql4 -->
+      <dir name="SocialBookmarking">
+       <file md5sum="a8d62f82406b08d3ba8d0e1874f0c717" name="Bookmarks.php" role="magecommunity" />
+      </dir> <!-- /Auguria/Sponsorship/Model/SocialBookmarking -->
+      <file md5sum="5b2527368d08cade3495819a823ff8f7" name="AutoBoost.php" role="magecommunity" />
+      <file md5sum="e4ec03129d8fa6aa30aa259a0ee302ce" name="Bookmarks.php" role="magecommunity" />
+      <file md5sum="c4e3f0cd6077fab4ebc7e078d031fc3d" name="Change.php" role="magecommunity" />
+      <file md5sum="21106c8021072b8f8cf8419fec0ad0a9" name="Changestatut.php" role="magecommunity" />
+      <file md5sum="1644dc508b0a1c4d06397a48509f652c" name="Fidelitylog.php" role="magecommunity" />
+      <file md5sum="0c09c9c685ad6285fa7f8c642506e782" name="Observer.php" role="magecommunity" />
+      <file md5sum="ccaf66522f8b8d7f17590bf2e5ec6d8f" name="Openinviter.php" role="magecommunity" />
+      <file md5sum="834b0e8e29eff5061abb18621a22ddb5" name="Sponsorlog.php" role="magecommunity" />
+      <file md5sum="acd91d3c6a6dbe801e7dde41a8d2fb06" name="Sponsorship.php" role="magecommunity" />
+      <file md5sum="9b2af360ba8b4c6b233697d2bf8b8798" name="Sponsorshipopeninviter.php" role="magecommunity" />
+      <file md5sum="ad5779cf7a0887635315b74827780063" name="Status.php" role="magecommunity" />
+      <file md5sum="87d39a07bff5133894f8334f9f5fe967" name="Validator.php" role="magecommunity" />
+     </dir> <!-- /Auguria/Sponsorship/Model -->
+     <dir name="sql">
+      <dir name="sponsorship_setup">
+       <file md5sum="cde2a97370601a046bcc559e22a7cdb8" name="mysql4-install-0.1.0.php" role="magecommunity" />
+       <file md5sum="99c4e9b7ab6d3aab2477195310482242" name="mysql4-upgrade-0.1.0-0.1.1.php" role="magecommunity" />
+       <file md5sum="08dc31268dcb35b68abbc4c179f7ed03" name="mysql4-upgrade-0.1.1-0.1.2.php" role="magecommunity" />
+       <file md5sum="9966b88c1e297dd4cae297859e4034a0" name="mysql4-upgrade-0.1.2-0.1.3.php" role="magecommunity" />
+       <file md5sum="0d55e5801c8e4031aeece7787ffc94c1" name="mysql4-upgrade-0.1.3-0.1.4.php" role="magecommunity" />
+       <file md5sum="6de811c47e0031c134a8343e230ca451" name="mysql4-upgrade-0.1.4-0.1.5.php" role="magecommunity" />
+       <file md5sum="d6f43e969bf07f5859b1f251540c358d" name="mysql4-upgrade-0.1.5-0.1.6.php" role="magecommunity" />
+       <file md5sum="5289d74fa889d0046a19d9714df5572b" name="mysql4-upgrade-0.1.6-0.1.7.php" role="magecommunity" />
+       <file md5sum="89acdec2f7785fc2e6e82ff6265e439a" name="mysql4-upgrade-0.1.7-0.1.8.php" role="magecommunity" />
+       <file md5sum="02158b6524f5d24c8e9d07022da2aa27" name="mysql4-upgrade-0.1.8-0.1.9.php" role="magecommunity" />
+       <file md5sum="b29284b6cf0df556810ed3bdb47fd7dc" name="mysql4-upgrade-0.1.10-0.1.11.php" role="magecommunity" />
+       <file md5sum="d6bd4428ca5918e44603d7dbcff23e74" name="mysql4-upgrade-1.0.3-1.0.4.php" role="magecommunity" />
+      </dir> <!-- /Auguria/Sponsorship/sql/sponsorship_setup -->
+     </dir> <!-- /Auguria/Sponsorship/sql -->
+    </dir> <!-- /Auguria/Sponsorship -->
+   </dir> <!-- /Auguria -->
+   <dir name="en_US">
+    <dir name="template">
+     <dir name="email">
+      <file md5sum="0ca5d0c23070e0a6a9f9822ad9612678" name="sponsorship_coupon.html" role="magelocale" />
+      <file md5sum="30fe91c3b83ee223f6bffb3dd779dd26" name="sponsorship_invitation.html" role="magelocale" />
+     </dir> <!-- /en_US/template/email -->
+    </dir> <!-- /en_US/template -->
+   </dir> <!-- /en_US -->
+   <dir name="frontend">
+    <dir name="default">
+     <dir name="default">
+      <dir name="css">
+       <file md5sum="30454132306ff6ac4dcf190aa922b7cc" name="tableorderer.css" role="mageskin" />
+      </dir> <!-- /frontend/default/default/css -->
+      <dir name="images">
+       <dir name="tableorderer">
+        <file md5sum="a54846803de3cc786eec3d69f9ac2d38" name="asc.gif" role="mageskin" />
+        <file md5sum="c01ad2e7c59d1a20a433cb873c21bd88" name="bg.gif" role="mageskin" />
+        <file md5sum="fb7ed019476eaa1643af922b59ede4fb" name="bkg_toolbar.gif" role="mageskin" />
+        <file md5sum="f8a1940c9cf44ab8870319169f3a14ff" name="desc.gif" role="mageskin" />
+       </dir> <!-- /frontend/default/default/images/tableorderer -->
+      </dir> <!-- /frontend/default/default/images -->
+      <dir name="layout">
+       <file md5sum="8d7ead600805bdd2cc66a0e67a26dcf4" name="sponsorship.xml" role="magedesign" />
+      </dir> <!-- /frontend/default/default/layout -->
+      <dir name="template">
+       <dir name="sponsorship">
+        <dir name="customer">
+         <dir name="account">
+          <dir name="dashboard">
+           <file md5sum="41131e636284b1a2dcdbc79be86c6768" name="fidelity_points.phtml" role="magedesign" />
+           <file md5sum="a510e2612ffc9730644e21924603e190" name="sponsor_points.phtml" role="magedesign" />
+          </dir> <!-- /frontend/default/default/template/sponsorship/customer/account/dashboard -->
+          <file md5sum="b3c531f03302819338ebd9739b144d5f" name="dashboard.phtml" role="magedesign" />
+          <file md5sum="ac569b80b7dfda7412a265e88e51d403" name="fidelitypointsdetail.phtml" role="magedesign" />
+          <file md5sum="0a45d3ef02a05607ea46dedb631359c6" name="sponsorpointsdetail.phtml" role="magedesign" />
+         </dir> <!-- /frontend/default/default/template/sponsorship/customer/account -->
+         <dir name="form">
+          <dir name="pointschange">
+           <file md5sum="d181ffed79eec08a0a65e78e3aa731f8" name="pointschange_cash.phtml" role="magedesign" />
+           <file md5sum="88870799ae481ba3a62209042aa4344d" name="pointschange_coupon.phtml" role="magedesign" />
+           <file md5sum="29a244c931252894b98e1a9bf1c40fc4" name="pointschange_gift.phtml" role="magedesign" />
+          </dir> <!-- /frontend/default/default/template/sponsorship/customer/form/pointschange -->
+          <file md5sum="c81f986b3a40771f9652a5b9f264ba20" name="boost.phtml" role="magedesign" />
+          <file md5sum="4a55e415cf16a47c584bcbbba570d8a5" name="edit.phtml" role="magedesign" />
+          <file md5sum="98fced0f1ac113b79e14521fea151afc" name="pointschange.phtml" role="magedesign" />
+          <file md5sum="52b5e45974ecf7898851b2983c496297" name="register.phtml" role="magedesign" />
+         </dir> <!-- /frontend/default/default/template/sponsorship/customer/form -->
+         <dir name="widget">
+          <file md5sum="167d0c09817b6a786e017e54c7117a76" name="name.phtml" role="magedesign" />
+          <file md5sum="275ebb5903affe9462a1307cec452053" name="virement.phtml" role="magedesign" />
+         </dir> <!-- /frontend/default/default/template/sponsorship/customer/widget -->
+        </dir> <!-- /frontend/default/default/template/sponsorship/customer -->
+        <file md5sum="184d0b3a71e0204cd02645bedc1c51e8" name="openinviter.phtml" role="magedesign" />
+        <file md5sum="8e468750660c4b2556f4f1e1b50bfafb" name="openinviterimport.phtml" role="magedesign" />
+        <file md5sum="739958126e9bf04dbaf772ab3dde0d54" name="sponsorship.phtml" role="magedesign" />
+       </dir> <!-- /frontend/default/default/template/sponsorship -->
+      </dir> <!-- /frontend/default/default/template -->
+     </dir> <!-- /frontend/default/default -->
+    </dir> <!-- /frontend/default -->
+   </dir> <!-- /frontend -->
+   <dir name="fr_FR">
+    <dir name="template">
+     <dir name="email">
+      <file md5sum="bbd873e171d6a9ca5f46e04314c39624" name="sponsorship_coupon.html" role="magelocale" />
+      <file md5sum="30fe91c3b83ee223f6bffb3dd779dd26" name="sponsorship_invitation.html" role="magelocale" />
+     </dir> <!-- /fr_FR/template/email -->
+    </dir> <!-- /fr_FR/template -->
+    <file md5sum="986d23517fec3b5431639f2ae65d380e" name="Auguria_Sponsorship.csv" role="magelocale" />
+   </dir> <!-- /fr_FR -->
+   <dir name="js">
+    <dir name="tableorderer">
+     <file md5sum="f23c21e5031d7218f83c9117cf7442eb" name="table_orderer.js" role="mage" />
+    </dir> <!-- /js/tableorderer -->
+   </dir> <!-- /js -->
+   <dir name="sponsorship">
+    <dir name="openinviter">
+     <file md5sum="cdbd00ab6efa0ff8e3ce6eaaa07c53ce" name="logo_auguria.png" role="magemedia" />
+    </dir> <!-- /sponsorship/openinviter -->
+   </dir> <!-- /sponsorship -->
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2</min>
+    <max>5.6</max>
+   </php>
+   <pearinstaller>
+    <min>1.6.2</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease />
+</package>

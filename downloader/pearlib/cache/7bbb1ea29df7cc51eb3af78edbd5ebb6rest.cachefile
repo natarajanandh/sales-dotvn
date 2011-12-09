@@ -1,0 +1,7 @@
+a:9:{s:7:"attribs";a:2:{s:5:"xmlns";s:36:"http://pear.php.net/dtd/rest.package";s:18:"xsi:schemaLocation";s:80:"http://pear.php.net/dtd/rest.package    http://pear.php.net/dtd/rest.package.xsd";}s:1:"n";s:27:"Locale_Mage_community_fr_FR";s:1:"c";s:37:"connect.magentocommerce.com/community";s:2:"ca";a:2:{s:7:"attribs";a:1:{s:10:"xlink:href";s:34:"/Chiara_PEAR_Server_REST/c/Default";}s:8:"_content";s:7:"Default";}s:1:"l";s:27:"Academic Free License (AFL)";s:2:"lu";s:47:"http://www.opensource.org/licenses/academic.php";s:1:"s";s:58:"Magento Community Modules -  French (France) Language Pack";s:1:"d";s:337:"Magento Community Modules - French (France) Language Pack
+
+Traduction française de Magento.
+
+Ce pack contient les fichiers de traductions française de Magento ainsi que les emails traduits.
+
+<strong>Attention, cette version de l'extension peut être incompatible avec les versions antérieures de Magento (1.3 & inférieures).</strong>";s:1:"r";a:1:{s:7:"attribs";a:1:{s:10:"xlink:href";s:54:"/Chiara_PEAR_Server_REST/r/Locale_Mage_community_fr_FR";}}}

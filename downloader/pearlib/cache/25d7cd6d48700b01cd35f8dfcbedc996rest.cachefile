@@ -1,0 +1,21 @@
+a:9:{s:7:"attribs";a:2:{s:5:"xmlns";s:36:"http://pear.php.net/dtd/rest.package";s:18:"xsi:schemaLocation";s:80:"http://pear.php.net/dtd/rest.package    http://pear.php.net/dtd/rest.package.xsd";}s:1:"n";s:19:"TBT_RewardsReferral";s:1:"c";s:37:"connect.magentocommerce.com/community";s:2:"ca";a:2:{s:7:"attribs";a:1:{s:10:"xlink:href";s:34:"/Chiara_PEAR_Server_REST/c/Default";}s:8:"_content";s:7:"Default";}s:1:"l";s:27:"Open Software License (OSL)";s:2:"lu";s:42:"http://opensource.org/licenses/osl-3.0.php";s:1:"s";s:142:"Adds refer a friend and affiliate functionality to the Sweet Tooth reward points system. Sweet Tooth is a reward points extension for Magento.";s:1:"d";s:3018:"<div style="border: 2px dotted; padding: 6px; font-size: 11pt; font-weight: bold; text-align: center; margin-top: 6px; margin-bottom: 4px; background-color: pink; width: 484px;">
+<div style="background-color: white;">This is an extension for the <br /><a href="http://www.GetSweetTooth.com">Sweet <span style="color: darkred;">Tooth</span> Magento Loyalty Points Extension</a></div>
+</div>
+<h3>Description</h3>
+<p>This extension adds a fully featured referral/affiliate functionality to the <a href="http://www.getsweettooth.com">Sweet Tooth loyalty extension for Magento</a>.  With this extension installed you can create customer behavior rules that award the customer points based on how their referrals interact with your site.  Customers can refer a friend through in a new section labeled 'Referrals' in their customer account.  They can add custom messages and track the progress of their referrals.  The Magento administrative back-end, this extension also adds the 'Referrals Section' to the Sweet Tooth 'Customer Rewards' menu.  Here, administrators can track the progress of all referrals and manage them if needed.  In the new  Referral Program Configuration section of Sweet Tooth, administrators can also customize the referral e-mail templates and customize the behavior of the referral program per store.   <strong>For more information about Sweet Tooth <a href="http://www.getsweettooth.com" target="_blank">visit the Sweet Tooth promo page</a> or <a href="../../../extension/1636" target="_blank">visit Sweet Tooth on Magento Connect</a>.</strong> This extension's change log <a href="http://www.wdca.ca/sweet_tooth/wiki/index.php/Referral_Affiliate">can be found here.</a></p>
+<h3>Installation</h3>
+<p><a href="../../../extension/1636" target="_blank">Install Sweet Tooth</a> if you don't already have it installed, then install this extension using the module key and your Magento Connect downloader.  That's it!</p>
+<h3>Features</h3>
+<p>- Administrators will be able to create customer behavior rules with three (3) new customer behavior conditions:</p>
+<ul class="r-menu-layer-list" style="margin-top: 0pt; margin-bottom: 8px;">
+<li>Earn points when referral signs up</li>
+Earn points when referral makes first order
+<li>Earn points as a percentage of the points that the referred customer earns (TIER 1 AFFILIATE)</li>
+</ul>
+<p>These will also inherit all standard <a href="http://www.wdca.ca/sweet_tooth/wiki/index.php/Point_Distribution_Rule_System_Features#Customer_Behavior_Distribution_Rules">features of Sweet Tooth customer behavior rules</a>. - Fully customizable e-mail templates and front-end design - Customers can...</p>
+<ul class="r-menu-layer-list" style="margin-top: 0pt; margin-bottom: 8px;">
+<li>monitor their accumulated points from their referrals</li>
+<li>monitor the status of their referrals (if they signed up, made an order, etc)</li>
+<li>include a custom messages in their referral e-mails</li>
+</ul>
+<p>- Back-end management of referrals and referral configuration.</p>";s:1:"r";a:1:{s:7:"attribs";a:1:{s:10:"xlink:href";s:46:"/Chiara_PEAR_Server_REST/r/TBT_RewardsReferral";}}}
