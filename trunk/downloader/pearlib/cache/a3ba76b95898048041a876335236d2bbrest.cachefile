@@ -1,0 +1,17 @@
+a:14:{s:7:"attribs";a:2:{s:5:"xmlns";s:36:"http://pear.php.net/dtd/rest.release";s:18:"xsi:schemaLocation";s:81:"http://pear.php.net/dtd/rest.release     http://pear.php.net/dtd/rest.release.xsd";}s:1:"p";a:2:{s:7:"attribs";a:1:{s:10:"xlink:href";s:46:"/Chiara_PEAR_Server_REST/p/auguria_sponsorship";}s:8:"_content";s:19:"Auguria_Sponsorship";}s:1:"c";s:37:"connect.magentocommerce.com/community";s:1:"v";s:5:"1.0.4";s:2:"st";s:6:"stable";s:1:"l";s:7:"OSL 3.0";s:1:"m";s:12:"magentoadmin";s:1:"s";s:391:"This module allows customers to earn fidelity and sponsorship points.
+Customers can invit friends on your site and when their friends buy products, they earn sponsorship points. If a godchild sponsor a person, the sponsor will earn a percentage too.
+When customers buy, they can win fidelity points. 
+These points can then be exchanged against cash, discounts or gifts (not yet implemented).";s:1:"d";s:2056:"The module consists of :
+- A form to send invitations: when an invitation is sent, the guest mail is registered , and the customer id too.
+- A system of affiliation: The link sent through invitations refer to a controller that will create a cookie and a session to identify a person invited. We can equally put such links on third party sites.
+- Account creation: When creating an account, it checks whether an invitation was sent to the email used for registration. If this is not the case, we check if a session cookie or affiliation exists. If there is a link, the user who registers become the godson of the customer who invits him.
+- A monitoring points for the client: the client have an interface for monitoring points in his account. He can see his godson. He can ask for trade his points.
+- Increment of points: Fidelity points and sponsorship points are inserted in the command, at the checkout cart. Upon payment of the command, points are awarded to customers.
+- Definition of rules: the management of points can be made through the catalog rules prices or cart rules prices.
+- Module configuration: The administration interface allows you to enable or disable  fidelity points or sponsorship points. Enabling or no exchange of cash, gift or coupon. You can also define the max cash without siret number, the period of calcul of the max cash, if an order is required to sponsor, the period of validity for an invitation, the period of validity of a sponsorship whithout an order, number of levels for sponsorship calculation points, the percentage on indirect sponsorship sales, the maximum number of invitations that you can send per hour, the header message, the body message and the footer message.
+- An administration interface: allows to see the list of invitations sent, monitor requests for trade of points.
+
+Once installed, you must:
+- Create one or several catalog or cart rules for increment fidelity and sponsorship points
+- Edit CMS Page on sponsorship information
+- If you enable automatic sponsorship recall, activate magento cron";s:2:"da";s:19:"2010-06-21 12:17:15";s:1:"n";s:163:"If you have ideas for improvements or find bugs, please send them to Franck Charpentier  at www.auguria.net, with Auguria LastReviews  as part of the subject line.";s:1:"f";s:6:"183627";s:1:"g";s:74:"http://connect.magentocommerce.com/community/get/Auguria_Sponsorship-1.0.4";s:1:"x";a:1:{s:7:"attribs";a:1:{s:10:"xlink:href";s:17:"package.1.0.4.xml";}}}
