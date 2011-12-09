@@ -54,7 +54,7 @@ p.required { font-size:10px;  }
 #toggle_blind {background:#000;height:auto;width:952px;margin:0 auto;}
 #toggle_blind ul li {width:189px;float:left;border:1px dotted #343434;border-left:none;border-top:none;text-align:center;}
 #toggle_blind ul#division_list1 li a {display:block;color:#fff;text-decoration:none;padding:10px 0 10px 15px;}
-.clsbg {width:100%;border-top:4px solid #000;background:url(../images/bgHeader.png) repeat-x;}
+.clsbg {width:100%;background:url(../images/bgHeader.png) repeat-x;}
 .header {width:1003px;margin:0 auto;padding:0 0 10px;}
 .clsbestdeal{float:left;margin:10px 5px 0px 3px;}
 .city_name h4{float:left;}
@@ -123,7 +123,7 @@ color:#F00;
 .clsfans{border:none; overflow:hidden; width:225px; height:360px; background: #FFF;}
 
 /*footer css*/
-.footer{padding-top: 10px;}
+.footer{padding:0 15px 32px;}
 .footer-top{width: 100%;background: #1A1A1A; border-top: 3px solid #05C4E7; color:#6A6A6A;}
 .footer-content{width:950px;margin: 0 auto; padding:10px 0 0 0;}
 .footer-content .top{padding: 0 0 25px 0;}
@@ -142,19 +142,20 @@ color:#F00;
 .footer-content .top .follow-us{background: #262626;width: 163px;padding: 10px 0 8px 5px;color: #E9E8E3;font-size: 0.8em;-moz-border-radius: 8px;-webkit-border-radius: 8px;border-radius: 8px;background-clip: padding-box;}
 .footer-content .top .follow-us dt{float: left;padding:4px; color:#05C4E7;}
 .footer-content .top .follow-us dd {float: left;padding: 0 4px;}
-.footer-bottom{width: 100%;background: #262626;}
-.clsfoot-txt{width:950px;margin: 0 auto; padding:10px 0;}
+.footer-bottom{width: 100%;background: #6ba32b;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;border:1px solid #fff;padding-top:7px;}
+.clsfoot-txt{width:950px;margin: 0 auto; padding:10px 0;line-height:20px;}
 .clsfoot-div{float:left;width:200px; text-align: left;}
-.clsfoot-div h4{color:#CCC;font-size:1em;padding-bottom:10px;}
+.clsfoot-div h4{color:#fff;padding-bottom:10px;font-weight:bold;}
 .clsfooterul{text-align:left;}
-.clsfooterul li{list-style:none;padding-bottom:5px;font-size: 0.8em;}
+.clsfooterul li{list-style:none;}
 .clsfooterlogo{float:right;padding-top:30px;}
-.clsfooterul li a{text-decoration:none;font-size:12px;color:#6A6A6A;}
-.footer .clscopyright{color:#6A6A6A;margin: 0px auto;padding: 10px 0px 0px;text-align: center;width: 927px;}
+.clsfooterul li a{text-decoration:none;font-size:12px;color:#fff;}
+.footer .clscopyright{color:#fff;margin: 0px auto;text-align: right;}
 .clsfoot-txt a {color: #999;}
 .footerdollar {margin: 10px 0 0 0;width: 148px;text-align: right;padding: 10px;-moz-border-radius: 8px; background: #262626;-webkit-border-radius: 8px;border-radius: 8px;background-clip: padding-box;}
 .raf-right{text-align: right;margin-right:75px;margin-top:5px;float:right;}
 h4, a{text-align: left;}
+.footer-s {width:250px;}
 
 /*button style by : sathish on : 13.01.2011 */
 input[type="button"], input[type="submit"], input[type="reset"], button {border:none;}
