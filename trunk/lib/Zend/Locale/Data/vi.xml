@@ -812,7 +812,7 @@
 		<currencyFormats>
 			<currencyFormatLength>
 				<currencyFormat>
-					<pattern>#,##0.00 ¤</pattern>
+					<pattern>¤ #,##0.00</pattern>
 				</currencyFormat>
 			</currencyFormatLength>
 			<unitPattern count="other">{0} {1}</unitPattern>
@@ -1012,6 +1012,7 @@
 			</currency>
 			<currency type="VND">
 				<displayName>đồng</displayName>
+				<symbol>VNĐ</symbol>
 			</currency>
 			<currency type="XAU">
 				<displayName>Vàng</displayName>
