@@ -1,0 +1,93 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_blank
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+/* For Background Image */
+$resource = Mage::getSingleton('core/resource');
+$read = $resource->getConnection('catalog_read');
+$background = $resource->getTableName('background');
+$select = $read->select()
+->from(array('cp'=>$background))
+->where('cp.background_id = ?', '1')
+->where('cp.status = ?', '1');
+
+$background_image_array = $read->fetchAll($select);
+if(isset($background_image_array[0]['filename'])){
+    $background_image = "background-image:url('".$this->getUrl('media').$background_image_array[0]['filename']."');background-repeat:no-repeat;";
+    Mage::getSingleton('core/session')->setBackground('yes');
+} else {
+    Mage::getSingleton('core/session')->setBackground('no');
+    $background_image ="background:#EFEFE9;";
+}
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+    <head>
+    <?php  if(Mage::getSingleton('cms/page')->getIdentifier() != "subscribepage"){ ?>
+ <?php echo $this->getChildHtml('head') ?>
+    </head>
+<?php flush(); ?>
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?> style="<?php echo $background_image; ?>">
+    <div class="wrapper">
+            <div class="page">
+                <div class="header-container"><?php echo $this->getChildHtml('header') ?></div>
+                <div class="main col1-layout">
+                    <div class="col-main"><div class="onepageimg"><img src="<?php echo $this->getSkinUrl('images/maintop.png') ?>" width="950" height="13"  style="font-size:0px;" /></div>
+                        <div class="contpad" >
+                            <div class=onepagepadding> <?php echo $this->getChildHtml('global_messages') ?> <?php echo $this->getChildHtml('breadcrumbs') ?>
+                            <?php echo $this->getChildHtml('content') ?></div>
+                    </div><div class="onepageimg"><img src="<?php echo $this->getSkinUrl('images/mainbottom.png') ?>" width="950" height="13"  /></div></div>
+                </div>
+                <div class="footer"><div class="clsfooter-cont"><?php echo $this->getChildHtml('footer') ?></div></div>
+                <?php echo $this->getChildHtml('before_body_end') ?>
+            </div>
+        </div>
+        <?php echo $this->getAbsoluteFooter() ?>
+       <?php } else{?>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+        <link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/landing.css')?>"/>
+
+        <title>Subscribe to Receive Daily Deals</title>
+
+        <link rel="icon" href="<?php echo $this->getSkinUrl('favicon.ico') ?>" type="image/x-icon" />
+
+<link rel="shortcut icon" href="<?php echo $this->getSkinUrl('favicon.ico') ?>" type="image/x-icon" />
+</head>
+<body class="landing clearfix">
+    <?php if($this->getChildHtml('global_messages')){
+    echo '<div style="background:white;padding:3px 0 3px 20px;">'.$this->getChildHtml('global_messages').'</div>';
+    }
+    echo $this->getChildHtml('content'); } ?>
+
+    </body>
+</html>
+
+    

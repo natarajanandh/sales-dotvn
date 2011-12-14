@@ -1,0 +1,24 @@
+﻿<?php if ($this->getMethod()->getMailingAddress()): ?>
+    <ul class="form-list checkmo-list" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+        <?php if ($this->getMethod()->getMailingAddress()): ?>
+        <li>
+            <label><?php echo Mage::helper('payment')->__('Tài khoản thụ hưởng:') ?></label>
+           <address class="checkmo-mailing-address">
+              <?php echo nl2br($this->getMethod()->getMailingAddress());?>   
+              <?php $_SESSION['receiver']  = nl2br($this->getMethod()->getMailingAddress());?>
+              
+              <?php $_SESSION['url_checkout'] = $this->getMethod()->getCheckout();?>
+              <?php $_SESSION['merchantID']= nl2br($this->getMethod()->getMerchantSite()); ?>
+              
+              <?php $_SESSION['mabaomat']  = nl2br($this->getMethod()->getSecureCode());  
+			 // var_dump($this->getMethod()->getCheckout().nl2br($this->getMethod()->getMerchantSite()).nl2br($this->getMethod()->getSecureCode()));
+			  ?>
+              
+              <?php $_SESSION['return_url']= nl2br($this->getMethod()->getReturnUrl());?>
+              <?php $_SESSION['affilatecode']= nl2br($this->getMethod()->getAffilateCode());?>
+              <?php $_SESSION['fee_cal']= nl2br($this->getMethod()->getFeeCal());?>
+            </address>
+        </li>
+        <?php endif; ?>
+    </ul>
+<?php endif; ?>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Rchar_Rchar>
+            <version>0.1.0</version>
+        </Rchar_Rchar>
+    </modules>
+    <global>
+        <blocks>
+            <rchar>
+                <class>Rchar_Rchar_Block</class>
+            </rchar>
+        </blocks>
+    </global>
+</config>

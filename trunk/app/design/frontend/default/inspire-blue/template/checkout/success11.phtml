@@ -1,0 +1,235 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_blank
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+$this->setGiftOrderId(); ?>
+<div class="success">
+<div class="page-title">
+    <h2><?php echo $this->__('Đặt phiếu thành công') ?></h2>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<h3><?php echo $this->__('Hệ thống đã lưu đơn hàng của bạn!') ?></h3>
+<?php if ($this->canPrint()) :?>
+    <p><?php echo $this->__('Mã đơn hàng của bạn là: <a class="order-code" href="%s">%s</a>', $this->getViewOrderUrl(), $this->getOrderId()) ?>.</p>
+<?php  else :?>
+    <p><?php echo $this->__('Mã đơn hàng của bạn là: %s', $this->getOrderId()) ?>.</p>
+<?php endif;?>
+    <p><?php echo $this->__('Bạn hãy lưu giữ Mã đơn hàng này, điều này là cần thiết nếu bạn muốn thắc mắc hoặc hỗ trợ về đơn hàng.') ?></p>
+    <?php
+	
+	$orderId=$this->getOrderId();
+	$onepayAccessCode= $_SESSION['onepayAccessCode'];
+	$onepayMerchantSite= $_SESSION['onepayMerchantSite'];
+	$onepayReturnUrl= $_SESSION['onepayReturnUrl'];
+	$onepaySecureHash= $_SESSION['onepaySecureHash'];
+	$onepayAmount = $_SESSION['onepayAmount'];
+	$Title='Ru nhau';
+$order1 = Mage::getModel('sales/order')->loadByIncrementId($this->getOrderId());
+//$OnepayURI = $_SESSION['OnepayURI'];
+if ($order1->getPayment()->getMethod() == "onepay") { 
+$_SESSION['OnepayURI'] = Mage_Payment_Model_Method_Onepay::buildCheckoutUrl($Title,$onepayMerchantSite,$onepayAccessCode, $onepayReturnUrl, $orderId,'pay','VND','1','vn',"'".date ( 'YmdHis' ) . rand ()."'",$_SERVER ['REMOTE_ADDR'], $onepayAmount*100,$onepaySecureHash);
+$OnepayURI = $_SESSION['OnepayURI'];
+
+//die($OnepayURI);
+echo "<script>location.href = '{$OnepayURI}';</script>"; 
+
+/*                         
+http://127.0.0.1/runhau27012011/skin/result_onepay.phtml?vpc_TxnResponseCode=4&vpc_Message=Hash%20value%20khong%20hop%20le&vpc_Merchant=ONEPAY&vpc_Amount=20000&vpc_OrderInfo=100000085
+
+*/
+}
+?>
+
+
+<?php
+$orderId       = $this->getOrderId();
+$order         = Mage::getModel('sales/order')->loadByIncrementId($orderId);
+$orderTotal    = $order->subtotal;
+$orderEntityId = $order->entity_id;
+
+$db = Mage::getModel('Core/Mysql4_Config')->getReadConnection();
+
+// Retrieve ordered products
+$sql = sprintf("
+    SELECT s.product_id, s.order_id, s.qty_ordered, s.name, c.entity_id, c.identifier, c.code_deal
+    FROM `magentosales_flat_order_item` as s INNER JOIN `magentocatalog_product_flat_1` as c 
+    ON s.product_id = c.entity_id 
+    WHERE (s.order_id = %d);",
+        $orderEntityId
+);
+$orderedProducts = $db->fetchAll($sql);
+//print_r( $orderedProducts);
+
+// Loop through each product in order
+foreach ($orderedProducts as $orderedProduct) {
+    $productId = (int) $orderedProduct['product_id'];
+    $quantity  = (int) $orderedProduct['qty_ordered'];
+	$name      =  $orderedProduct['name'];
+	$identifier=  $orderedProduct['identifier'];
+	$code_deal=  $orderedProduct['code_deal'];
+}
+?>
+<?php
+$order4 = Mage::getModel('sales/order')->loadByIncrementId($this->getOrderId());
+if ($order4->getPayment()->getMethod() == "smspayment") { 
+echo '<br><b>Mã chương trình: &nbsp;</b>'.$identifier.'<br>';
+echo 'Để nhận được mã coupon cho chương trình: "'.$name .'" , bạn vui lòng nhắn tin với cú pháp <b>'.$identifier.'</b> và gửi đến số 6601 (10.000vnd/SMS). Bạn sử dụng mã nhận được để được hưởng chương trình khuyến mãi này. Mọi thắc mắc, vui lòng liên hệ hotline: 093 420 3858 (Hà Nội) & 090 994 5330<br><br>
+Cám ơn bạn đã mua hàng tại Rủ Nhau."';
+
+                         //die($nglPayoutURI);
+
+}
+?> 
+<?php if ($this->canPrint()) :?>
+   <!-- <p><?php echo $this->__('Click <a href="%s" onclick="this.target=\'_blank\'">here to print</a> a copy of your Deal confirmation.', $this->getPrintUrl()) ?></p>-->
+<?php endif;
+$unsetorder = Mage::getSingleton('core/session');
+$unsetorder->setorderemail();
+$unsetorder->setorderfrom();
+$unsetorder->setorderto();
+$unsetorder->setordermessage();
+
+?>
+    <ul class="top-sn">
+    <h4>Tham gia cộng đồng Rủ Nhau để cùng chia sẻ với những người chung sở thích.</h4>
+
+        <li><div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId=241235342566242&amp;xfbml=1"></script><fb:like href="http://www.facebook.com/runhaumua" send="false" layout="button_count" width="75" show_faces="false" font=""></fb:like></li>
+	<li><g:plusone size="medium" href="http://runhau.vn"></g:plusone></li>
+	<li><iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/follow_button.html?screen_name=ru_nhau&show_count=true" style="width:205px; height:20px;"></iframe></li>
+
+    </ul>
+<div class="buttons-set" id="order_success" style="padding:150px 0 0 0;">
+    <button type="button" class="button" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><?php echo $this->__('Continue Shopping') ?></span></button>
+</div>
+<div style="display:none;">
+<?php
+             $db22 = Mage::getModel('Core/Mysql4_Config')->getReadConnection();
+	
+$currentTime =  Mage_Core_Model_Locale::date(null, null ,"en_US",true);
+$sql22 = sprintf("
+    SELECT s.cities_value,s.cities, s.special_price, s.price, s.other_title,  s.name,s.small_image, s.entity_id, s.identifier, SUM(a.qty_ordered) as count_buy, s.special_to_date, s.special_from_date, s.hightlight , c.product_id, c.category_id, d.attribute_id, d.value, e.attribute_id as attribute_id1, e.value  as value1
+    FROM `magentocatalog_product_flat_1` as s 
+	
+	INNER JOIN `magentosales_flat_order_item` as a ON a.product_id = s.entity_id  
+	INNER JOIN `magentosales_flat_order_grid` as f ON a.order_id = f.entity_id  
+	 
+	INNER JOIN `magentocatalog_category_product` as c ON s.entity_id = c.product_id
+	INNER JOIN `magentocatalog_product_entity_varchar` as d ON d.entity_id = c.product_id
+	INNER JOIN `magentocatalog_product_entity_text` as e ON e.entity_id = c.product_id
+	where d.attribute_id in ('530') and e.attribute_id in ('525') and s.special_to_date>="."'".date("Y-m-d H:i:s",time())."'"." and s.special_from_date <="."'".date("Y-m-d H:i:s",time())."'  group by a.product_id order by a.product_id desc limit 0,30 "
+   
+);
+
+$orderedProducts = $db22->fetchAll($sql22);
+
+  header("Content-Type: text/plain; charset=utf-8");
+  $doc = new DOMDocument();
+  $doc->formatOutput = true;
+  
+  $r = $doc->createElement( "products" );
+  $doc->appendChild( $r );  
+    
+    //Loop through and print each products info
+	foreach ($orderedProducts as $orderedProduct) {
+   $b = $doc->createElement( "product" );
+  
+  $entity_id = $doc->createElement( "entity_id" );
+  $entity_id->appendChild($doc->createTextNode( $orderedProduct['entity_id'] ));
+  $b->appendChild( $entity_id );
+  $identifier = $doc->createElement( "identifier" );
+  $identifier->appendChild($doc->createTextNode( $orderedProduct['identifier'] ));
+  $b->appendChild( $identifier );
+  
+  $name = $doc->createElement( "name" );
+  $name->appendChild($doc->createTextNode( $orderedProduct['name'] ) );
+  $b->appendChild( $name );
+  
+  $name = $doc->createElement( "other_title" );
+  $name->appendChild($doc->createTextNode( $orderedProduct['other_title'] ) );
+  $b->appendChild( $name );
+  
+  $small_image = $doc->createElement( "small_image" );
+  $small_image->appendChild($doc->createTextNode( $orderedProduct['small_image'] ) );
+  $b->appendChild( $small_image );
+  
+  
+  $price = $doc->createElement( "price" );
+  $price->appendChild($doc->createTextNode( number_format($orderedProduct['price'], 0, '', '') ) );
+  $b->appendChild( $price );
+  
+  $special_price = $doc->createElement( "special_price" );
+  $special_price->appendChild($doc->createTextNode( number_format($orderedProduct['special_price'], 0, '', '') ) );
+  $b->appendChild( $special_price );
+   
+  $special_from_date = $doc->createElement( "special_from_date" );
+  $special_from_date->appendChild($doc->createTextNode( $orderedProduct['special_from_date'] ) );
+  $b->appendChild( $special_from_date );
+  
+  $special_to_date = $doc->createElement( "special_to_date" );
+  $special_to_date->appendChild($doc->createTextNode( $orderedProduct['special_to_date'] ) );
+  $b->appendChild( $special_to_date );
+  
+  $hightlight = $doc->createElement( "hightlight" );
+  $hightlight->appendChild($doc->createTextNode( $orderedProduct['hightlight'] ) );
+  $b->appendChild( $hightlight );
+  
+  $cities_value = $doc->createElement( "cities_value" );
+  $cities_value->appendChild($doc->createTextNode( $orderedProduct['cities_value'] ) );
+  $b->appendChild( $cities_value );
+  
+  $cities = $doc->createElement( "cities" );
+  $cities->appendChild($doc->createTextNode( $orderedProduct['cities'] ) );
+  $b->appendChild( $cities );
+//
+  $category_id = $doc->createElement( "cid" );
+  $category_id->appendChild($doc->createTextNode( $orderedProduct['category_id'] ) );
+  $b->appendChild( $category_id );
+  
+  $totalqty = $doc->createElement( "count_buy" );
+  $totalqty->appendChild($doc->createTextNode( number_format($orderedProduct['count_buy'], 0, '', '') ) );
+  $b->appendChild( $totalqty );
+  
+  $product_id = $doc->createElement( "key_buy_now" );
+  $product_id->appendChild($doc->createTextNode( 'http://www.runhau.vn/checkout/cart/add/uenc/aHR0cDovLzEyNy4wLjAuMS9ydW5oYXUudm4vP19fX1NJRD1V/product/'.$orderedProduct['product_id'].'/' ) );
+  //$tt='checkout/cart/add/uenc/aHR0cDovLzEyNy4wLjAuMS9ydW5oYXUudm4vP19fX1NJRD1V/product/'.$product_id.'/';
+  $b->appendChild( $product_id );  
+
+
+//if($orderedProduct['d.attribute_id']==530) { // so nguoi mua toi thieu
+  $target_number = $doc->createElement( "need_buy" );
+  $target_number->appendChild($doc->createTextNode( $orderedProduct['value'] ) );
+  $b->appendChild( $target_number );
+//	}
+//if($orderedProduct['e.attribute_id']==525) { // Dia chi
+  $address = $doc->createElement( "address_promotion" );
+  $address->appendChild($doc->createTextNode( $orderedProduct['value1'] ) );
+  $b->appendChild( $address );
+//	}	
+
+  $r->appendChild( $b );
+    }
+  echo $doc->saveXML();
+  $doc->save("listproducts.xml") ;
+?>
+</div></div>

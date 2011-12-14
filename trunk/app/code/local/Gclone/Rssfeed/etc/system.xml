@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <rssfeed translate="label" module="rssfeed">
+            <label>RSS Feed</label>
+            <tab>gclone_all</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <rssfeed translate="label">
+                    <label>RSS Feed</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enable RSS Feed</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>                           
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>                                                
+                        <link translate="label comment">
+                            <label>Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Link that appear in the Feed Channel.</comment>
+                        </link>
+                    </fields>
+                </rssfeed>
+                <active translate="label">
+                    <label>Active Deal Feeds</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>11</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enable Active Deal Feed</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <feedtitle translate="label comment">
+                            <label>Feed Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Title that appear in the Feed Channel.</comment>
+                        </feedtitle>
+                        <title translate="label comment">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Title that appear in the Feed Widget.</comment>
+                        </title>
+                        <caption translate="label comment">
+                            <label>Caption</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Caption that appear in the Feed Widget.</comment>
+                        </caption>
+                    </fields>
+                </active>
+                <upcoming translate="label">
+                    <label>Upcoming Deal Feeds</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>12</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enable Upcoming Deal Feed</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <feedtitle translate="label comment">
+                            <label>Feed Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Title that appear in the Feed Channel.</comment>
+                        </feedtitle>
+                        <title translate="label comment">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Title that appear in the Feed Widget.</comment>
+                        </title>
+                        <caption translate="label comment">
+                            <label>Caption</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Caption that appear in the Feed Widget.</comment>
+                        </caption>
+                    </fields>
+                </upcoming>
+                <recent translate="label">
+                    <label>Recent Deal Feeds</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>13</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enable Recent Deal Feed</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <feedtitle translate="label comment">
+                            <label>Feed Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Title that appear in the Feed Channel.</comment>
+                        </feedtitle>
+                        <title translate="label comment">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Title that appear in the Feed Widget.</comment>
+                        </title>
+                        <caption translate="label comment">
+                            <label>Caption</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Caption that appear in the Feed Widget.</comment>
+                        </caption>
+                    </fields>
+                </recent>
+                <color translate="label comment" module="rssfeed">
+                    <label>Colors</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>15</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>                        
+                        <text translate="label">
+                            <label>Text Color</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Text color. (default: #000000, format: start with '#' and 6 digits long)</comment>
+                        </text>
+                        <link translate="label">
+                            <label>Link Text Color</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Link text color. (default: #ED6502, format: start with '#' and 6 digits long)</comment>
+                        </link>
+                        <shellbackground translate="label">
+                            <label>Shell Background Color</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Shell background color. (default: #ED6502, format: start with '#' and 6 digits long)</comment>
+                        </shellbackground>
+                        <textbackground translate="label">
+                            <label>Text Background Color</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Text background color. (default: #ffffff, format: start with '#' and 6 digits long)</comment>
+                        </textbackground>
+                    </fields>
+                </color>
+            </groups>
+        </rssfeed>
+    </sections>
+</config>

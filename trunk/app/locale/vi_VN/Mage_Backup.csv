@@ -1,0 +1,4 @@
+﻿"Cannot read backup file","Không thể đọc file sao lưu"
+"File compressed with Zlib, but this extension is not installed on server","Tập tin nén bằng Zlib nhưng phần mở rộng chưa được cài đặt trên máy chủ"
+"Backup file doesn't exist","File sao lưu không tồn tại"
+"Wrong order of creation for new backup","Tạo sao lưu mới không đúng thứ tự"

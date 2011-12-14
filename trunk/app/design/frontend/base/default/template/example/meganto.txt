@@ -1,0 +1,91 @@
+
+
+<div id="clsleftcol" class="clearfix">
+
+<h1 class="clearfix"><img src="<?php echo $this->getSkinUrl('images/todays-deal.jpg') ?>" width="202" height="21" alt="Todays-deal" title="Todays-deal" class="clsheadimg"/><span><strong>$40 for $100 worth of lorem Ipsum...</strong></span></h1><br/>
+                 <div class="clearfix">
+                 <div class="clsbannerbord"><img src="<?php echo $this->getSkinUrl('images/banner.jpg') ?>" width="404" height="276" alt="banner" title="banner"/></div>
+
+               <!--Grey box-->
+                   <div class="clsgreybg ">
+                       <h2>Company Info</h2>
+                       <address>C.Company Name<br/>
+                         Street Name, City, Pincode
+                       </address>
+                       <div class="clearfix"><input type="button" class="clsvisitbtn"/></div>
+                       <div class="clsbord"></div>
+
+                       <h2>Terms</h2>
+                       <ul class="termul">
+                        <li><strong>Enjoy By :</strong> 8/12/2010</li>
+                        <li><strong>Valid :</strong> Any Day</li>
+                        <li><strong>Limits :</strong> 1Deal per person.</li>
+                        <li><strong>Gift cards :</strong> No limit.</li>
+                        <li><strong>Questions :</strong><a href="#">Call 1-000-0</a></li>
+                       </ul>
+                   </div>
+              <!--Grey box-->
+               </div>
+
+                <!--MIDDLE BOX-->
+                     <div id="clsmiddle-col" class="clearfix">
+                        <div class="clsfirstcol">
+                            <div class="clscartbg">
+                                <ul class="clearfix">
+                                    <li><strong>Value</strong><h3>£38</h3></li>
+                                    <li><img src="<?php echo $this->getSkinUrl('images/divider.jpg') ?>" width="1" height="36" alt="divider" title="divider"/></li>
+                                    <li><strong>Savings</strong><h3>£8</h3></li>
+                                    <li><img src="<?php echo $this->getSkinUrl('images/divider.jpg') ?>" width="1" height="36" alt="divider" title="divider"/></li>
+                                    <li><strong>Discount %</strong><h3>76 %</h3></li>
+                                </ul>
+                            </div>
+                            <input type="button" class="clscartbtn"/>
+                        </div>
+                         <img src="<?php echo $this->getSkinUrl('images/divider-main.jpg') ?>.jpg" width="2" height="121" alt="divider" title="divider" class="clsdivpos"/>
+
+                         <div class="clssecondcol" align="center">
+                          <img src="<?php echo $this->getSkinUrl('images/raiter.jpg') ?>" width="164" height="12" alt="Rate" title="Rate"/><p>Keep buying to <br/> make deal</p>
+                         </div>
+                         <img src="<?php echo $this->getSkinUrl('images/divider-main.jpg') ?>" width="2" height="121" alt="divider" title="divider" class="clsdivpos"/>
+                         <div class="clsthirdcol" >
+                           <ul class="clsrateul ">
+                              <li class="clsratebg"><p align="center"><strong>3</strong></p></li>
+                              <li class="clsratebg"><p align="center"><strong>5</strong></p></li>
+                           </ul>
+
+                            <ul class="clsrateul ">
+                              <li class="clsratebg"><p align="center"><strong>9</strong></p></li>
+                              <li class="clsratebg"><p align="center"><strong>1</strong></p></li>
+                           </ul>
+
+                            <ul class="clsrateul ">
+                              <li class="clsratebg"><p align="center"><strong>1</strong></p></li>
+                              <li class="clsratebg"><p align="center"><strong>8</strong></p></li>
+                           </ul>
+
+                           <div class="clear"></div>
+                           <ul class="clstimerul">
+                            <li class="clstimerbg"><p align="center"><strong>HOUR</strong></p></li>
+                           </ul>
+
+                            <ul class="clstimerul">
+                            <li class="clstimerbg"><p align="center"><strong>MNT</strong></p></li>
+                           </ul>
+
+                            <ul class="clstimerul">
+                            <li class="clstimerbg"><p align="center"><strong>SEC</strong></p></li>
+                           </ul>
+                         </div>
+                     </div>
+                 <!--MIDDLE BOX--><br/>
+                 <div id="clscont">
+                   <h2 class="clsh2cot">DESCRIPTION</h2>
+                   <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p><br/>
+                   <h2 class="clsh2cot">REVIEWS</h2>
+                   <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit."</p>
+                   <span><strong><em>~Kim G., Yelp</em></strong></span><br/>
+                   <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit."</p>
+                   <span><strong><em>~Kim G., Yelp</em></strong></span>
+                 </div>
+</div>
+

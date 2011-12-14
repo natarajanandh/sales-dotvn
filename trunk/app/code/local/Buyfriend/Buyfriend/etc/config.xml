@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Buyfriend_Buyfriend>
+            <version>0.1.0</version>
+        </Buyfriend_Buyfriend>
+    </modules>
+    <global>
+        <blocks>
+            <buyfriend>
+                <class>Buyfriend_Buyfriend_Block</class>
+            </buyfriend>
+        </blocks>
+    </global>
+</config>

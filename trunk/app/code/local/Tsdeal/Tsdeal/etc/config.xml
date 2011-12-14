@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Tsdeal_Tsdeal>
+            <version>0.1.0</version>
+        </Tsdeal_Tsdeal>
+    </modules>
+    <global>
+        <blocks>
+            <tsdeal>
+                <class>Tsdeal_Tsdeal_Block</class>
+            </tsdeal>
+        </blocks>
+    </global>
+</config>

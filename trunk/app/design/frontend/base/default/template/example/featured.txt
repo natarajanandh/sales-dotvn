@@ -1,0 +1,1 @@
+{{block type="catalog/product_featured" category_id="3" template="catalog/product/featured.phtml"}}

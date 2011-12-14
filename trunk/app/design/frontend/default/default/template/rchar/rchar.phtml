@@ -1,0 +1,32 @@
+
+
+<div  class="tabtwo">
+<div class="mailform"><h4><?php echo $this->__('Refer a Charity') ?></h4><div class="clsmailform">
+
+<?php  $status = $this->getRchar(); if($status != 'success'){ if($status == 'failed') {   echo "<span style='color:red'>* Mail sending failed</span><br>"; }  ?>
+      <form action="<?php echo Mage::helper('core/url')->getCurrentUrl() ; ?>" method="post" id="rchar-detail">
+        <fieldset class="block-content">
+            <legend><?php echo $this->__('Refer a Charity') ?></legend>
+            <?php /*
+            <?php if( $message = $this->getErrorMessage() ): ?>
+                <p class="error"><?php echo $message ?></p>
+            <?php endif; ?>
+            <?php if( $message = $this->getSuccessMessage() ): ?>
+                <p class="success"><?php echo $message ?></p>
+            <?php endif; ?>*/
+             ?>
+            <div class="">
+                 <label>Email Address: </label> <input name="emailcharity" type="text" id="newsletter" class="txtmail" style="margin-top:5px;" onfocus="if (this.value == 'Enter Your Email address...') {this.value = '';this.style.color ='black';}" onblur="if (this.value == '') {this.style.color ='silver';this.value = 'Enter Your Email address...';}" value="Enter Your Email address..." />
+                <br><label>Enter your content here:</label><br><textarea name="content" rows="10" cols="75" style="margin-bottom: 8px" onfocus="if (this.value == 'Type your content here...') {this.value = '';this.style.color ='black';}" onblur="if (this.value == '') {this.style.color ='silver';this.value = 'Type your content here...';}" >Type your content here...</textarea></div>
+            <button type="submit" class="clssubmit" name="rchar"></button>
+        </fieldset>
+    </form> <?php }else{ echo "Your mail has been sent"; } ?>
+
+
+
+
+
+
+    </div>
+</div>
+</div>

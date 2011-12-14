@@ -1,0 +1,11 @@
+<?php
+$amounts = $this->getDiscountsales();
+$sharelinks = Mage_Page_Block_Html_Head::getsharelinks();
+$facebook = $sharelinks['facebook'];
+$twitter = $sharelinks['twitter'];
+$linkedin = $sharelinks['linkedin'];
+$status = Mage::getStoreConfig('advertsystem/invite/enabled');
+
+?>
+
+<div class="footer-bottom "><?php echo $this->getChildHtml() ?></div>
