@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Bd_Bd>
+            <version>0.1.0</version>
+        </Bd_Bd>
+    </modules>
+    <global>
+        <blocks>
+            <bd>
+                <class>Bd_Bd_Block</class>
+            </bd>
+        </blocks>
+    </global>
+</config>

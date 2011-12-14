@@ -1,0 +1,63 @@
+<!-- BEGIN Facebook Connect -->
+<div id="fb-root"></div>
+<?php if($this->isSecure()): ?>
+<script src="https://connect.facebook.net/en_US/all.js"></script>
+<?php else: ?>
+<script src="http://connect.facebook.net/en_US/all.js"></script>
+<?php endif; ?>
+<script type="text/javascript">
+    FB.init({ apiKey:<?php echo json_encode($this->getApiKey()) ?>, cookie:true, xfbml  : true });
+
+    FB.getLoginStatus(handleSessionResponse);
+
+    document.observe('click', function(e){
+        if (!e) var e = window.event;
+        if (e.target) targ = e.target;
+        else if (e.srcElement) targ = e.srcElement;
+        if (targ.nodeType == 3) // defeat Safari bug
+            targ = targ.parentNode;
+        theId=targ.id
+
+        //When clicking on the F-connect Button
+        if (theId == "facebook") {
+            e.stop();
+            FB.login(function(response){
+
+                if(response.status=='connected') setLocation('<?php echo $this->getConnectUrl() ?>');
+
+            }, {perms:<?php echo $this->getRequiredPermissions() ?>});
+        }
+
+        //Clearing Sessions and Cookies After logging out
+        if (theId == "facebooklogout") {
+            FB.logout(handleSessionResponse);
+        }
+         if (theId == "flogout") {
+            FB.logout(handleSessionResponse);
+        }
+
+    });
+    function handleSessionResponse(response) {
+        // if we dont have a session, just hide the user info
+        if (!response.session) {
+            clearDisplay();
+            return;
+        }
+
+        // if we have a session, query for the user's profile picture and name
+        FB.api(
+        {
+            method: 'fql.query',
+            query: 'SELECT name, pic FROM profile WHERE id=' + FB.getSession().uid
+        },
+        function(response) {
+            // Place the user image and saving comment image(if facebook user) in the header //
+            var user = response[0];
+            document.getElementById('facebookimage').innerHTML = '<img src="' + user.pic + '" width ="35" height="30" alt=""/>';
+            document.getElementById('commentfacebbok').innerHTML = '<input name="fimage" type="hidden" value="' + user.pic + '"/>';
+
+        }
+    );
+    }
+</script>
+<!-- END Facebook Connect -->

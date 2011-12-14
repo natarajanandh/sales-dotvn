@@ -1,0 +1,25 @@
+<center><h1>Today's Side Deal</h1></center>
+<?
+
+$images = array();
+$catId=4; // put your category ID in here
+$products =  Mage::getResourceModel('catalog/product_collection')
+->addAttributeToSelect('image')
+->addCategoryFilter(Mage::getModel('catalog/category')->load($catId));
+Mage::getSingleton('catalog/product_status')->addSaleableFilterToCollection($products); // Only select products that are salable
+
+$products->load();
+$_productCollection =Mage::getResourceModel('catalog/product_collection');
+$i=0;
+foreach ($products as $_product):
+    $model = Mage::getModel('catalog/product'); //getting product model
+    $_product = $model->load($_product->getId());
+    $productid=$_product->getId();
+    $images[] = $_product->getImageUrl();
+    $baseurl= Mage::getBaseUrl();
+echo "<div class='box'><a href='$baseurl?cid=$catId&id=$productid'><img src='" . $images[$i] . "' width='200' height='100' /></a></div>";
+echo $_product->getName();
+$i++;
+//}
+endforeach;
+?>

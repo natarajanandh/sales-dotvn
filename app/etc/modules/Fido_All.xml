@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+<modules>
+<Fido_Sidedeals>
+<active>true</active>
+<codePool>local</codePool>
+</Fido_Sidedeals>
+</modules>
+</config>

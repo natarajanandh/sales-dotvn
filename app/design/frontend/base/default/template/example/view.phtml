@@ -1,0 +1,36 @@
+<?php
+
+/**
+* Fido view template
+*
+* @see Fido_Example_Block_View
+*
+*/
+?>
+<?php
+$details = $this->receiveMessage();
+
+
+?>
+<div  class="block block-share" id ="share">
+
+<?php
+//echo $this->receiveMessage();
+$title =  Mage::getSingleton('core/layout')->getBlock('head')->getTitle();
+
+
+?>
+ <div class="mailform">
+                    <h4>Share this Deal</h4>
+                    <div class="clsmailform">
+                      <ul class="sharelink clearfix">
+                            <li><a href="http://www.facebook.com/sharer.php?u=<?php echo Mage::getBaseUrl();  ?>&amp;t=<?php echo $title ?>" target="_blank"><img src="<?php echo $this->getSkinUrl('images/facebook.jpg') ?>" width="32" height="32" alt="facebook" title="facebook"/></a></li>
+                            <li><a href="http://twitter.com/home?status=<?php echo $title ?>:<?php echo Mage::getBaseUrl();  ?>" target="_blank"><img src="<?php echo $this->getSkinUrl('images/twitter.jpg') ?>" width="32" height="32" alt="twitter" title="twitter"/></a></li>
+                            <li><a href="http://digg.com/submit?phase=2&url=<?php echo Mage::getBaseUrl();  ?>" target="_blank"><img src="<?php echo $this->getSkinUrl('images/digg.png') ?>" width="32" height="32" alt="digg" title="digg"/></a></li>
+                            <li><a href="http://www.stumbleupon.com/submit?url=<?php echo Mage::getBaseUrl();  ?>&title=<?php echo $title ?>" target="_blank"><img src="<?php echo $this->getSkinUrl('images/stumble.png') ?>" width="32" height="32" alt="Stumble Upon" title="Stumble Upon"/></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+</div>

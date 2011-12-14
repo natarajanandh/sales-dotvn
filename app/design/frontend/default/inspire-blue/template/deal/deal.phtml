@@ -1,0 +1,291 @@
+<?php
+//Get the value of productid and 'recent' recent deals parameter
+$timezone = explode(" ", $this->formatDate(null, 'long', true));
+$startdate = $this->formatDate(null, 'short', true) . " " . $timezone[count($timezone) - 1];
+$productIds = Mage::getSingleton('core/session')->getProductIds();
+
+// Check the products is available or not
+if (empty($productIds)) {
+?>
+<div  class="clsspace"><img src="<?php echo $this->getSkinUrl('images/contenttop.png') ?>" width="706" height="10" alt="2columns-right"  /></div>
+    <div class="contpad clearfix">
+        <div class="nodealtext clearfix ">  <?php echo "<h1>" . $this->__('No Deal Available') . "</h1>" ?></div>
+    </div>
+
+<img src="<?php echo $this->getSkinUrl('images/contentbottom.png') ?>" width="706" height="10" alt="contentbottom"/>
+<?php
+} else {
+?>
+    
+            <script language="javascript">
+            var j =1;
+
+            if (typeof(BackColor)=="undefined")
+            BackColor = "white";
+            if (typeof(ForeColor)=="undefined")
+            ForeColor= "black";
+
+            if (typeof(DisplayFormat)=="undefined")
+            DisplayFormat = "<span class='hour' style='margin:2px 0 0 0'>%%H%%</span><span class='min'  style='margin:2px 0 0 60px'>%%M%%</span><span class='sec' style='margin:2px 0 0 110px'>%%S%%</span>";
+            if (typeof(CountActive)=="undefined")
+            CountActive = true;
+            if (typeof(FinishMessage)=="undefined")
+            FinishMessage = "";
+            if (typeof(CountStepper)!="number")
+            CountStepper = -1;
+            if (typeof(LeadingZero)=="undefined")
+            LeadingZero = true;
+
+            CountStepper = Math.ceil(CountStepper);
+            if (CountStepper == 0)
+            CountActive = false;
+            var SetTimeOutPeriod = (Math.abs(CountStepper)-1)*1000 + 990;
+
+            function calcage(secs, num1, num2) {
+            if(num1==3600){s = ((Math.floor(secs/num1))).toString();}
+            else{s = ((Math.floor(secs/num1)%num2)).toString();}
+            if (LeadingZero && s.length < 2)
+            s = "0" + s;
+            return "<b>" + s + "</b>";
+            }
+
+            function CountBack(secs,iid,j) {
+            if (secs < 0) {
+            document.getElementById(iid).innerHTML = FinishMessage;
+            var dealimage = "<?php echo $this->getSkinUrl('images/8.jpg') ?>";
+            var buynowreplace = "<?php echo $this->getSkinUrl('images/8.jpg') ?>";
+            document.getElementById('deal_status-'+j).innerHTML ='<img src="'+dealimage+'"  alt="Rate" title="Rate"/><p>Deal closed !</p> ';
+                    document.getElementById('scriptbuynow-'+j).style.display = "none";
+                    document.getElementById('scriptbuynow-'+j).setAttribute('href', '#!');
+                    document.getElementById('script_gift_box').style.display = "none";
+                    document.getElementById('price_value-'+j).innerHTML ='<?php echo $this->__('Closed'); ?>';
+            return;
+
+            }
+            DisplayStr = DisplayFormat.replace(/%%D%%/g, calcage(secs,86400,100000));
+            DisplayStr = DisplayStr.replace(/%%H%%/g, calcage(secs,3600, 0));
+            DisplayStr = DisplayStr.replace(/%%M%%/g, calcage(secs,60,60));
+            DisplayStr = DisplayStr.replace(/%%S%%/g, calcage(secs,1,60));
+
+            document.getElementById(iid).innerHTML = DisplayStr;
+            if (CountActive)
+            setTimeout(function(){CountBack((secs+CountStepper),iid,j)}, SetTimeOutPeriod);
+
+            }
+
+            </script>
+<?php
+    $count = 1;
+    foreach ($productIds as $item) {
+        $productId = $item;
+?>
+<div  class="clsspace"><img src="<?php echo $this->getSkinUrl('images/contenttop.png') ?>" width="706" height="10" alt="2columns-right"  /></div>
+<div class="contpad clearfix" <?php echo $contpadStyle; ?>>
+     <div class="leftcontent">
+        <?php
+        $inif = '0';
+        $model = Mage::getModel('catalog/product'); //getting product model
+        $_product = $model->load($productId);
+        $inif = '1';
+        $currencySymbol = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
+        $dealstatus = $_product->getDealStatus();
+        $discussionId = $_product->getIdentifier();
+
+        $productCity = $_product->getCity();
+        $cities = Mage::getSingleton('core/session')->getTotalCities();
+        $cityIds = explode(',', $productCity);
+        $cityCount = count($cityIds);
+		$productUrl = Mage::getModel('deal/deal')->getProductUrl($productId);
+        $discussStatus = Mage::getSingleton('core/session')->getDisStatusID();
+        $fbApiKey = Mage::getSingleton('facebook/config')->getApiKey();
+        /* HDflvplayer. */
+        ?>
+
+        <fieldset class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </fieldset>
+
+        <div class="left_column">
+            <div class="buynowbox">
+                <div class="leftbox_middle">
+                    <div class="buynow_value clear">
+						<?php $sp_price = floor($_product->getSpecialPrice()); ?>
+                            <div class="price_value" id="price_value-<?php echo $count; ?>" style="width:170px;"><?php echo  Mage::helper('core')->currency($sp_price, true, true) ?>  </div>
+                            <div class="price_old"><?php echo  Mage::helper('core')->currency($_product->getPrice(), true, false) ?></div>
+                            <div style="text-align:center;paddin-top:7px;" align="center"><a href='<?php echo Mage::getBlockSingleton('catalog/product_view')->getAddToCartUrl($_product) ?>' id="scriptbuynow-<?php echo $count; ?>" class="buynowbtn">
+                                <img src="<?php echo $this->getSkinUrl('images/buy_btn.png') ?>" class="" width="110" height="37" alt="Buy Button"/>
+                            </a></div>
+
+                    </div>
+					<!--Time box-->
+  		            <?php
+                        //product's regular Price
+                        $todayDate = Mage::getModel('catalog/product')->getResource()->formatDate($_product->getspecial_to_date(), false);
+                        $expirydate = $todayDate . ' ' . $_product->gettime();
+                	?>
+                    <div class="timerbg_middle clearfix clear">
+                        <span class="corner_img"></span>
+                        <div class="deal_statusnew" >
+                            <h4><?php echo $this->__('Time Left To Buy'); ?></h4>
+                            <div class="timerbox" >
+                                <div class="viraiterbg">
+                                    <div id="countbox_<?php echo $count; ?>" class="cntdwn"></div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!--End of Time box-->
+					<script type="text/javascript">
+                        var dthen<?php echo $count; ?> = new Date("<?php echo Date("m/d/y h:i:s A", strtotime($expirydate)); ?>");
+                        start = "<?php echo Date("m/d/y h:i:s A", strtotime(Mage_Core_Model_Locale::date(null, null, "vi_VN", true))); ?>";
+                        start_date = Date.parse(start);
+                        var dnow<?php echo $count; ?> = new Date(start_date);
+                        if(CountStepper>0)
+                          ddiff= new Date((dnow<?php echo $count; ?>)-(dthen<?php echo $count; ?>));
+                        else
+                          ddiff = new Date((dthen<?php echo $count; ?>)-(dnow<?php echo $count; ?>));
+                        gsecs<?php echo $count; ?> = Math.floor(ddiff.valueOf()/1000);
+
+                        var iid<?php echo $count; ?> = "countbox_<?php echo $count; ?>";
+                        CountBack(gsecs<?php echo $count; ?>,"countbox_"+j, j);
+                        j++;
+                    </script>
+                        
+                    <?php
+                        $_gallery = $_product->getMediaGalleryImages();
+						
+                        $currentUrl = $this->helper('core/url')->getCurrentUrl();
+                        $content = '&amp;';
+                        //$map =   $_product->getsitemap();
+                        $customersite = $_product->getcustomersite();
+                        $highlight = $_product->gethightlight();
+                        $fineprint = $_product->getFineprint();
+                        $website = $_product->getCustomerWebsite();
+                        $map = $_product->getsitemap();
+                        $phone = $_product->getQuestions();
+                        $_description = $_product->getdescription();
+                        $renderDescription = $this->helper('catalog/output')->productAttribute($_product, $_description, 'description');
+                        if (!$_product->isGrouped()) {
+                            $discount_price = $_product->getPrice() - $_product->getSpecialPrice();
+                            $discount = ($discount_price * 100) / $_product->getPrice();
+                            $discount = round($discount);
+                    ?>
+                            <div class=" clearfix" >
+                                <div class="clsdiscount_prices" >
+                                    <h3 style="text-align:center;padding-top:6px;"><?php echo $this->__('Tiết Kiệm'); ?></h3>
+                                    <span><?php echo $discount . '%'; ?></span>
+                                </div>
+                                <div class="clsdiscount_prices" style="background:none;padding-top:6px;">
+                                <?php
+										if (!$_product->isGrouped()) {
+											$resultQuantity = $this->getQuantityPurchase($_product);
+										}
+								?>
+                                    <span><?php echo $resultQuantity[0]; ?></span></div>
+                                    <h3 style="text-align:center;"><?php echo $this->__('bought'); ?></h3>
+                               
+
+                               
+                       
+<?php } ?>
+                    </div>
+                </div>
+                <?php
+                        //Adding the products cartUrl,specialprice,identifier to the session
+                        Mage::getSingleton('core/session')->setSpecialPrice($_product->getSpecialPrice());
+                        Mage::getSingleton('core/session')->setAddtocart($this->getAddToCartUrl($_product));
+                        //End of Adding the products cartUrl,specialprice,identifier to the session
+                ?>
+                    </div>
+                </div>
+                
+                <!--Fine Print and Highlights-->
+                <div class="right_column">
+                    <div id="featured"  class="left">
+                        <div class="banner_middle">
+        	            <?php 
+							if (count($_gallery) != 1) {
+							$index = 0;
+                	            foreach ($_gallery as $_image): 
+									if($index < 1){
+						?>
+									<?php $imageSrc = $this->helper('catalog/image')->init($this->getProduct(), 'baseimage', $_image->getFile())->resize(280,200); ?>
+
+                                	<img src="<?php echo $imageSrc ?>" width="280" height="200" alt="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" title="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>"  />
+								<?php } $index++; endforeach; ?>
+
+						<?php } else { ?>
+                                <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" width="280" height="200" alt="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" title="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>"  />
+						<?php } ?>
+						<div class="discount"><p style="font-size:18px;padding-left:21px;">Giảm</p><p style="font-size:25px;font-weight:bold;text-align:center;"><?php echo $discount . '%'; ?></p></div>
+                        </div>
+                       
+                    </div>
+                     <div style="float:left;width:230px;">
+                     		<p style="line-height:21px;font-size:25px;padding-left:10px;text-align:justify"><a href="<?php echo $productUrl; ?>" style="color:#1560c6;text-decoration:none;"><?php echo $this->htmlEscape($_product->getName()) ?></a></p>
+                            <div class="clsdescription" style="padding-left:10px;padding-top:10px;"><?php echo substr($renderDescription,0,150); ?>...</div>
+                            <div style="overflow:hidden;"><div class="showmore">Chi tiết &rsaquo;&rsaquo;</div></div>
+                            
+                     </div>
+                     
+					<?php if (count($_gallery) != 1) { ?>
+                                <script type="text/javascript">
+                                    $j('#featured-<?php echo $count; ?>').orbit({
+                                        'bullets': true,
+                                        'bulletid': <?php echo $count; ?>,
+                                        'timer' : true,
+                                        'animation' : 'fade',
+                                        'captions' : false,
+                                        'directionalNav' : false
+                                    });
+                                </script>
+                                <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+					<?php } ?>
+							
+                            
+                           
+
+                    
+                       
+                    </div>
+ <div class="spread clearfix">
+                                   
+									<?php
+                                            // Prepare URL for the facebook dialog feed.
+                                            $appId = Mage::getStoreConfig('customer/facebook/api_id');
+                                            
+                                            $redirectUrl = Mage::getBaseUrl();
+                                            $productImage = $this->helper('catalog/image')->init($_product, 'image');
+                                            $productName = urlencode($_product->getName());
+                                            $productDescription = urlencode(strip_tags($_description));
+                                            $fbUrl = 'http://www.facebook.com/dialog/feed?app_id=' . $appId . '&description=' . $productDescription . '&picture=' . $productImage . '&name=' . $productName . '&message=&redirect_uri=' . $redirectUrl . '&link=' . $productUrl;
+                                    ?>
+                                            <span class="sharelinks">
+                                            	<!-- Place this tag where you want the +1 button to render -->
+												
+                                                <a class="links" href="http://twitter.com/intent/tweet/?text=<?php echo $_product->getName(); ?>&amp;url=<?php echo $productUrl; ?>"><img src="<?php echo $this->getSkinUrl('images/Twitter-icon.png') ?>" width="24" height="24" alt="twitter" title="twitter"/></a>
+                                                <a class="links" title="Facebook Share" href="<?php echo $fbUrl; ?>" target="_blank"><img src="<?php echo $this->getSkinUrl('images/FaceBook-icon.png') ?>" width="24" height="24" alt="facebook" title="facebook"/></a>
+                                                <a class="links" href="http://link.apps.zing.vn/share?u=<?php echo $productUrl ?>" target="_blank" title="Chia sẻ lên Zing Me" style="padding-right:5px;"><img src="<?php echo $this->getSkinUrl('images/zing.png') ?>" width="23" height="23" alt="zing" title="twitter"/></a>
+                                                <div class="g-plusone" data-annotation="none" data-href="<?php echo $productUrl ?>" style="padding-left:6px;"></div>
+	                                        </span>
+                
+                          </div> 
+                    
+                   
+                </div>
+                <!--left content-->
+            </div>
+            <!--contpad-->
+            
+            <img src="<?php echo $this->getSkinUrl('images/contentbottom.png') ?>" width="706" height="10" alt="contentbottom"/>
+
+            <?php
+                $count = $count + 1;
+            }
+            
+        }
+            ?>
+
+<!--end of first content box-->

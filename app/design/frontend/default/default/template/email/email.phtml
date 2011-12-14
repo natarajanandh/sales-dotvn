@@ -1,0 +1,93 @@
+
+
+<div  class="block block-email">
+<div class="leftboxtop"><img src="<?php echo $this->getSkinUrl('images/righttop.jpg') ?>" width="226" height="10"/></div>
+<div class="mailform"><h4><?php echo $this->__('Email to a friend') ?></h4><div class="clsmailform">
+
+<?php  $status = $this->getemail(); if($status != 'success'){ if($status == 'failed') {   echo "<p style='color:red'>Email sending failed.Please enter a valid email address</p>"; }  ?>
+      <form action="<?php echo Mage::helper('core/url')->getCurrentUrl() ; ?>" method="post" id="email-detail">
+        <fieldset class="block-content">
+            <legend><?php echo $this->__('Email a friend') ?></legend>
+            <?php /*
+            <?php if( $message = $this->getErrorMessage() ): ?>
+                <p class="error"><?php echo $message ?></p>
+            <?php endif; ?>
+            <?php if( $message = $this->getSuccessMessage() ): ?>
+                <p class="success"><?php echo $message ?></p>
+            <?php endif; ?>*/
+             ?>
+            <div class=""><input name="emailfriend" type="text" id="newsletter" class="txtmail" style="margin-top:5px;" onfocus="if (this.value == 'Enter Your Friend Email address...') {this.value = '';this.style.color ='black';}" onblur="if (this.value == '') {this.style.color ='silver';this.value = 'Enter Your Friend Email address...';}" value="Enter Your Friend Email address..." /></div>
+            <button type="submit" class="clssubmit" name="emailafriend"></button>
+        </fieldset>
+    </form> <?php }else{ echo "Your mail has been sent"; } ?>
+
+
+
+
+
+
+    </div>
+</div><div class="leftboxbottom"><img src="<?php echo $this->getSkinUrl('images/rightbottom.jpg') ?>" width="226" height="10"/></div>
+</div><?php
+                /*
+                    This shows how to load specific fields from a record in the database.
+                    1) Note the load(15), this corresponds to saying "select * from table where table_id = 15"
+                    2) You can then just use the get(fieldname) to pull specific data from the table.
+                    3) If you have a field named news_id, then it becomes getNewsId, etc.
+                */
+                /*
+                $news = Mage::getModel('email/email')->load(15);
+                echo $news->getNewsId();
+                echo $news->getTitle();
+                echo $news->getContent();
+                echo $news->getStatus();
+                */
+
+                /*
+                    This shows an alternate way of loading datas from a record using the database the "Magento Way" (using blocks and controller).
+ 					Uncomment blocks in /app/code/local/Namespace/Module/controllers/IndexController.php if you want to use it.
+
+               */
+                /*
+                $object = $this->getEmail();
+                echo 'id: '.$object['test_id'].'<br/>';
+				echo 'title: '.$object['title'].'<br/>';
+				echo 'content: '.$object['content'].'<br/>';
+				echo 'status: '.$object['status'].'<br/>';
+                */
+
+
+                /*
+                    This shows how to load multiple rows in a collection and save a change to them.
+                    1) The setPageSize function will load only 5 records per page and you can set the current Page with the setCurPage function.
+                    2) The $collection->walk('save') allows you to save everything in the collection after all changes have been made.
+                */
+                /*
+                $i = 0;
+
+                $collection = Mage::getModel('email/email')->getCollection();
+                $collection->setPageSize(5);
+                $collection->setCurPage(2);
+                $size = $collection->getSize();
+                $cnt = count($collection);
+                foreach ($collection as $item) {
+                    $i = $i+1;
+                    $item->setTitle($i);
+                    echo $item->getTitle();
+                }
+
+                $collection->walk('save');
+                */
+
+                /*
+                    This shows how to load a single record and save a change.
+                    1) Note the setTitle, this corresponds to the table field name, title, and then you pass it the text to change.
+                    2) Call the save() function only on a single record.
+                */
+                /*
+                $object = Mage::getModel('email/email')->load(1);
+                $object->setTitle('This is a changed title');
+                $object->save();
+				*/
+
+            ?> 

@@ -1,0 +1,100 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_blank
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="page-title" id="clscontact">
+    <div class="page-title clearfix"> <h1 ><?php echo Mage::helper('contacts')->__('Contact Us') ?></h1>   </div>
+    <div class="titlebot"></div><div class="mantatory" style="text-align: right"  ><span class="required">*</span> <span  class="req-txt"><?php echo $this->__('Mandatory') ?></span></div>
+</div>
+<div id="contact-page">
+    <p class="contactquery"><?php echo $this->__('Any Questions? Use this form to contact us. Our representative will get back to you.') ?></p>
+
+
+    <form action="<?php echo $this->getFormAction(); ?>" id="contactForm" method="post">
+        <ul  class="contactul">
+            <li>
+
+                <div  class="leftcol"><label for="name" class="contact-label"><?php echo Mage::helper('contacts')->__('Name') ?> <span class="required">*</span></label><span  class="label-txt"><?php echo $this->__('please enter your full name') ?></span></div>
+                <input  name="name" id="name" title="<?php echo $this->__('Name') ?>" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserName()) ?>" class="input-text required-entry clstxtbox" type="text"  />
+                <div class="clear"></div>
+            </li>
+            <li >
+                <div class="clearfix">
+                    <div class="leftcol"><label for="email" class="contact-label"><?php echo Mage::helper('contacts')->__('Email') ?> <span class="required">*</span></label><span class="label-txt"><?php echo $this->__('So we can get back to you') ?></span></div>
+                    <input name="email" id="email" title="<?php echo $this->__('Email') ?>" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserEmail()) ?>"  class="input-text validate-email required-entry clstxtbox" type="text"  />
+                </div>
+            </li>
+
+
+            <li>
+                <div class="clearfix">
+                    <div class="leftcol"><label for="telephone" class="contact-label"><?php echo Mage::helper('contacts')->__('Telephone') ?><span class="required">*</span></label></div>
+                    <input name="telephone" id="telephone" title="<?php echo $this->__('Telephone') ?>" value="" class="input-text required-entry clstxtbox" type="text"  />
+
+                </div>
+            </li>
+            <li>
+                <div class="clearfix">
+                    <div class="leftcol"><label for="comment"  class="txtmsg"><?php echo Mage::helper('contacts')->__('Comment') ?></label><span class="bottomtxtmsg"> <?php echo $this->__('Please enter the details of the  request we will respond as quickly as possible.') ?> </span></div>
+                    <textarea rows="10" cols="5" name="comment" id="comment" title="<?php echo $this->__('Comment') ?>"  class="txtarea"></textarea>
+                </div>
+            </li>
+            <li>
+                <div class="clearfix">
+                    <div class="leftcol"><label for="code"  class="txtmsg"><?php echo Mage::helper('contacts')->__('Enter the code') ?> <span class="required">*</span></label><span class="bottomtxtmsg">
+                            <?php echo $this->__('Please enter the code, which is used for spam filter.') ?> </span></div>
+                    <script type="text/javascript">
+                        var RecaptchaOptions = {
+                            theme : 'white'
+                        };
+                    </script>
+                    <div class="floatleft">
+                        <?php
+                            require_once('recaptchalib.php');
+                            $publickey = "6LdGMr8SAAAAAPXwsXi8jHx7iDbHvQ6-V6P7W5kb"; // you got this from the signup page
+                            echo recaptcha_get_html($publickey);
+                        ?>
+                    </div>
+                </div>
+            </li>
+            <li>
+
+                <div class="clearfix">
+                    <button type="submit" class="btnnew clssubmit"><span><?php echo $this->__('Send') ?></span></button>
+
+
+                </div>
+
+            </li>
+
+        </ul> </form>
+
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+    var contactForm = new VarienForm('contactForm', true);
+    //]]>
+</script>

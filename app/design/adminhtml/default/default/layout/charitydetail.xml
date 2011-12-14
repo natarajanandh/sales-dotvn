@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <charitydetail_adminhtml_charitydetail_index>
+        <reference name="content">
+            <block type="charitydetail/adminhtml_charitydetail" name="charitydetail" />
+        </reference>
+    </charitydetail_adminhtml_charitydetail_index>
+</layout>

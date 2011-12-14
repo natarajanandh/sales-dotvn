@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<config>
+    <menu>
+        <all translate="title" module="all">
+            <children>
+                <couponvalidator translate="title" module="couponvalidator">
+                    <title>Coupon Validation</title>
+                    <action>couponvalidator/adminhtml_couponvalidator</action>
+                    <sort_order>5</sort_order>
+                </couponvalidator>              
+            </children>
+        </all>
+        <sales translate="title" module="sales">
+            <children>
+                <couponvalidator translate="title" module="couponvalidator">
+                    <title>Coupon Validation</title>
+                    <action>couponvalidator/adminhtml_couponvalidator</action>
+                    <sort_order>15</sort_order>
+                </couponvalidator>
+            </children>
+        </sales>
+    </menu>
+    <acl>
+        <resources>            
+            <admin>
+                <children>
+                   <sales translate="title" module="sales">
+                    
+                        <children>
+                            <couponvalidator translate="title" module="couponvalidator">
+                                <title>Couponvalidator</title>
+                            </couponvalidator>
+                         </children>                                               
+                    
+                    </sales>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

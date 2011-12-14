@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gclone_Mailchimp>
+            <version>0.0.1</version>
+        </Gclone_Mailchimp>
+    </modules>
+
+    <global>
+        <rewrite>
+            <gclone_mailchimp_account_edit>
+                <from><![CDATA[#^/customer/account/edit/(.*)#]]>
+                </from>
+                <to>mailchimp/account/edit</to>
+            </gclone_mailchimp_account_edit>
+            <gclone_mailchimp_account_confirm>
+                <from><![CDATA[#^/customer/account/confirm/(.*)#]]>
+                </from>
+                <to>mailchimp/account/confirm</to>
+            </gclone_mailchimp_account_confirm>
+        </rewrite>
+
+        <blocks>
+            <adminhtml>
+                <rewrite>
+                    <newsletter_subscriber>Gclone_Mailchimp_Block_Adminhtml_Newsletter_Subscriber</newsletter_subscriber>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+
+        <models>
+            <mailchimp>
+                <class>Gclone_Mailchimp_Model_Mailchimp</class>
+                <emailtype>Gclone_Mailchimp_Model_Mailchimp_emailtype</emailtype>
+					<!--<rewrite>
+						<listids>Ebizmarts_Mailchimp_Model_Mailchimp_Listids</listids>
+					</rewrite>-->
+            </mailchimp>
+
+            <newsletter>
+                <rewrite>
+                    <subscriber>Gclone_Mailchimp_Model_Newsletter_Subscriber</subscriber>
+                </rewrite>
+            </newsletter>
+
+
+        </models>
+
+
+        <helpers>
+            <Mailchimp>
+                <class>Gclone_Mailchimp_Helper</class>
+            </Mailchimp>
+            <mailchimp>
+                <rewrite>
+                    <data>Gclone_Mailchimp_Helper_Data</data>
+                </rewrite>
+            </mailchimp>
+        </helpers>
+
+        <resources>
+            <Mailchimp_setup>
+                <setup>
+                    <module>Gclone_Mailchimp</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </Mailchimp_setup>
+
+            <Mailchimp_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </Mailchimp_write>
+
+            <Mailchimp_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </Mailchimp_read>
+
+        </resources>
+
+    </global>
+
+    <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <mailchimp translate="title" module="mailchimp">
+                                            <title>mailchimp Section</title>
+                                            <sort_order>50</sort_order>
+                                        </mailchimp>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+
+
+		<!--<layout>
+		    <updates>
+		        <customerpartner module="Ebizmarts_Customerpartner">
+		            <file>customerpartner.xml</file>
+		        </customerpartner>
+		    </updates>
+		</layout>
+
+
+	-->
+    </adminhtml>
+
+    <admin>
+        <routers>
+            <mailchimp>
+                <use>admin</use>
+                <args>
+                    <module>Gclone_Mailchimp</module>
+                    <frontName>mailchimp</frontName>
+                </args>
+            </mailchimp>
+        </routers>
+    </admin>
+
+    <default>
+        <mailchimp>
+            <general>
+                <active>0</active>
+                <url>http://api.mailchimp.com/1.2/</url>
+            </general>
+            <subscribe>
+                <email_type>html</email_type>
+                <double_optin>0</double_optin>
+                <update_existing>1</update_existing>
+            </subscribe>
+            <unsubscribe>
+                <delete_member>0</delete_member>
+                <send_goodbye>0</send_goodbye>
+                <send_notify>0</send_notify>
+            </unsubscribe>
+        </mailchimp>
+    </default>
+
+</config>

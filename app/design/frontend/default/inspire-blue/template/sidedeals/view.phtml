@@ -1,0 +1,161 @@
+<!--
+Created by Contussupport
+www.contussupport.com
+-->
+<!-- Today's side deal -->
+<?php
+/* Condition for displaying the sidedeal in the main deal page */
+//$cid = Mage::app()->getRequest()->getParam('cid');
+$id  = Mage::app()->getRequest()->getParam('id');
+$catId = 7; // put your category ID in here
+$title = $this->__('Todays Side Deal');
+if(isset($id)) {
+    $catId = 6;
+    //$title = $this->__('Todays Main Deal'); // put your category ID in here
+}
+
+$cities =array();
+$desc ='';
+$baseUrl= Mage::getBaseUrl();
+$dealsCity= Mage::getSingleton('core/session')->getCity();
+//getting the current city
+$Totalcities = Mage::getSingleton('core/session')->getTotalCities();
+$dealsCityName = $Totalcities[$dealsCity];
+if($catId == 6){
+    $products =  Mage::getResourceModel('catalog/product_collection')
+        ->addAttributeToSelect('image')
+        ->addCategoryFilter(Mage::getModel('catalog/category')->load($catId));
+    $products->addAttributeToFilter('Cities',array('eq'=>$dealsCity));
+$products->addFieldToFilter(array(
+        array('attribute'=>'Status','eq'=>'1'),
+));
+
+$currentTime =  Mage_Core_Model_Locale::date(null, null ,"en_US",true);
+
+foreach ($products as $_product){
+    $productId = $_product->getId();
+
+    if($productId != $id){
+    $model = Mage::getModel('catalog/product'); //getting product model
+    $_product = $model->load($_product->getId());
+    $city= $_product->getAttributeText('cities');
+    $ProductToDate  = $_product->getResource()->formatDate($_product->getspecial_to_date(),false);
+    $ToDate = strtotime($ProductToDate);
+    $ProductFromDate  = $_product->getResource()->formatDate($_product->getspecial_from_date(),false);
+     $Fromtime = strtotime($ProductFromDate);
+     if($Fromtime < strtotime($currentTime)) {
+    //if($city == $dealsCityName ) {
+        if(strtotime(date("Y-m-d",$ToDate).' '.$_product->getTime()) >= strtotime($currentTime)) {
+            $productId=$_product->getId();
+            $images = $this->helper('catalog/image')->init($_product, 'image');
+            $desc=$_product->getName();
+            //break;
+            if($flag==1){
+                $title = $this->__('Todays Side Deal');
+            }
+            $flag=1;
+
+
+
+
+    $URL = $_product->getProductUrl();
+
+
+
+if($desc!='') {
+    $title = $this->__('Todays Main Deal');
+    ?>
+
+<div class="side-block">
+    <div class="block-title"><?php echo $this->__($title); ?></div>
+    <div class="block-content">
+        <div class="midpix">
+            <div class="midtxt">
+                <a href="<?php echo $URL; ?>"><img src="<?php echo $images; ?>" width="202" height="140" alt=""/></a>
+                <div class="deal_content"><?php echo $desc;?></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+    <?php
+}
+  }
+}
+}
+}
+$catId =7;
+}
+
+
+$products =  Mage::getResourceModel('catalog/product_collection')
+        ->addAttributeToSelect('image')
+        ->addCategoryFilter(Mage::getModel('catalog/category')->load($catId));
+
+$products->addAttributeToFilter('Cities',array('eq'=>$dealsCity));
+$products->addFieldToFilter(array(
+        array('attribute'=>'Status','eq'=>'1'),
+));
+
+$currentTime =  Mage_Core_Model_Locale::date(null, null ,"en_US",true);
+
+foreach ($products as $_product){
+    $productId = $_product->getId();
+
+    if($productId != $id){
+    $model = Mage::getModel('catalog/product'); //getting product model
+    $_product = $model->load($_product->getId());
+    $city= $_product->getAttributeText('cities');
+    $ProductToDate  = $_product->getResource()->formatDate($_product->getspecial_to_date(),false);
+    $ToDate = strtotime($ProductToDate);
+     $ProductFromDate  = $_product->getResource()->formatDate($_product->getspecial_from_date(),false);
+     $Fromtime = strtotime($ProductFromDate);
+     if($Fromtime < strtotime($currentTime)) {
+    //if($city == $dealsCityName ) {
+        if(strtotime(date("Y-m-d",$ToDate).' '.$_product->getTime()) >= strtotime($currentTime)) {
+            $productId=$_product->getId();
+            $images = $this->helper('catalog/image')->init($_product, 'image');
+            $desc=$_product->getName();
+            //break;
+            if($flag==1){
+                $title = "Extra Side Deal";
+            }
+            $flag=1;
+
+
+
+
+    $URL = $_product->getProductUrl();
+
+if($desc!='') {
+    ?>
+<div class="side-block">
+    <div class="block-title"><?php echo $this->__($title); ?></div>
+    <div class="block-content">
+        <div class="midpix">
+            <div class="midtxt">
+                <a href="<?php echo $URL; ?>"><img src="<?php echo $images; ?>" width="202" height="140" alt="" /></a>
+                <div class="deal_content"><?php echo $desc;?></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+    <?php
+}
+  }
+}
+}
+}
+?>
+<!-- end of Today's side deal -->
+    <?php
+    $sharelinks = Mage_Page_Block_Html_Head::getsharelinks();
+    $facebookfans =  $sharelinks['facebookfans'];
+    ?>    
+<!--Facebook fans Like -->
+<?php
+if(! empty($facebookfans)) { ?>
+<iframe src="http://www.facebook.com/plugins/likebox.php?id=<?php echo $facebookfans; ?>&amp;width=225&amp;connections=10&amp;stream=false&amp;header=true&amp;height=360" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:225px; height:360px; background: #FFF;" allowTransparency="true">
+</iframe>
+    <?php } ?>

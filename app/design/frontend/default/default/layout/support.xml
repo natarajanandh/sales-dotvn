@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <deal_index_index>
+        <reference name="right">
+			<block type="support/support"  name="support.support.right" before="sidedeals" template="support/support.phtml"></block>
+		</reference>
+    </deal_index_index>
+    
+</layout>

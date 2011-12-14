@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Email_Email>
+            <version>0.1.0</version>
+        </Email_Email>
+    </modules>
+    <global>
+        <blocks>
+            <email>
+                <class>Email_Email_Block</class>
+            </email>
+        </blocks>
+    </global>
+</config>

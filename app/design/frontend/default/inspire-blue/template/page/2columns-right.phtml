@@ -1,0 +1,84 @@
+
+<?php
+
+/**
+ * Template for Mage_Page_Block_Html
+ */
+/* For Background Image */
+$resource = Mage::getSingleton('core/resource');
+$read = $resource->getConnection('catalog_read');
+$background = $resource->getTableName('background');
+$select = $read->select()
+        ->from(array('cp'=>$background))
+        ->where('cp.background_id = ?', '1')
+        ->where('cp.status = ?', '1');
+
+$background_image_array = $read->fetchAll($select);
+if(isset($background_image_array[0]['filename'])){
+$background_image = "background-image:url('".$this->getUrl('media').$background_image_array[0]['filename']."');background-repeat:no-repeat;";
+Mage::getSingleton('core/session')->setBackground('yes');
+} else {
+    Mage::getSingleton('core/session')->setBackground('no');
+    $background_image ="background:#EFEFE9;";
+}
+
+?>
+<?php
+/* Only for Home page */
+if(Mage::getSingleton('cms/page')->getIdentifier() == 'home') { ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php } else{?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<?php }?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" xmlns:og="http://ogp.me/ns#" lang="<?php echo $this->getLang() ?>">
+<head>
+<?php echo $this->getChildHtml('head') ?>
+</head>
+<?php flush(); ?>
+<body <?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?> style="<?php echo $background_image; ?>" >
+<div class="wrapper" align="center">
+    <div class="page">
+        <div class="header-container"><?php echo $this->getChildHtml('header');  ?></div>
+        <div class="main col2-right-layout clearfix">
+         <?php echo $this->getChildHtml('topMenu') ?>
+        	<div class="content">
+            	<?php echo $this->getChildHtml('breadcrumbs') ?>   
+              
+	            <div class="col-main">
+    	            
+        	        <?php
+					/* Only for Home page */
+					if(Mage::getSingleton('core/session')->getDealModule() != '') { ?>
+                
+                	<?php echo $this->getChildHtml('global_messages') ?>
+                	<?php echo $this->getChildHtml('content') ?>
+                	<?php } else{?>
+                	<div  class="leftboxtop">
+                    	<img src="<?php echo $this->getSkinUrl('images/contenttop.png') ?>" width="706" height="13"  />
+                    </div>
+                 <div class="contpad clearfix">
+                <?php echo $this->getChildHtml('global_messages') ?>
+                <?php echo $this->getChildHtml('content') ?>
+                 </div>
+                <img src="<?php echo $this->getSkinUrl('images/contentbottom.png') ?>" width="706" height="10" alt="contentbottom"/>
+                
+<?php }?>
+ </div>
+            <div class="col-right sidebar"><?php echo $this->getChildHtml('right') ?></div>
+            </div>
+            <div class="footer">
+            	<div class="clsfooter-cont"><?php echo $this->getChildHtml('footer') ?></div>  
+
+           </div>
+        </div>
+        
+     </div>
+</div>
+<div class="clear" style="padding-top:70px;"></div>
+    		
+        <?php echo $this->getChildHtml('before_body_end') ?>
+
+		<?php //echo $this->getAbsoluteFooter() ?>
+		<?php Mage::getSingleton('core/session')->setDealModule(''); ?>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mage_Voucher>
+            <version>0.8.0</version>
+        </Mage_Voucher>
+    </modules>
+    <frontend>
+        <routers>
+            <voucher>
+                <use>standard</use>
+                <args>
+                    <module>Mage_Voucher</module>
+                    <frontName>voucher</frontName>
+                </args>
+            </voucher>
+        </routers>
+        <layout>
+            <updates>
+                <voucher>
+                    <file>voucher.xml</file>
+                </voucher>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <resources>
+            <voucher_setup>
+                <setup>
+                    <module>Mage_Voucher</module>
+                </setup>
+            </voucher_setup>
+        </resources>
+        <template>
+            <email>
+                <voucher_email_email_template translate="label" module="voucher">
+                    <label>voucher Form</label>
+                    <file>voucher_form.html</file>
+                    <type>text</type>
+                </voucher_email_email_template>
+            </email>
+        </template>
+    </global>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Mage_Voucher>
+                    <files>
+                        <default>Mage_Voucher.csv</default>
+                    </files>
+                </Mage_Voucher>
+            </modules>
+        </translate>
+    </adminhtml>
+</config>

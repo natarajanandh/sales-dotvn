@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gclone_Deal>
+            <version>0.1.0</version>
+        </Gclone_Deal>
+    </modules>
+    <frontend>
+        <routers>
+            <deal>
+                <use>standard</use>
+                <args>
+                    <module>Gclone_Deal</module>
+                    <frontName>deal</frontName>
+                </args>
+            </deal>
+        </routers>
+        <layout>
+            <updates>
+                <deal>
+                    <file>deal.xml</file>
+                </deal>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+            <deal>
+                <use>admin</use>
+                <args>
+                    <module>Gclone_Deal</module>
+                    <frontName>deal</frontName>
+                </args>
+            </deal>
+        </routers>
+    </admin>
+    <adminhtml>
+		<!--<menu>
+			<deal module="deal">
+				<title>Deal</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="deal">
+						<title>Manage Items</title>
+						<sort_order>0</sort_order>
+						<action>deal/adminhtml_deal</action>
+					</items>
+				</children>
+			</deal>
+		</menu>-->
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <Gclone_Deal>
+                            <title>Deal Module</title>
+                            <sort_order>10</sort_order>
+                        </Gclone_Deal>
+                        <system>
+                            
+                            <children>
+                               <config>
+                                   <children>
+                                <deal >
+                                    <title>Deal Module</title>
+                                   
+                                </deal>
+                                </children>
+                              </config>
+                            </children>
+                           
+                        </system>
+
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <deal>
+                    <file>deal.xml</file>
+                </deal>
+            </updates>
+        </layout>
+    </adminhtml>
+    <global>
+        <models>
+            <deal>
+                <class>Gclone_Deal_Model</class>
+                <resourceModel>deal_mysql4</resourceModel>
+            </deal>
+            <deal_mysql4>
+                <class>Gclone_Deal_Model_Mysql4</class>
+                <entities>
+                    <deal>
+                        <table>deal</table>
+                    </deal>
+                </entities>
+            </deal_mysql4>
+        </models>
+        <resources>
+            <deal_setup>
+                <setup>
+                    <module>Gclone_Deal</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </deal_setup>
+            <deal_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </deal_write>
+            <deal_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </deal_read>
+        </resources>
+        <blocks>
+            <deal>
+                <class>Gclone_Deal_Block</class>
+            </deal>
+        </blocks>
+        <helpers>
+            <deal>
+                <class>Gclone_Deal_Helper</class>
+            </deal>
+        </helpers>
+
+        <events>
+        <rewrite_deal_url>
+                <observers>
+                    <deal>
+                        <type>singleton</type>
+                        <class>Gclone_Deal_Model_Observer</class>
+                        <method>urlRewrite</method>
+                    </deal>
+                </observers>
+        </rewrite_deal_url>
+    </events>
+    <routers>
+            <cms>
+                <rewrite>
+                    <index>
+                        <to>deal/index</to>
+                        <override_actions>true</override_actions>                       
+                    </index>
+                </rewrite>
+            </cms>
+        </routers>
+    </global>
+    <global>
+        <models>
+            <Deal>
+                <rewrite>
+                    <item>Gclone_Deal_Catalog_Model_Resource_Eav_Mysql4_Product_Collection</item>
+                </rewrite>
+            </Deal>
+        </models>
+    </global>
+    
+</config>

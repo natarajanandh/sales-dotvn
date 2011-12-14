@@ -1,0 +1,289 @@
+<div class="side-block">
+	<div class="block-title"><span style="padding-left:10px;">Hỗ trợ trực tuyến</span></div>
+    <div class="block-content" style="padding-top:15px;">
+    	<table cellpadding="0" cellspacing="0" width="100%" border="0">
+        	<tr>
+            	<td><img src="<?php echo $this->getSkinUrl('images/support.jpg') ?>" alt="" /></td>
+                <td align="center">
+                <div style="padding-bottom:10px;"><img src="<?php echo $this->getSkinUrl('images/9.png') ?>" alt="" /></div>
+                <div><img src="<?php echo $this->getSkinUrl('images/vietnamvisa.png') ?>" alt="" /></div>
+                </td>
+            </tr>
+            <tr>
+            	<td colspan="2">
+                	<div class="r">
+                    	<div class="a left">Phone:</div>
+                        <div class="left">(+84 4) 3 782 2600</div>
+                    </div>
+                    <div class="r">
+                    	<div class="a left">Hotline:</div>
+                        <div class="left">(+84 4) 917 2 91769</div>
+                    </div>
+                    <div class="r">
+                    	<div class="a left">E-mail:</div>
+                        <div class="left">support@sale.vn</div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <img src="<?php echo $this->getSkinUrl('images/bottom-curve.png') ?>" alt=""/>
+</div>
+
+<script type="text/javascript">
+    //var eff = jQuery.noConflict();
+    $j(function(){
+        $j('#loopedslider').loopedSlider({
+            autoHeight: false,
+            containerClick: false,
+            autoStart:4000,
+            restart: 4000,
+            slidespeed: 500
+        });
+    });
+</script>
+<?php
+/* Condition for displaying the sidedeal in the main deal page */
+//$cid = Mage::app()->getRequest()->getParam('cid');
+$id = Mage::app()->getRequest()->getParam('id');
+$catId = 7; // put your category ID in here
+$title = $this->__('Todays Side Deal');
+if (isset($id)) {
+    $catId = 6;
+    //$title = $this->__('Todays Main Deal'); // put your category ID in here
+}
+
+$cities = array();
+$desc = '';
+$baseUrl = Mage::getBaseUrl();
+$dealsCity = Mage::getSingleton('core/session')->getCity();
+
+//getting the current city
+$Totalcities = Mage::getSingleton('core/session')->getTotalCities();
+
+$dealsCityName = $Totalcities[$dealsCity];
+
+if ($catId == 6) {
+
+    $products = Mage::getModel('deal/deal')->getDealCollections($catId, $dealsCity);
+	
+    $currentTime = Mage_Core_Model_Locale::date(null, null, "vi_VN", true);
+
+    foreach ($products as $_product) {
+        $productId = $_product->getId();
+
+        if ($productId != $id) {
+            $model = Mage::getModel('catalog/product'); //getting product model
+            $_product = $model->load($_product->getId());
+            $city = $_product->getAttributeText('cities');
+            $ProductToDate = $_product->getResource()->formatDate($_product->getspecial_to_date(), false);
+            $ToDate = strtotime($ProductToDate);
+            $ProductFromDate = $_product->getResource()->formatDate($_product->getspecial_from_date(), false);
+            $Fromtime = strtotime($ProductFromDate);
+            if ($Fromtime < strtotime($currentTime)) {
+                //if($city == $dealsCityName ) {
+                if (strtotime(date("Y-m-d", $ToDate) . ' ' . $_product->getTime()) >= strtotime($currentTime)) {
+                    $productId = $_product->getId();
+                    $images = $this->helper('catalog/image')->init($_product, 'image');
+                    $desc = $_product->getName();
+                    //break;
+                    $URL = Mage::getModel('deal/deal')->getProductUrl($productId);
+
+                    if ($desc != '') {
+                        $title = $this->__('Todays Main Deal');
+?>
+
+                        <div class="side-block">
+                            <div class="block-title"><?php echo $this->__($title); ?></div>
+                            <div class="block-content">
+                                <div class="midpix">
+                                    <div class="midtxt">
+                                        <a href="<?php echo $URL; ?>"><img src="<?php echo $images; ?>" width="202" height="140" alt=""/></a>
+                                        <div class="deal_content"><?php echo $desc; ?></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <img src="<?php echo $this->getSkinUrl('images/bottom-curve.png') ?>" alt=""/>
+                        </div>
+<?php
+                    }
+                }
+            }
+        }
+    }
+    $catId = 7;
+}
+
+$products = Mage::getModel('deal/deal')->getDealCollectionsRadom($dealsCity);
+			  echo "<pre>";
+			  print_r($products->getData());
+			  echo "</pre>";
+			  die;
+foreach ($products as $_product) {
+echo "<pre>";
+print_r($_product->getId());
+echo "</pre>";
+}
+die;
+$productCount = 0;
+$title = $this->__('Todays Side Deal');
+$currentTime = Mage_Core_Model_Locale::date(null, null, "en_US", true);
+$isSlide = Mage::getStoreConfig('deal/sidedeal/enable_slide');
+foreach ($products as $_product) {
+    $productId = $_product->getId();
+
+    if ($productId != $id) {
+        $model = Mage::getModel('catalog/product'); //getting product model
+        $_product = $model->load($_product->getId());
+        $city = $_product->getAttributeText('city');
+        $ProductToDate = $_product->getResource()->formatDate($_product->getspecial_to_date(), false);
+        $ToDate = strtotime($ProductToDate);
+        $ProductFromDate = $_product->getResource()->formatDate($_product->getspecial_from_date(), false);
+        $Fromtime = strtotime($ProductFromDate);
+        if ($Fromtime < strtotime($currentTime)) {
+            //if($city == $dealsCityName ) {
+            if (strtotime(date("Y-m-d", $ToDate) . ' ' . $_product->getTime()) >= strtotime($currentTime)) {
+                $productCount = $productCount + 1;
+            }
+        }
+    }
+}
+
+if ($productCount > 0) {
+    if ($isSlide != 0 && $productCount != 1) {
+?>
+        <div class="side-block">
+            <div class="block-title" style="padding: 10px 0 0 40px; width: 185px;"><?php echo $this->__($title); ?></div>
+            <div class="block-content">
+                <div class="midpix">
+                    <!-- Start of Slick Slider for Active Deals -->
+                    <div id="loopedslider">
+                        <div class="container">
+                            <div class="slides">
+                        <?php
+                        foreach ($products as $_product) {
+                            $productId = $_product->getId();
+
+                            if ($productId != $id) {
+                                $model = Mage::getModel('catalog/product'); //getting product model
+                                $_product = $model->load($_product->getId());
+                                $city = $_product->getAttributeText('city');
+                                $ProductToDate = $_product->getResource()->formatDate($_product->getspecial_to_date(), false);
+                                $ToDate = strtotime($ProductToDate);
+                                $ProductFromDate = $_product->getResource()->formatDate($_product->getspecial_from_date(), false);
+                                $Fromtime = strtotime($ProductFromDate);
+                                if ($Fromtime < strtotime($currentTime)) {
+                                    //if($city == $dealsCityName ) {
+                                    if (strtotime(date("Y-m-d", $ToDate) . ' ' . $_product->getTime()) >= strtotime($currentTime)) {
+                                        $productId = $_product->getId();
+                                        $images = $this->helper('catalog/image')->init($_product, 'image');
+                                        $desc = $_product->getName();
+                                        //break;
+                                        if ($flag == 1) {
+                                            $title = "Extra Side Deal";
+                                        }
+                                        $flag = 1;
+
+
+
+
+                                        $URL = Mage::getModel('deal/deal')->getProductUrl($productId);
+
+                                        if ($desc != '') {
+                        ?>
+                                            <div>
+                                                <div class="midtxt">
+                                                    <a href="<?php echo $URL; ?>" ><img src="<?php echo $images; ?>" width="202" height="140" alt=""/></a>
+                                                    <div class="deal_content" style="width:200px;"><?php echo $desc; ?></div>
+                                                </div>
+
+                                            </div>
+                        <?php
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+
+                <div class="floatleft slidearrow">
+                    <a href="#" class="previous floatleft"><img src="<?php echo $this->getSkinUrl('images/left-arrow.png') ?>"width="15" height="16" alt="previous" /></a>
+                    <h2 style="width:165px; float:left; text-align:center;"><?php //echo $this->__('<< Slide Between Deals >>');   ?></h2>
+                    <a href="#" class="next" class="floatright"><img src="<?php echo $this->getSkinUrl('images/right-arrow.png') ?> "width="15" height="16" alt="left" class="floatright"/></a>
+                </div>
+
+                <div class="clear"></div>
+            </div>
+            <!-- End of Slick Slider for Active Deals -->
+        </div>
+
+    </div>
+    <img src="<?php echo $this->getSkinUrl('images/bottom-curve.png') ?>" alt="" />
+</div>
+<!-- end of Today's side deal -->
+<?php
+                    } else {
+
+                        foreach ($products as $_product) {
+                            $productId = $_product->getId();
+
+                            if ($productId != $id) {
+                                $model = Mage::getModel('catalog/product'); //getting product model
+                                $_product = $model->load($_product->getId());
+                                $city = $_product->getAttributeText('cities');
+                                $ProductToDate = $_product->getResource()->formatDate($_product->getspecial_to_date(), false);
+                                $ToDate = strtotime($ProductToDate);
+                                $ProductFromDate = $_product->getResource()->formatDate($_product->getspecial_from_date(), false);
+                                $Fromtime = strtotime($ProductFromDate);
+                                if ($Fromtime < strtotime($currentTime)) {
+                                    //if($city == $dealsCityName ) {
+                                    if (strtotime(date("Y-m-d", $ToDate) . ' ' . $_product->getTime()) >= strtotime($currentTime)) {
+                                        $productId = $_product->getId();
+                                        $images = $this->helper('catalog/image')->init($_product, 'image');
+                                        $desc = $_product->getName();
+                                        //break;
+                                        $URL = Mage::getModel('deal/deal')->getProductUrl($productId);
+
+                                        if ($desc != '') {
+                                            $title = $this->__('Todays Side Deal');
+?>
+                                            <div class="side-block">
+                                                <div class="block-title"><?php echo $this->__($title); ?></div>
+                                                <div class="block-content">
+                                                    <div class="midpix">
+                                                        <div class="midtxt">
+                                                            <a href="<?php echo $URL; ?>"><img src="<?php echo $images; ?>" width="202" height="140" alt=""/></a>
+                                                            <div class="deal_content"><?php echo $desc; ?></div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <img src="<?php echo $this->getSkinUrl('images/bottom-curve.png') ?>" alt="" />
+                                            </div>
+<?php
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } ?>
+<?php
+                $sharelinks = Gclone_Deal_Block_Deal::getsharelinks();
+                $facebookfans = $sharelinks['facebookfans'];
+?>    
+                <!--Facebook fans Like -->
+<?php if (!empty($facebookfans)) {
+ ?>
+ 		<div class="side-block">
+        
+	        <div class="block-content">
+                     <iframe src="http://www.facebook.com/plugins/likebox.php?id=<?php echo $facebookfans; ?>&amp;width=243&amp;connections=12&amp;border_color=%23ffffff&amp;stream=false&amp;header=false&amp;height=350" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:243px; height:350px; background: #FFF;" allowTransparency="true">
+                    </iframe>
+                   </div>
+                    <img src="<?php echo $this->getSkinUrl('images/bottom-curve.png') ?>" alt=""/>
+         </div>
+<?php } ?>

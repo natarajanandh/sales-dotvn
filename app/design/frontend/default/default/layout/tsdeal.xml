@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <tsdeal_index_index>
+        <reference name="content">
+            <block type="tsdeal/tsdeal" name="tsdeal" template="tsdeal/tsdeal.phtml" />
+        </reference>
+    </tsdeal_index_index>
+</layout> 

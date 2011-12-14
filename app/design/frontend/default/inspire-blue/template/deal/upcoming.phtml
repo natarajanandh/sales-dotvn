@@ -1,0 +1,135 @@
+<?php
+$upcomingEnabled=Mage::getStoreConfig('deal/upcoming/as_upcoming');
+$products = array();
+//$products = $this->getFeaturedProduct(0,5);
+$currentTime = Mage_Core_Model_Locale::date(null, null, "en_US", true);
+$i = 0;
+$products = $this->getFeaturedProduct();
+?>
+<h1 class="recenttitle"><?php echo $this->__('Upcoming Deals'); ?> :</h1><div class="titlebot"></div><br/>
+<?php
+$resource = Mage::getSingleton('core/resource');
+$read = $resource->getConnection('catalog_read');
+$orderTable = $resource->getTableName('sales/order');
+$city = Mage::getSingleton('core/session')->getCity();
+//print_r($city);exit;
+$salesflatorderitem = (string) Mage::getConfig()->getTablePrefix() . 'sales_flat_order_item';
+$total_orders = "0";
+$id = "0";
+$a = 0;
+foreach ($products as $_product) {
+    $cities =explode(',',$_product->getcity());
+        if (in_array($city, $cities)) {
+        $a++;
+    }
+}
+$var = $a;
+$attribute = Mage::getModel('eav/config')->getAttribute('catalog_product', '562'); // get the cities attribute id 548
+foreach ($attribute->getSource()->getAllOptions(true, true) as $option) {
+    $value = $option['value'];
+    $cities[$value] = $option['label'];
+}
+
+if (count($products) > 0 && $upcomingEnabled == 1) {
+    foreach ($products as $_product) {
+        $status = $_product->getStatus();
+        if ($status == 1) {
+       $cities =explode(',',$_product->getcity());
+        if (in_array($city, $cities)) {
+
+            //code to check if the deal is current or not, if deal is current, deal will not be displayed, elseif the deal time is over then deal will be displayed
+            $ProductToDate = $_product->getResource()->formatDate($_product->getspecial_to_date(), false);
+            $ProductFromDate = $_product->getResource()->formatDate($_product->getspecial_from_date(), false);
+            $Fromtime = strtotime($ProductFromDate);
+            if (strtotime(date("Y-m-d", $Fromtime)) > strtotime($currentTime)) {
+?>
+<?php
+                if (!$_product->isGrouped()) {
+
+                    echo '<div class="clsrecentbox" style="margin: 10px 0px 0px 15px;">';
+?>
+<?php
+                    $current_product = Mage::getModel('deal/deal')->getProductUrl($_product->getId());
+                    $productId = $_product->getId();
+                    $todayDate = $_product->getResource()->formatDate($_product->getspecial_from_date(), false);
+                    $fromdate = date('F jS, Y', strtotime($todayDate)); //
+                    //$this->formatDate($_order->getCreatedAtStoreDate(), 'long'))
+
+                    $discount_price = $_product->getPrice() - $_product->getSpecialPrice();
+                    $discount = ($discount_price * 100) / $_product->getPrice();
+                    $discount = round($discount);
+
+                    // getting value of base URL to prepare URL, for recent deals view page
+                    //starts
+                    $baseUrl = Mage::getBaseUrl();
+                    $URL = $current_product;
+                    //ends
+
+                    $dealStatus[0] = "complete";
+                    $dealStatus[1] = "processing";
+                    $select = $read->select()
+                                    ->from(array('cp' => $orderTable))
+                                    ->join(array('pei' => $salesflatorderitem), 'pei.order_id=cp.entity_id', array())
+                                    ->where('pei.product_id=?', $productId)
+                                    ->where('cp.status IN (?)', $dealStatus);
+
+                    $orders_list = $read->fetchAll($select);
+
+                    $fetch_list = array();
+                    $quantity = array();
+                    $quantity[0] = "0";
+
+                    //echo $select;
+                    if (count($orders_list) > 0) {
+
+                        foreach ($orders_list as $rows) {
+
+                            $order_id = $rows['entity_id'];
+                            $order = Mage::getModel('sales/order')->load($order_id);
+
+                            $items = $order->getAllItems();
+                            //print_r($items);
+                            $itemcount = count($items);
+                            $name = array();
+                            $unitPrice = array();
+                            $sku = array();
+                            $ids = array();
+                            $qty = array();
+                            foreach ($items as $itemId => $item) {
+                                if ($productId == $item->getProductId()) {
+                                    $total_orders = $total_orders + 1;
+                                    $qty[0] = $item->getQtyOrdered();
+                                    $quantity[0] = $quantity[0] + $qty[0];
+                                }
+                            }
+                        }
+                    }
+?>
+                    <h2 class="floatright"><?php echo $this->__('%s', $this->formatDate($_product->getspecial_from_date(), 'long')) ?></h2>
+                    <div class="clear"></div>
+                    <div class="clsbord">
+
+                        <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(404, 276); ?>" width="178" height="130" alt="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" title="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>"/>
+                        <h3 align="center"><span><?php echo Mage::helper('core')->currency($_product->getSpecialPrice(), true, false) ?></span></h3><p class="recent-txt"><?php echo substr($this->htmlEscape($_product->getName()), 0, 25) . "..." ?></p>
+                        <div class="clsgrid clearfix">
+                            <ul class="clsgridul" style="width:185px;">
+                                <li class="clearfix clsbord-bot"><h5><?php echo $this->__('Value'); ?>:  </h5><h6><?php echo Mage::helper('core')->currency($_product->getPrice(), true, false) ?></h6></li>
+                                <li class="clearfix clsbord-bot"><h5><?php echo $this->__('Savings'); ?>:  </h5><h6><?php echo Mage::helper('core')->currency($discount_price, true, false) ?></h6></li>
+                                <li class="clearfix"><h5><?php echo $this->__('Discount'); ?>:  </h5><h6><?php echo $discount . "%"; ?></h6></li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+                    </div>
+<?php
+                }
+                $i = $i + 1;
+            }
+        }
+    }
+    }
+} else {
+    echo "<h1 class='recenttitle' style='color:#333;text-align:center'>No Upcoming Deals!</h1>";
+}
+?>

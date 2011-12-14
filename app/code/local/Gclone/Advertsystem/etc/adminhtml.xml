@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <menu>
+        <all translate="title" module="all">
+            <children>
+                <advertsystem translate="title" module="advertsystem">
+                    <title>Advert System</title>
+                    <sort_order>7</sort_order>
+                    <children>
+                        <rules translate="title">
+                            <title>Manage Rule</title>
+                            <sort_order>1</sort_order>
+                            <action>advertsystem/adminhtml_adrule</action>
+                        </rules>
+                        <referral translate="title">
+                            <title>Customers</title>
+                            <sort_order>2</sort_order>
+                            <action>advertsystem/adminhtml_adcustomer</action>
+                        </referral>
+                        <config translate="title">
+                            <title>Configuration</title>
+                            <sort_order>3</sort_order>
+                            <action>adminhtml/system_config/edit/section/advertsystem</action>
+                        </config>
+                    </children>
+                </advertsystem>
+            </children>
+        </all>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <advertsystem>
+                        <title>Advert System</title>
+                        <children>
+                            <rules translate="title">
+                                <title>Manage Rules</title>
+                                <sort_order>1</sort_order>
+                            </rules>
+                            <referral translate="title">
+                                <title>Customers</title>
+                                <sort_order>2</sort_order>
+                            </referral>
+                            <config translate="title">
+                                <title>Configuration</title>
+                                <sort_order>3</sort_order>
+                            </config>
+                        </children>
+                    </advertsystem>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <advertsystem>
+                                        <title>Contus - Advert System</title>
+                                    </advertsystem>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

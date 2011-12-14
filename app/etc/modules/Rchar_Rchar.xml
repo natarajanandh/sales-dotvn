@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Rchar_Rchar>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Rchar_Rchar>
+    </modules>
+</config> 

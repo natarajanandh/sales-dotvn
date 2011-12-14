@@ -1,0 +1,387 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_blank
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/*
+ * Created by Contussupport
+ * www.contussupport.com
+*/
+?>
+
+<?php
+$storeName =Mage::getStoreConfig('general/store_information/name');
+
+$i=0;
+$select = "";
+$cities = array();
+$attribute = Mage::getModel('eav/config')->getAttribute('catalog_product', '548'); // get the cities attribute id 548
+foreach ( $attribute->getSource()->getAllOptions(true, true) as $option) {
+    // $attrubuteArray[$option['value']] = $option['label']; // to get the multiple cities in pages
+    $value = $option['value'];
+    if($value !='') {
+   $cities[$value] = $option['label'];
+   $select .= "<option value='".$option['label']."'>". $option['label']."</option>";
+   }
+}
+Mage::getSingleton('core/session')->setProductID();
+$_productCollection = Mage::getResourceModel('catalog/product_collection');
+$citynames = array();
+$baseurl = Mage::getBaseUrl();
+$inif = 0;
+$sidedeal = 0;
+$maindeal = 0;
+$default = 0;
+$ProductID = '';
+$Productcity = '';
+$orgprodcity = '';
+$orgprodID = '';
+
+if(isset($_REQUEST['id'])) {
+    $prod_id = $_REQUEST['id'];
+    $sidedeal = 1;
+}
+elseif(isset($_REQUEST['city'])) {
+    $prod_city = urldecode($_REQUEST['city']);
+    $maindeal = 1;
+    Mage::getSingleton('core/session')->setmaindealcity($prod_city);
+}
+else {
+    $default = 1;
+}
+//
+foreach ($_productCollection as $_product):
+
+    $cat = $_product->getCategoryIds();// getting the category id
+    Mage::getModel('catalog/category')->load($cat[0])->getId();// loads the category id basedcondition
+   $dealStatus = $_product->getdealstatus();  
+ $status = $_product->getStatus();
+    if(isset($_REQUEST['city'])) {
+        // it displays if getting the city is set
+
+        if(Mage::getModel('catalog/category')->load($cat[0])->getId()==3):// checking the maindeal category id
+            $model = Mage::getModel('catalog/product'); //getting product model
+            $_product = $model->load( $_product->getId());
+
+            if($maindeal == 1)// if  maindeal view their products
+            {
+                if(strtoupper($_product->getAttributeText('cities')) == $prod_city) {
+                    $dealscity = strtoupper($_product->getAttributeText('cities'));
+                    $prod_id = $_product->getId();
+                    Mage::getSingleton('core/session')->setProductID($prod_id); //setting the product's Id in the Session
+                    $ProductID = Mage::getSingleton('core/session')->getProductID(); //getting the session productID
+
+                    Mage::getSingleton('core/session')->setCity($dealscity);// setting the session to be displayed
+                    $Productcity = Mage::getSingleton('core/session')->getCity(); // getting the cityname to view in session to display
+
+                    Mage::getSingleton('core/session')->setmaindealid($prod_id);// setting the session for displaying the default product
+                    Mage::getSingleton('core/session')->setmaindealcity($prod_city);// setting the session for displaying the default product
+
+                }else
+        {
+          Mage::getSingleton('core/session')->setCity($prod_city);// setting the session to be displayed
+            $Productcity = Mage::getSingleton('core/session')->getCity();
+        }
+
+        }
+        endif;
+    }
+    else {
+        $model = Mage::getModel('catalog/product'); //getting product model
+        $_product = $model->load( $_product->getId());    // getting the category id
+        if($sidedeal == 1)// if  it is sidedeal
+        {
+            if($_product->getId() == $prod_id) {
+
+                Mage::getSingleton('core/session')->setProductID($prod_id); //setting the product's Id in the Session
+                $ProductID=Mage::getSingleton('core/session')->getProductID(); //getting the session productID
+
+                $dealscity=strtoupper($_product->getAttributeText('cities'));
+                Mage::getSingleton('core/session')->setCity($dealscity);// setting the session to be displayed
+                $Productcity = Mage::getSingleton('core/session')->getCity(); // getting the cityname to view in session to display
+            }
+
+        }
+
+        if($default == 1) {
+            $chkid = Mage::getSingleton('core/session')->getmaindealid();
+            $chkcity = Mage::getSingleton('core/session')->getmaindealcity();
+            if($chkid == '' && $chkcity == '') {  // if there is no product id and product city
+                if(Mage::getModel('catalog/category')->load($cat[0])->getId()==3):
+                $model = Mage::getModel('catalog/product'); //getting product model
+                $_product = $model->load( $_product->getId());
+                $prod_id = $_product->getId();
+                $basecity = $_product->getAttributeText('cities');
+                if($_product->getStatus() == 1): // if the product is enabled
+
+                    if($i==0):
+                        Mage::getSingleton('core/session')->setProductID($prod_id[0]);  //setting theproduct's Id in the Session
+                        $ProductID = Mage::getSingleton('core/session')->getProductID(); //getting the session productID
+                        $dealscity = strtoupper($basecity);
+                        Mage::getSingleton('core/session')->setCity($dealscity); // setting the session to be displayed
+                        $Productcity = Mage::getSingleton('core/session')->getCity(); // getting the cityname to view in session to display
+                        $i++;
+                    endif;
+
+                endif;
+                endif;
+            }
+            else {
+                $ProductID = $chkid;
+                $Productcity = $chkcity;
+                Mage::getSingleton('core/session')->setProductID($ProductID);
+                Mage::getSingleton('core/session')->setCity($Productcity);
+            }
+
+        }
+
+    }
+    if($_product->getStatus() == 1):
+        $citynames[] = strtoupper($_product->getAttributeText('cities'));
+    endif;
+
+endforeach;
+//$final=array_unique($citynames);
+$product = Mage::getModel('catalog/product');
+
+$attributes = Mage::getResourceModel('eav/entity_attribute_collection')
+        ->setEntityTypeFilter($product->getResource()->getTypeId())
+        ->addFieldToFilter('attribute_code', 'city') // This can be changed to any attribute code
+        ->load(false);
+
+$attribute = $attributes->getFirstItem()->setEntity($product->getResource());
+
+/* @var $attribute Mage_Eav_Model_Entity_Attribute */
+$manufac = $attribute->getSource()->getAllOptions(false);
+foreach ($manufac as $man) {
+    $cities[$man['value']] = $man['label'];
+}
+//print_r($manufacturers);
+$final=array_unique($cities);
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="topmenubg">
+    <div id="toggle_blind"style="display:none;">
+        <div class='container_16 clearfix' id='drawer_inner'>
+            <div class='grid_16 last'>
+                <div id='division_drawer'>
+                    <ul class='clearfix' id='division_list1'>
+                        <?php foreach($final as $city): if($city!=""):?>
+                        <li>
+                            <a href="<?php echo $baseurl.'?city='.strtoupper($city); ?>"><?php echo strtoupper($city); ?></a>
+                        </li>
+                            <?php endif ;
+                        endforeach; ?>
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="clsbg ">
+
+    <div class="header clearfix">
+
+
+
+
+        <?php $page=$_SERVER['REQUEST_URI'];
+        function curPageURL() {
+            $pageURL = '';
+            if(strstr($_SERVER["SERVER_NAME"],'www')) {
+                $pageURL .='http://'.$_SERVER["SERVER_NAME"];
+            }
+            else {
+                $pageURL .='http://www.'.$_SERVER["SERVER_NAME"];
+            }
+            if ($_SERVER["SERVER_PORT"] != "80") {
+                $pageURL .= ":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+            } else {
+                $pageURL .= $_SERVER["REQUEST_URI"];
+            }
+            return $pageURL;
+        }
+
+        $pagewithoutindex = str_replace("index.php/", "", Mage::getBaseUrl());
+        $pagewithoutslash = str_replace("index.php/", "index.php", Mage::getBaseUrl());
+        $pageurl="";
+        if(curPageURL() == Mage::getBaseUrl() || curPageURL() == $pagewithoutindex ||  curPageURL() == $pagewithoutslash) {
+            $pageurl= '1';
+        }
+        if(strstr(curPageURL(),'cid')) {
+            $pageurl= '1';
+        }
+        if(strstr(curPageURL(),'city')) {
+            $pageurl= '1';
+        }
+        $page=explode('/',$page);
+        $page1 = count($page);
+        $page = $page[$page1-1];
+
+        ?>
+
+        <!--Logo starts-->
+        <div class="clslogo" >
+            <a onclick="location.href='<?php echo $this->getUrl('') ?>'"><img src="<?php echo $this->getSkinUrl('images/logo.png') ?>" width="291" height="36" alt="<?php echo $storeName; ?>" title="<?php echo $storeName; ?>" border="0"/></a>
+            <div class="city_name">
+                <span style="float:left;margin:10px 5px 0px 3px;"><?php echo $this->__('Daily Deals On the Best in')?></span>
+                <h4 style="float:left">
+<?php
+
+                    echo Mage::getSingleton('core/session')->getCity(); ?></h4>
+
+            </div>
+        </div>
+        <!--Logo Ends-->
+
+        <!--City slider and newsletter content-->
+        <div class="floatright">
+            <div class="floatright">
+
+                <img src="<?php echo $this->getSkinUrl('images/cityleft.jpg') ?>" style="float:left;"/><div class="city_middle">
+                    <ul class='toggles'>
+                        <li class='drawer_toggle' id='division_drawer_anchor'>
+                            <a href="#" onclick="Effect.toggle('toggle_blind', 'blind',{  duration: 0.1 }); return false;" class="clsmore clearfix">
+                                <span style="float:left;display:block"><?php echo $this->__('Visit More Cities')?></span>
+                                <img src="<?php echo $this->getSkinUrl('images/nc.png') ?>" id="image1" style="float:left;display:block;padding:5px 0 0 5px ;" />
+                            </a><li><img src="<?php echo $this->getSkinUrl('images/citydivider.jpg') ?>" /></li>
+<?php echo $this->getChildHtml('topLinks'); ?>
+                        <li><a href="<?php echo $this->getUrl("contacts"); ?>"><?php echo $this->__('Contact us')?></a></li></ul></div>
+                <img src="<?php echo $this->getSkinUrl('images/cityright.jpg')?>" style="float:left;" />
+
+                <div class="clear"></div>
+                <script src="<?php echo $this->getSkinUrl('js/cityslider.js') ?>" type="text/javascript"></script>
+                <script src="<?php echo $this->getSkinUrl('js/cityscript.js') ?>" type="text/javascript"></script>
+
+            </div><div class="clear"></div>
+
+            <div class="clsmailing clearfix" >
+                <form action="<?php echo $this->getUrl('newsletter/subscriber/new') ?>" method="post" id="newsletter-validate-detail">
+
+                    <div class="clearfix">
+                        <div class="searchinput" ><input name="email" type="text" id="newsletter1" value="Enter your email address here..." onfocus="if (this.value == 'Enter your email address here...') {this.value = '';this.style.color ='black';}" onblur="if (this.value == '') {this.style.color ='black';this.value = 'Enter your email address here...';}" class="searchinput1" /></div>
+                        <div class="selectcity"><select id="city" name="city"  class="select">
+                                <option value="0"><?php echo $this->__('Select your City')?></option>
+<?php echo $select; ?>               </select></div>
+                        <button type="submit" class="mailing_button" style="margin:0px;padding:0px;border:none;float:left"></button></div>
+
+                </form>
+                <script type="text/javascript">
+                    //<![CDATA[
+                    var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+                    //]]>
+                </script>
+            </div>
+        </div>
+        <!--End of City slider and newsletter content-->
+    </div>
+</div>
+
+
+
+<div class="clear"></div>
+
+<!-- Menu Navigation -->
+<div class="header-bottom clear" style="float:none;">
+    <div style="width:952px;margin:0 auto;">
+        <img src="<?php echo $this->getSkinUrl('images/tot_menu_bg_le.jpg') ?>"  width="10" height="45" alt="menuleftimg" class="floatleft"/>
+        <div class="menu_middlebg">
+
+            <ul class="clsmenuul" >
+
+                <li>
+                    <ul style="height:41px;display:table-cell;vertical-align:middle;">
+
+                        <li <?php if($pageurl == '1') echo 'class="active"' ; ?>><a href="<?php echo Mage::getBaseUrl(); ?>" >
+                                <p align="center"><?php echo $this->__('TODAY\'S DEAL')?></p></a>
+                        </li>
+                        <li <?php if($page == 'recent-deals') echo 'class="active"' ; ?>><a href="<?php echo Mage::getBaseUrl();
+?>recent-deals" >
+                                <p align="center"><?php echo $this->__('RECENT DEALS')?></p></a>
+                        </li>
+                        <li <?php if($page == 'works') echo 'class="active"' ; ?>><a href="<?php echo Mage::getBaseUrl(); ?>works" >
+                                <p align="center"><?php echo $this->__('HOW IT WORKS')?></p></a>
+                        </li>
+
+                        <li <?php if($page == 'business') echo 'class="active"' ; ?>><a href="<?php echo Mage::getBaseUrl();
+?>business" >
+                                <p align="center"><?php echo $this->__('BUSINESS')?></p></a>
+                        </li>
+                        <li <?php if($page == 'contacts') echo 'class="active"' ; ?>><a href="<?php echo Mage::getBaseUrl();
+?>contacts" >
+                                <p align="center"><?php echo $this->__('CONTACT US')?></p></a>
+                        </li>
+                    </ul>
+
+
+                </li>
+            </ul><ul class="floginul">
+                <li>
+                    <ul style="height:41px;display:table-cell;vertical-align:middle;">
+                        <li >
+<?php
+$loggedIn = $this->helper("customer")->isLoggedIn(); //place the output in a var ?>
+                            <?php
+                            //  $key = Mage::app()->getRequest()->getCookie('fbs_'.Mage::getSingleton('facebook/config')->getApiKey(), false);
+                            if($loggedIn) {
+                                if(isset($_COOKIE['fbs_'.Mage::getSingleton('facebook/config')->getApiKey()])) {
+                                    ?>
+                            <div id="facebookimage"></div></li>
+                        <li ><a href="<?php echo Mage::getBaseUrl()."customer/account/logout/" ?>"  title="Facebook Connect"  rel="facebook-connect"><img src="<?php echo $this->getSkinUrl('images/flogout.jpg') ?>" id="facebooklogout" class="facebooklogout" /></a></li>
+
+        <?php }
+}
+                        else { ?>
+                        <li><a href="#"  title="Facebook Connect"  rel="facebook-connect"><img src="<?php echo $this->getSkinUrl('images/flogin.jpg') ?>" id="facebook" /></a></li>
+                        <li><?php echo $this->__('or')?></li>
+                        <li><a href="<?php echo Mage::getBaseUrl()."customer/account/login/" ?>"  title="Sign in"  style="color: #1A356E;display: block;font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;font-weight: bold;padding: 2px 6px 3px;" ><?php echo $this->__('Sign In')?></a></li>
+    <?php }?>
+                    </ul></li>
+            </ul><div class="clear"></div>
+
+        </div>
+        <img src="<?php echo $this->getSkinUrl('images/tot_menu_bg_ri.png') ?>"  width="10" height="45" alt="menurightimg" class="floatright"/>
+
+        <div class="clear"></div></div>
+</div>
+<!-- Menu Navigation -->

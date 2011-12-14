@@ -1,0 +1,324 @@
+<?php
+/**
+ * Contus Support
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@Contus Supportcommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Contus Support to newer
+ * versions in the future. If you wish to customize Contus Support for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_blank
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php
+
+
+$productId = Mage::app()->getRequest()->getParam('previewid');
+$currencySymbol = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
+?>
+<div class="leftcontent">
+        <?php // List mode ?>
+        <?php if($this->getMode()!='grid'): ?>
+            <?php
+            $inif = '0';
+            $currentTime = date("Y-m-d  h:i A", time());
+                $model = Mage::getModel('catalog/product'); //getting product model
+                $_product = $model->load($productId);
+                $ProductToDate  = $_product->getResource()->formatDate($_product->getspecial_to_date(),false);
+                $ToDate = strtotime($ProductToDate);
+             //   if(strtotime(date("Y-m-d",$ToDate).' '.$_product->getTime()) >= strtotime($currentTime)) {
+                  //  $inif = '1';
+                    ?>
+    <div class="topcontent clearfix"><h1>Today's Deal: <span><?php echo $this->htmlEscape($_product->getName()) ?></span></h1></div>
+    <fieldset class="no-display">
+        <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+        <input type="hidden" name="related_product" id="related-products-field" value="" />
+    </fieldset>
+    <div class="left_column">
+        <div class="buynowbox">
+            <div class="leftbox_middle">
+                <div class="buynow_value clearfix"><?php $sp_price = floor($_product->getSpecialPrice()); ?>
+                    <span class="price_value"><?php echo $currencySymbol; ?><?php echo Mage::helper('core')->currency($sp_price,false,false) ?>  </span>
+                    <a href='#' id="scriptbuynow" class="buynowbtn"><img src="<?php echo $this->getSkinUrl('images/buy_btn.png') ?>" class="" width="151" height="68" alt="divider"/></a>
+                </div>
+
+                                <?php
+                                $map =   $_product->getsitemap();
+                                $customersite = $_product->getcustomersite();
+                                $highlight = $_product->gethightlight();
+                                $fineprint =  $_product->getFineprint();
+                                $_description = $_product->getdescription();
+                                if (!$_product->isGrouped()) {
+                                    $discount_price =  $_product->getPrice()-$_product->getSpecialPrice();
+                                    $discount = ($discount_price*100)/ $_product->getPrice();
+                                    $discount = round($discount); ?>
+                <div class="dicount-boxes clearfix" >
+                    <div class="clsdiscount_prices">
+                        <h3><?php echo $this->__('Value') ?></h3>
+                        <span><?php echo $currencySymbol.Mage::helper('core')->currency($_product->getPrice(),false,false) ?></span>
+                    </div>
+                    <div class="clsdiscount_prices" >
+                        <h3 >Discount</h3>
+                        <span><?php echo $discount.'%'; ?></span>
+                    </div>
+                    <div class="clsdiscount_prices" >
+                        <h3 >Save</h3>
+                        <span><?php echo $currencySymbol.Mage::helper('core')->currency($discount_price,false,false); ?></span></div>
+                    <div class="clear"></div>
+                    <div class="gift_box clearfix" id ="script_gift_box">
+                        <img src="<?php echo $this->getSkinUrl('images/gift.png') ?>" width="34" height="31" alt="gift" title="gift" class="clsgiftimg"/>
+                        <span class="buy_friend"><a href="#" class="clsbuyfriend"><?php echo $this->__('Buy it for a friend!'); ?></a></span>
+                    </div>
+                                        <?php } ?>
+                </div>
+            </div>
+            <div class="clsbottomspace">
+                <img src="<?php echo $this->getSkinUrl('images/leftboxbottom.jpg') ?>" width="226" height="10" />
+            </div>
+
+            <!-- Deal Bought-->
+                            <?php
+                            if (!$_product->isGrouped()) {
+                                $current_product =  $_product->getId();
+                                $resource = Mage::getSingleton('core/resource');
+                                $read = $resource->getConnection('catalog_read');
+                                $orderTable = $resource->getTableName('sales/order');
+                                $orderItemTable = $resource->getTableName('sales/order_item');
+                                $dealstatus[0] = "processing";
+                                //$dealstatus[1] = "pending";
+                                $dealstatus[1] = "complete";
+                                $select = $read->select()
+                                        ->from(array('cp'=>$orderTable),array( 'totalcount'  => 'sum(cp.total_qty_ordered)'))
+                                        ->join(array('pei'=>$orderItemTable), 'pei.order_id=cp.entity_id',array())
+                                        ->where('cp.status in (?)', $dealstatus)
+                                        ->where('pei.product_id in (?)', $current_product);
+                                $orders_list = $read->fetchAll($select);
+                                $quantity[0] = floor($orders_list[0]['totalcount']);
+                                if($_product->gettarget_number() != '') {
+                                    $percent_deal = ($quantity[0]/ $_product->gettarget_number())*100;
+                                    if($_product->gettarget_number() > $quantity[0]) {
+                                        $targetNumber = $_product->gettarget_number() - $quantity[0];
+                                        $targetNumber .= $this->__(' more needed to get the deal');
+                                    }  else {
+                                        $targetNumber = $this->__('Deal Achieved! Keep Buying!');
+                                    }
+                                }else {
+                                    $percent_deal = '100';
+                                }
+                                $percent_deal =  round($percent_deal);
+                                if($percent_deal >0   && $percent_deal <=99) {
+                                }
+                                if($percent_deal == 0 ) {
+                                    $percent_deal = "0";
+                                }
+                                if($percent_deal >0   && $percent_deal <=15) {
+                                    $percent_deal = "1";
+                                }
+                                if($percent_deal >16  && $percent_deal <=33) {
+                                    $percent_deal = "2";
+                                }
+                                if($percent_deal >34  && $percent_deal <=54) {
+                                    $percent_deal = "3";
+                                }
+                                if($percent_deal >55  && $percent_deal <=73) {
+                                    $percent_deal = "4";
+                                }
+                                if($percent_deal >74  && $percent_deal <=86) {
+                                    $percent_deal = "5";
+                                }
+                                if($percent_deal >87  && $percent_deal <=99) {
+                                    $percent_deal = "6";
+                                }
+                                if($percent_deal >= 100 ) {
+                                    $percent_deal = "7";
+                                }
+                            }
+                            ?>
+            <div class="dealstatus"> <div class="totalcount"><?php echo $quantity[0]; ?> <?php echo $this->__('bought'); ?></div>
+                <div class="deal_status" id ="deal_status">
+                    <img src="<?php echo $this->getSkinUrl('images/'.$percent_deal.'.png') ?>"  width="180" height="16" alt="Rate" title="Rate"  class="statusimg"/>
+                    <div style="font-size:13px;color:#000;padding:5px 0 0 0;"><?php echo $this->__($targetNumber);  ?></div>
+                </div>
+            </div>
+            <div class="clsbottomspace"><img src="<?php echo $this->getSkinUrl('images/leftboxbottom.jpg') ?>" width="226" height="10"/></div>
+            <!-- Deal Bought-->
+
+            <!--Time box-->
+                            <?php  //product's regular Price
+                            $todayDate  = $_product->getResource()->formatDate($_product->getspecial_to_date(),false);
+                            $my_time = strtotime($todayDate);
+                            $expirydate = date('m/d/Y',$my_time);
+                            $expirydate .= " ". $_product->gettime();
+                            ?>
+            <script type="text/javascript">
+                var targetdate = "<?php echo $expirydate; ?>";
+                var dealimage = "<?php echo $this->getSkinUrl('images/8.jpg') ?>";
+                var buynowreplace = "<?php echo $this->getSkinUrl('images/8.jpg') ?>";
+            </script>
+
+            <div class="timerbg_middle clearfix">
+                <span class="corner_img"></span>
+                <div class="deal_statusnew" >
+                    <h4><?php echo $this->__('Time Left To '); ?> <span><?php echo $this->__('Buy'); ?></span></h4>  
+                    
+                    <div class="timerbox" >
+                        <div class="viraiterbg">
+                           <!-- <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/timer.js'); ?>"></script>-->
+                        </div>
+                        <div class="timerulbox clearfix">
+                            <ul>
+                                <li class="clstimerbg"><strong><?php echo $this->__('HOURS'); ?></strong></li>
+                            </ul>
+                            <ul>
+                                <li class="clstimerbg"><strong><?php echo $this->__('MINUTES'); ?></strong></li>
+                            </ul>
+                            <ul>
+                                <li class="clstimerbg"><strong><?php echo $this->__('SECONDS'); ?></strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End of Time box-->
+
+    <!--Adding the products cartUrl,specialprice,identifier to the session-->
+                    <?php
+                    Mage::getSingleton('core/session')->setSpecialPrice($_product->getSpecialPrice());
+                    Mage::getSingleton('core/session')->setAddtocart($this->getAddToCartUrl($_product));
+                    ?>
+    <!--End of Adding the products cartUrl,specialprice,identifier to the session-->
+
+    <!--Share Icons-->
+                    <?php
+                    $title =  Mage::getSingleton('core/layout')->getBlock('head')->getTitle();
+                    ?>
+
+
+
+    <!--End Share Icons-->
+
+    <!--Fine Print and Highlights-->
+    <div class="right_column">
+       
+        <div class="banner_middle"> <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" width="430" height="276" alt="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" title="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>"  /></div>
+         <div class="bottom clearfix">
+                            <div class="spread clearfix">
+                    <span class="floatleft"><?php echo $this->__('Spread it!'); ?></span>
+            <span class="sharelinks">
+                <a  title="" href="http://twitter.com/home?status=<?php echo $_product->getName(); ?>:<?php echo Mage::getBaseUrl();  ?>" target="_blank"><img src="<?php echo $this->getSkinUrl('images/twitter_smallicon.gif') ?>" width="16" height="16" alt="twitter" title="twitter"/></a>
+                <a  title="" href="http://www.facebook.com/sharer.php?u=<?php echo Mage::getBaseUrl();  ?>&amp;t=<?php  echo $_product->getName(); ?>" target="_blank"><img src="<?php echo $this->getSkinUrl('images/facebook_smallicon.gif') ?>" width="16" height="16" alt="facebook" title="facebook"/></a>
+                                <?php $mail  = "mailto:?body=".htmlspecialchars(strip_tags($_description))."&subject=".$_product->getName();  ?>
+                <a  title="" href="<?php echo $mail; ?>" ><img src="<?php echo $this->getSkinUrl('images/mail_smallicon.gif') ?>" width="16" height="16" alt="Mail" title="Mail"/></a>
+            </span>
+        </div></div>
+        <div class="bottom_description">
+            <h3><?php echo $this->__('The Fine Print'); ?></h3><span><?php echo $fineprint;  ?></span>
+        </div>
+        <div class="highlights">
+            <h3><?php echo $this->__('Highlights'); ?></h3>
+            <span><?php echo $highlight; ?></span>
+        </div>
+    </div>
+    <!--end of Fine Print and Highlights-->
+
+    <div class="clear"></div>
+</div>
+                <?php //}
+
+        ?>
+
+<!-- NO Deal available-->
+        <?php if($inif !="1") { ?>
+<fieldset class="no-display">
+    <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+    <input type="hidden" name="related_product" id="related-products-field" value="" />
+</fieldset>
+<div class="clear"></div></div>
+            <?php
+        }
+        ?>
+ <?php
+                $gAddr = explode(',', strip_tags($customersite));
+                                    $i = 0;
+                                    foreach ($gAddr as $item) {
+
+                                        if ($i != 0) {
+                                            $gMapAddr.=', ';
+                                        }
+                                        $gMapAddr.=trim($item);
+                                        $i++;
+                                    }
+                ?>
+<!--No Deal Availbale-->
+<script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
+    <?php else: ?>
+    <?php endif; ?>
+</div>
+
+<img src="<?php echo $this->getSkinUrl('images/contentbottom.jpg') ?>" width="706" height="10"/>
+<!--end of first content box-->
+<div style="height:10px;font-size:0px;"><img src="<?php echo $this->getSkinUrl('images/reviewtop.jpg') ?>" width="706" height="10"  /></div>
+<div class="reviewbox">
+        <?php
+        if ($_description) :?>
+    <div class="bottombox clearfix">
+        <div class="bottomleftbox ">
+            <div class="description-reviews" style="">
+                <h4  class="clstitle1"><?php echo $this->__('Description') ?></h4>
+                <div class="clsdescription"><p><?php echo $_description; ?></p></div>
+
+            </div></div><div class="bottomrightbox">
+            <div class="company-details"><h3 ><?php echo $this->__('The Company'); ?></h3>
+                <address><?php  echo $customersite;  ?></address><br>
+                        <div id="map_canvas" style="width:220px; height:300px"></div>
+            </div></div>
+            <?php endif;?></div>
+ 
+<!--script to generate google map using customer's address : start-->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=en"></script>
+ <script type="text/javascript">
+                            var geocoder;
+                            var map;
+
+                            geocoder = new google.maps.Geocoder();
+                            var latlng = new google.maps.LatLng(-34.397, 150.644);
+                            var myOptions = {
+                                zoom: 8,
+                               center: latlng,
+                                mapTypeId: google.maps.MapTypeId.ROADMAP
+                            }
+
+                            map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+                            var address = '<?php echo $gMapAddr; ?>';
+    geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location
+            });
+        } else {
+            alert("Geocode was not successful for the following reason: " + status);
+        }
+    });
+
+
+</script>
+<!--script to generate google map using customer's address : end-->

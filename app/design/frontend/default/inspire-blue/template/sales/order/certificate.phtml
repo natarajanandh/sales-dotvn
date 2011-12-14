@@ -1,0 +1,66 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+$baseUrl = Mage::getBaseUrl();
+?>  
+
+
+<div class="about_topcontent page-title" style="text-align:left;">
+    <h1>Print Your Certificates
+
+        <?php $orderId = (int)$this->getRequest()->getParam('order_id');
+
+        $order = Mage::getModel('sales/order')->load($orderId);
+        $incrementId = $order->getIncrementId();
+        $items = $order->getAllItems();
+
+        foreach ($items as $itemId => $item) { $ordertotal = $item->getQtyOrdered(); }
+
+
+        echo '<span style="float:right">#'.$order->getIncrementId().'</span>';
+
+        $resource = Mage::getSingleton('core/resource');
+        $read = $resource->getConnection('catalog_read');
+        $orderTable = $resource->getTableName('sales/order');
+        $orderItemTable = $resource->getTableName('sales/order_item');
+
+        $select = $read->select()
+        ->from(array('cp'=>$orderTable),array( 'name'  => 'pei.name'))
+        ->join(array('pei'=>$orderItemTable), 'pei.order_id=cp.entity_id',array())
+        ->where('pei.order_id in (?)', $orderId);
+        $deallist = $read->fetchAll($select);
+        $dealName = $deallist[0]['name'];
+        ?>
+    </h1>
+    <div><img src="<?php echo $this->getUrl('media').'titlebottom.jpg'?>" /></div>
+    <h3><?php echo $dealName;?></h3><br/>
+    <ul class="clsprint_certificate">
+        <?php for($i=0;$i < $ordertotal;$i++)
+        {?>
+        <li> <a href="<?php echo $baseUrl;?>sales/order/coupon/order_id/<?php echo $orderId;?>/id/<?php echo $i+1;?>" class="link-print" onclick="this.target='_blank';"><?php echo $this->__('Print Coupon').' '.($i+1) ?></a></li>
+        <?php } ?>
+    </ul>
+</div>
+

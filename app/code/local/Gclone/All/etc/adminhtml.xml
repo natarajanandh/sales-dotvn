@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <menu>
+        <all translate="title" module="all">
+            <title>Easy Menu</title>
+            <sort_order>300</sort_order>
+            <class>all/all</class>
+            <header_css>paypal-header</header_css>
+            <frontend_type>text</frontend_type>
+            <children>
+                <products translate="title" module="catalog">
+                    <title>Manage Deals</title>
+                    <action>adminhtml/catalog_product/</action>
+                    <sort_order>0</sort_order>
+                </products>
+                <videoupload translate="title">
+                    <title>Manage Deal Videos</title>
+                    <sort_order>1</sort_order>
+                    <action>videoupload/adminhtml_videoupload</action>
+                </videoupload>
+                <order translate="title" module="sales">
+                    <title>Manage Orders</title>
+                    <action>adminhtml/sales_order</action>
+                    <sort_order>3</sort_order>
+                </order>
+                <items module="ordercustomer">
+                    <title>Manage Coupons</title>
+                    <sort_order>4</sort_order>
+                    <action>ordercustomer/adminhtml_ordercustomer</action>
+                </items>
+                <couponvalidator translate="title" module="couponvalidator">
+                    <title>Coupon Validation</title>
+                    <action>couponvalidator/adminhtml_couponvalidator</action>
+                    <sort_order>5</sort_order>
+                </couponvalidator>
+                <advertsystem translate="title" module="advertsystem">
+                    <title>Advert System</title>
+                    <sort_order>7</sort_order>
+                    <children>
+                        <rules translate="title">
+                            <title>Manage Rule</title>
+                            <sort_order>1</sort_order>
+                            <action>advertsystem/adminhtml_adrule</action>
+                        </rules>
+                        <referral translate="title">
+                            <title>Customers</title>
+                            <sort_order>2</sort_order>
+                            <action>advertsystem/adminhtml_adcustomer</action>
+                        </referral>
+                        <config translate="title">
+                            <title>Configuration</title>
+                            <sort_order>3</sort_order>
+                            <action>adminhtml/system_config/edit/section/advertsystem</action>
+                        </config>
+                    </children>
+                </advertsystem>
+                <page translate="title" module="cms">
+                    <title>CMS Pages</title>
+                    <action>adminhtml/cms_page</action>
+                    <sort_order>20</sort_order>
+                </page>
+                <reports translate="title" module="all">
+                    <title>Report</title>
+                    <sort_order>8</sort_order>
+                    <children>
+                        <sold translate="title" module="reports">
+                            <title>Deals Ordered</title>
+                            <action>adminhtml/report_deal/sold</action>
+                        </sold>
+                    </children>
+                </reports>
+                <configuration translate="title" module="all">
+                    <title>System Configuration</title>
+                    <sort_order>6</sort_order>
+                    <children>
+                        <deal translate="title">
+                            <title>Deal</title>
+                            <sort_order>0</sort_order>
+                            <action>adminhtml/system_config/edit/section/deal</action>
+                        </deal>
+                        <paypal translate="title">
+                            <title>PayPal</title>
+                            <class>paypal-section</class>
+                            <header_css>paypal-header</header_css>
+                            <sort_order>1</sort_order>
+                            <action>adminhtml/system_config/edit/section/paypal</action>
+                        </paypal>
+                        <paymentmethods translate="title">
+                            <title>Payment Methods</title>
+                            <sort_order>2</sort_order>
+                            <action>adminhtml/system_config/edit/section/payment</action>
+                        </paymentmethods>
+                        <emailnewsletter translate="title">
+                            <title>Email Newsletter</title>
+                            <sort_order>4</sort_order>
+                            <action>adminhtml/system_config/edit/section/emailnewsletter</action>
+                        </emailnewsletter>
+                        <license translate="title">
+                            <title>License Key</title>
+                            <sort_order>3</sort_order>
+                            <action>adminhtml/system_config/edit/section/license</action>
+                        </license>
+                        <fbusiness translate="title">
+                            <title>Featured Business</title>
+                            <sort_order>5</sort_order>
+                            <action>adminhtml/system_config/edit/section/fbusiness</action>
+                        </fbusiness>
+                        <videoupload translate="title">
+                            <title>HD FLV Player</title>
+                            <sort_order>6</sort_order>
+                            <action>adminhtml/system_config/edit/section/videoupload</action>
+                        </videoupload>
+                        <merchant translate="title">
+                            <title>Merchant</title>
+                            <sort_order>7</sort_order>
+                            <action>adminhtml/system_config/edit/section/merchant</action>
+                        </merchant>
+                        <rssfeed translate="title">
+                            <title>Rss Feed</title>
+                            <sort_order>8</sort_order>
+                            <action>adminhtml/system_config/edit/section/rssfeed</action>
+                        </rssfeed>
+                        <mailchimp translate="title">
+                            <title>Mail Chimp</title>
+                            <sort_order>9</sort_order>
+                            <action>adminhtml/system_config/edit/section/mailchimp</action>
+                        </mailchimp>
+                        <constantcontact translate="title">
+                            <title>Constant Contact</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/system_config/edit/section/constantcontact</action>
+                        </constantcontact>
+                        <dealcoupon translate="title">
+                            <title>Deal Coupon</title>
+                            <sort_order>11</sort_order>
+                            <action>adminhtml/system_config/edit/section/dealcoupon</action>
+                        </dealcoupon>
+                        <twitterbox translate="title">
+                            <title>Twitter Box</title>
+                            <sort_order>12</sort_order>
+                            <action>adminhtml/system_config/edit/section/twitterbox</action>
+                        </twitterbox>
+						<support translate="title">
+                            <title>Support</title>
+                            <sort_order>12</sort_order>
+                            <action>adminhtml/system_config/edit/section/support</action>
+                        </support>
+                        <customer translate="title">
+                            <title>Facebook API</title>
+                            <sort_order>13</sort_order>
+                            <action>adminhtml/system_config/edit/section/customer</action>
+                        </customer>
+                    </children>
+                </configuration>
+                <background module="background">
+                    <title>Set Site Background</title>
+                    <sort_order>10</sort_order>
+                    <action>background/adminhtml_background</action>
+                </background>
+                <share module="share">
+                    <title>Set Share Links / Facebook Fan Box</title>
+                    <sort_order>13</sort_order>
+                    <action>share/adminhtml_share</action>
+                </share>
+            </children>
+        </all>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <all>
+                        <title>Easy Menu</title>
+                        <children>
+                            <products translate="title" module="catalog">
+                                <title>Manage Deals</title>
+                    
+                                <sort_order>0</sort_order>
+                            </products>
+                            <videoupload translate="title">
+                                <title>Manage Deal Videos</title>
+                                <sort_order>1</sort_order>
+                               
+                            </videoupload>
+                            <order translate="title" module="sales">
+                                <title>Manage Orders</title>
+                   
+                                <sort_order>3</sort_order>
+                            </order>
+                            <items module="ordercustomer">
+                                <title>Manage Coupons</title>
+                                <sort_order>4</sort_order>
+                                <action>ordercustomer/adminhtml_ordercustomer</action>
+                            </items>
+                            <couponvalidator translate="title" module="couponvalidator">
+                                <title>Coupon Validation</title>
+                                
+                                <sort_order>5</sort_order>
+                            </couponvalidator>
+                            <advertsystem>
+                                <title>Advert System</title>
+                                <children>
+                                    <rules translate="title">
+                                        <title>Manage Rules</title>
+                                        <sort_order>1</sort_order>
+                                    </rules>
+                                    <referral translate="title">
+                                        <title>Customers</title>
+                                        <sort_order>2</sort_order>
+                                    </referral>
+                                    <config translate="title">
+                                        <title>Configuration</title>
+                                        <sort_order>3</sort_order>
+                                    </config>
+                                </children>
+                            </advertsystem>
+                            <page translate="title" module="cms">
+                                <title>CMS Pages</title>
+                    
+                                <sort_order>20</sort_order>
+                            </page>
+                            <reports translate="title" module="all">
+                                <title>Report</title>
+                                <sort_order>8</sort_order>
+                                <children>
+                                    <sold translate="title" module="reports">
+                                        <title>Deals Ordered</title>
+                           
+                                    </sold>
+                                </children>
+                            </reports>
+                            <configuration translate="title" module="all">
+                                <title>System Configuration</title>
+                                <sort_order>6</sort_order>
+                                <children>
+                                    <deal translate="title">
+                                        <title>Deal</title>
+                                        <sort_order>0</sort_order>
+                            
+                                    </deal>
+                                    <paypal translate="title">
+                                        <title>PayPal</title>
+                           
+                                        <sort_order>1</sort_order>
+                            
+                                    </paypal>
+                                    <paymentmethods translate="title">
+                                        <title>Payment Methods</title>
+                                        <sort_order>2</sort_order>
+                            
+                                    </paymentmethods>
+                                    <emailnewsletter translate="title">
+                                        <title>Email Newsletter</title>
+                                        <sort_order>4</sort_order>
+                            
+                                    </emailnewsletter>
+                                    <license translate="title">
+                                        <title>License Key</title>
+                                        <sort_order>3</sort_order>
+                            
+                                    </license>
+                                    <fbusiness translate="title">
+                                        <title>Featured Business</title>
+                                        <sort_order>5</sort_order>
+                           
+                                    </fbusiness>
+                                    <videoupload translate="title">
+                                        <title>HD FLV Player</title>
+                                        <sort_order>6</sort_order>
+
+                                    </videoupload>
+                                    
+                                    <merchant translate="title">
+                                        <title>Merchant</title>
+                                        <sort_order>7</sort_order>
+                            
+                                    </merchant>
+                                    <rssfeed translate="title">
+                                        <title>Rss Feed</title>
+                                        <sort_order>8</sort_order>
+                            
+                                    </rssfeed>
+                                    <mailchimp translate="title">
+                                        <title>Mail Chimp</title>
+                                        <sort_order>9</sort_order>
+                           
+                                    </mailchimp>
+                                    <constantcontact translate="title">
+                                        <title>Constant Contact</title>
+                                        <sort_order>10</sort_order>
+                           
+                                    </constantcontact>
+                                    <dealcoupon translate="title">
+                                        <title>Deal Coupon</title>
+                                        <sort_order>11</sort_order>
+                           
+                                    </dealcoupon>
+                                    <twitterbox translate="title">
+                                        <title>Twitter Box</title>
+                                        <sort_order>12</sort_order>
+
+                                    </twitterbox>
+                                    <customer translate="title">
+                                        <title>Facebook API</title>
+                                        <sort_order>13</sort_order>
+
+                                    </customer>
+                                </children>
+                            </configuration>
+                            <background module="background">
+                                <title>Set Site Background</title>
+                                <sort_order>10</sort_order>
+                            </background>
+                            <share module="share">
+                                <title>Set Share Links / Facebook Fan Box</title>
+                                <sort_order>13</sort_order>
+                        
+                            </share>
+                        </children>
+                    </all>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <all>
+                                        <title>Gclone ALL</title>
+                                    </all>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <layout>
+        <updates>
+            <all>
+                <file>all.xml</file>
+            </all>
+        </updates>
+    </layout>
+</config>

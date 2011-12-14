@@ -1,0 +1,327 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2009 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @see Mage_Checkout_Block_Cart
+ */
+
+?>
+<div class="cart">
+    <div class="page-title title-buttons">
+        <h1><?php echo $this->__('Shopping Cart') ?></h1>
+        <?php if(!$this->hasError()): ?>
+        <ul class="checkout-types">
+                <?php //echo $this->getChildHtml('top_methods') ?>
+        </ul>
+        <?php endif; ?>
+    </div>
+
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php echo $this->getChildHtml('form_before') ?>
+
+    <div style=" margin: 0 auto;">
+    <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post" >
+        <fieldset>
+            <table id="shopping-cart-table " class="data-table cart-table" style=" margin: 0 auto;">
+                <col width="1" />
+                <col width="1" />
+                <col />
+                <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
+                <col width="1" />
+                <?php endif ?>
+                <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+                <?php endif; ?>
+                <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+                <?php endif; ?>
+                <col width="1" />
+                <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+                <?php endif; ?>
+                <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <col width="1" />
+                <?php endif; ?>
+
+                <?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+                <thead>
+                    <tr class="newid">
+
+                        <th colspan="5" style="padding:0px;">
+
+                            <div style="background:url(<?php echo $this->getSkinUrl('images/carttitlebg.png') ?>) no-repeat;width:888px;">
+                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                    <tr>
+                                        <th rowspan="<?php echo $mergedCells; ?>" class="a-center clsremove"  style="border:none;width:15%;" ><?php echo $this->__('Remove') ?></th>
+                                           <!-- <th rowspan="<?php echo $mergedCells; ?>">&nbsp;</th>-->
+                                        <th rowspan="<?php echo $mergedCells; ?>" width="450" class="clsproduct"  style="border:none;width:40%;"  ><span class="nobr"><?php echo $this->__('Product Name') ?></span></th>
+                                        <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
+                                        <th rowspan="<?php echo $mergedCells; ?>"  class="a-center"><span class="nobr"><?php echo $this->__('Move to Wishlist') ?></span></th>
+                                        <?php endif ?>
+                                        <th colspan="<?php echo $mergedCells; ?>" width="110" class="clscartprice"  style="border:none;width:15%;" ><span class="nobr"><?php echo $this->__('Price') ?></span></th>
+                                        <th rowspan="<?php echo $mergedCells; ?>" width="110" class="clscartquantity"   style="border:none;width:15%;" ><?php echo $this->__('Qty') ?></th>
+                                        <th  colspan="<?php echo $mergedCells; ?>" width="110" class="clscarttotal"  style="border:none;width:15%;"  ><?php echo $this->__('Total') ?></th>
+
+
+
+                                    </tr>
+
+
+                                </table>
+
+
+                            </div>
+
+
+                        </th>
+
+
+
+                    </tr>
+                    <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+                    <tr>
+                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                        <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                        <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                    </tr>
+                    <?php endif; ?>
+                </thead>
+                <tfoot>
+                    <!-- <tr>
+<td colspan="50" class="a-right">
+                    <?php if($this->getContinueShoppingUrl()): ?>
+
+                    <?php endif; ?>
+<button type="submit" title="<?php echo $this->__('Update Shopping Cart') ?>" class="button btn-update"><span><span><?php echo $this->__('Update Shopping Cart') ?></span></span></button>
+</td>
+                    </tr>-->
+
+                    <tr>
+
+                        <td colspan="5" style="margin:0px;padding:0px;border:none">
+                            <table cellpadding="0" cellspacing="0" width="888">
+                                <tr class="remove-bg" ><td  align="center"><img src="<?php echo $this->getSkinUrl('images/dividerimg.jpg') ?>"/></td></tr>
+                                <tr><td class="subtotal" ><p class="icon_gift" style="padding-left:5px;float:left;">
+
+
+                                <span style="float:left;"><img src="<?php echo $this->getSkinUrl('images/icon_gift.gif') ?>"/></span>
+                                         <?php $sessiongift = Mage::getSingleton('core/session');
+                                        if($sessiongift->getorderemail()) { ?>
+                                       <p class="icon_gift"> <a title="Enter Gift Info" id="lightboxLink" href="javascript:void(0);" id="gift_details_link"><?php echo $this->__('Edit gift options!');?></a>
+
+                                        <a title="Enter Gift Info" id="lightboxLinkDelete" href="javascript:void(0);" id="gift_details_link"><?php echo $this->__('Delete gift options!');?></a>
+                                           </p> <?php
+                                        }
+                                        else {
+                                            ?>
+                                        <p class="icon_gift">
+                                            <a title="Enter Gift Info" id="lightboxLink" href="javascript:void(0);" id="gift_details_link"><?php echo $this->__('Buy this for your Friend!');?></a>
+                                        </p>
+                                            <?php
+                                        }
+                                        ?>
+
+
+<p style="float:right;"><span class="sub"><?php echo $this->__('Grand Total:')?></span><span class="subvalue"><?php
+//$currencySymbol = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
+echo Mage::helper('core')->currency(Mage::getSingleton('checkout/session')->getQuote()->getGrandTotal(),true,false); ?></span></p>
+
+<div class="clear"></div>
+</td>
+                                </tr>
+
+                            </table>
+
+
+
+
+                        </td>
+
+
+                    </tr>
+
+
+
+
+                </tfoot>
+                <tbody>
+                    <?php foreach($this->getItems() as $_item): ?>
+                        <?php echo $this->getItemHtml($_item) ?>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+            <table cellpadding="0" cellspacing="0" style=" margin: 0 auto;">
+                <tr><td colspan="5" class="cartbottom" ></td></tr>
+            </table>
+            <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+        </fieldset>
+    </form>
+        <div class="grandtotal">
+    <?php
+    $sessionorder = Mage::getSingleton('core/session');
+    echo $this->getChildHtml('totals');
+    ?>
+<!--    <div  class="proceedbtns"><a href="<?php echo $this->getUrl('checkout') ?>"><img src="<?php echo $this->getSkinUrl('images/proceedbtn.jpg') ?>"/></a></div><div class="clear"></div>-->
+    <div  class="proceedbtns">
+               <button type="button" class="btnnew" value="" onclick="window.location='<?php echo $this->getUrl('checkout') ?>'"><span><?php echo $this->__('Proceed to checkout'); ?></span></button>
+    </div>
+             </div>
+    <div class="clear"></div>
+
+    <br/>
+    <br/>
+    <div class="clearfix" id="gift-form" style="display:none;" >
+        <div class="modal_top"></div><a id="closeLink" href="javascript:void(0);">  <img height="39" width="39" src="<?php echo $this->getSkinUrl('images/close.gif') ?>" id="close" class="modal_close" alt=""/></a>
+        <form id="giftoption" action="<?php echo $this->getUrl('checkout/cart/giftPost') ?>" method="post" class=''>
+
+            <div class="modal_content">
+                <div class="modal_header">
+                    <h1><?php echo $this->__('Buy Options'); ?></h1>
+                    <p>
+                        <small><?php echo $this->__('Fill out the form below and give the gift!'); ?></small>
+                    </p>
+                </div>
+
+
+                <ul style="width: 240px; float: left; margin-right: 20px;padding-left:10px;" class="contactul" id="dealmeonegift" >
+                    <li>
+                        <div  class=""><label for="name" class="contact-label"><?php echo $this->__('Friend Name'); ?> :</label></div>
+                        <input  id="order_gift_to_name" maxlength="26" name="order_gift_to_name"   class="input-text required-entry clstxtbox" type="text" value="<?php echo $sessionorder->getorderto(); ?>" />
+
+                    </li>
+                    <li >
+
+                        <div class=""><label for="emil" class="contact-label"><?php echo $this->__('Your Name'); ?> :</label></div>
+                        <input id="order_gift_from_name" maxlength="40" name="order_gift_from_name"  title="From" class="input-text required-entry clstxtbox" type="text" value="<?php echo $sessionorder->getorderfrom(); ?>" />
+
+                    </li>
+
+
+                    <li>
+
+                        <div class=""><label for='order_delivery_method_email' class="contact-label"><?php echo $this->__('Friend Email Address'); ?> :</label></div>
+                        <input  id="order_gift_recipient_email" name="order_gift_recipient_email"  title="Email" class="input-text required-entry validate-email clstxtbox" type="text"  value="<?php echo $sessionorder->getorderemail(); ?>" />
+
+
+                    </li>
+
+                </ul>
+                <ul style="width: 260px; float: right;" >
+                    <li>
+
+
+                        <div class=""><label for="comment"  class="txtmsg"><?php echo $this->__('Message'); ?> :</label></div>
+                        <textarea rows="8" cols="5"id="order_gift_message" name="order_gift_message" title="Message"  class="txtarea"><?php echo $sessionorder->getordermessage(); ?></textarea>
+
+                    </li>
+                </ul>
+<!--                <div><button type="submit" class="clssubmit" ></button></div>-->
+                <div><button type="submit" class="btnnew clssubmit" ><span><?php echo $this->__('Submit'); ?></span></button></div>
+
+            </div>
+
+
+        </form>
+        <div class="modal_bottom"></div>
+    </div>
+    <div class="clearfix" id="gift-deleteform" style="display:none;" >
+        <div class="modal_top"></div>
+        <a id="closeLinkDelete" href="javascript:void(0);">  <img height="39" width="39" src="<?php echo $this->getSkinUrl('images/x-close-large.png') ?>" id="close" class="modal_close" alt=""/></a>
+        <form action="<?php echo $this->getUrl('checkout/cart/giftDelete') ?>" method="post" class=''>
+            <div class="modal_content">
+                <div class="modal_header">
+                    <h1><?php echo $this->__('Are you sure to delete'); ?></h1>
+                </div>
+                <div align="center"><button type="submit" class="clssubmit" ></button></div>
+            </div>
+        </form>
+        <div class="modal_bottom"></div>
+
+    
+    </div>
+
+    <!--<div class="cart-collaterals">
+        <div class="col2-set">
+            <div class="col-1">
+    <?php echo $this->getChildHtml('crosssell') ?>
+            </div>
+            <div class="col-2">
+    <?php echo $this->getChildHtml('coupon') ?>
+    <?php if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping');
+    endif; ?>
+            </div>
+        </div>
+        <div class="totals">
+    <?php echo $this->getChildHtml('totals'); ?>
+    <?php if(!$this->hasError()): ?>
+            <ul class="checkout-types">
+        <?php echo $this->getChildHtml('methods') ?>
+            </ul>
+    <?php endif; ?>
+        </div>
+    </div>-->
+</div>
+</div>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/lightbox.js') ?>"></script>
+<script type="text/javascript">
+    var url1 = document.location.href;
+    var test1;
+    var url1 = url1.split("#");
+    Event.observe(window, 'load', function () {
+        test1 = new Lightbox('gift-form');
+        if(url1[1]== "gift/") { test1.open(); }
+    });
+
+    Event.observe('lightboxLink', 'click', function () {
+        test1.open();
+    });
+
+    Event.observe('closeLink', 'click', function () {
+        test1.close();
+    });
+
+    Event.observe(window, 'load', function () {
+        test2 = new Lightbox('gift-deleteform');
+
+    });
+
+    Event.observe('lightboxLinkDelete', 'click', function () {
+        test2.open();
+    });
+
+    Event.observe('closeLinkDelete', 'click', function () {
+        test2.close();
+    });
+</script>
+<script type="text/javascript">
+    //< ![CDATA[
+    var myForm= new VarienForm('giftoption', true);
+    //]]>
+</script>

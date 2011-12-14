@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+  * Contus Support Pvt Ltd.
+ * created by Vasanth on nov 04 2010.
+ * vasanth@contus.in
+ * In xml used to integrate the video upload config to system configuration.
+ */
+-->
+<config>
+    <menu>
+         <all translate="title" module="all">
+            <children>
+                <videoupload translate="title">
+                    <title>Manage Deal Videos</title>
+                    <sort_order>1</sort_order>
+                    <action>videoupload/adminhtml_videoupload</action>
+                </videoupload>
+            </children>
+        </all>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <videoupload translate="title" module="videoupload">
+                                        <title>Video Upload</title>
+                                    </videoupload>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <catalog translate="title" module="catalog">
+                        <children>
+                             <videoupload translate="title" module="videoupload">
+                                <title>Manage Videoupload</title>
+                            </videoupload>
+                        </children>
+                    </catalog>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

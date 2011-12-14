@@ -1,0 +1,203 @@
+<?php
+$storeName =Mage::getStoreConfig('general/store_information/name');
+
+$currencySymbol = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
+$select = "";
+$cities = array();
+$attribute = Mage::getModel('eav/config')->getAttribute('catalog_product', '562'); // get the cities attribute id 548
+
+// to get the multiple cities in pages(drop down)
+foreach ($attribute->getSource()->getAllOptions(true, true) as $option) {
+    $value = $option['value'];
+    
+    if($value !='') {
+        $cities[$value] = $option['label'];
+        $select .= "<option value='".$option['label']."'>". $option['label']."</option>";
+        $cityUrl=Mage::getModel('deal/deal')->getCityUrl($value);
+        $city[$option['label']] = $cityUrl;
+    }
+}
+$final=array_unique($cities);
+
+Mage::getSingleton('core/session')->setTotalCities($final);
+Mage::getSingleton('core/session')->setCitydropdown($select);
+
+if(Mage::getSingleton('core/session')->getBackground() == 'no'){
+    $style = "background:#343434;";
+}else{
+    $style ="";
+}
+//For SEO Url
+$page=$_SERVER['REQUEST_URI'];
+$page=explode('/',$page);
+$pageUrl=$page[2];
+
+$recent=Mage::getStoreConfig('deal/recent/as_recent');
+$active=Mage::getStoreConfig('deal/active/as_active');
+$upcoming=Mage::getStoreConfig('deal/upcoming/as_upcoming');
+?>
+<?php flush(); ?>
+
+<div class="clsbg ">
+    <div class="header clearfix">
+
+            <!--Logo starts-->
+            <div class="clslogo" >
+                <a onclick="location.href='<?php echo $this->getUrl('') ?>'"><img src="<?php echo $this->getSkinUrl('images/logo.png') ?>" width="311" height="100" alt="<?php echo $this->__($storeName); ?>" title="<?php echo $this->__($storeName); ?>" /></a>
+                <div class="city_name">
+                    <span class="clsbestdeal"><?php echo $this->__('Daily Deals in'); ?></span>
+                    <h4><?php echo $final[Mage::getSingleton('core/session')->getCity()]; ?></h4>
+                </div>
+            </div>
+            <!--Logo Ends-->           
+            <!-- Cities panel starts-->
+            <div class="floatright" >
+            	<!-- Menu Navigation -->
+<div class="header-bottom " >
+      
+       
+        <div class="menu_middlebg">
+            <ul class="clsmenuul" >
+<li <?php if(Mage::getSingleton('core/session')->getDealModule() == 1)
+                                echo 'class="active"'; ?>><a href="<?php echo Mage::getBaseUrl(); ?>" >
+<?php echo $this->__("TODAY'S DEAL") ?></a>
+                </li>
+                <?php if($recent == 1){?>
+                <li <?php if ($pageUrl == 'recent-deals.html')
+                                echo 'class="active"'; ?>><a href="<?php echo Mage::getBaseUrl(); ?>recent-deals.html" ><?php echo $this->__('FEATURED DEALS') ?></a>
+                    </li>
+                    <?php }?>
+                    <?php if($active == 1){?>
+                <li <?php if ($pageUrl == 'active-deals.html')
+                                echo 'class="active"'; ?>><a href="<?php echo Mage::getBaseUrl(); ?>active-deals.html" ><?php echo $this->__('TOUR') ?></a>
+                    </li>
+                    <?php }?>
+                    <?php if($upcoming == 1){?>
+                <li <?php if ($pageUrl == 'upcoming-deals.html')
+                                echo 'class="active"'; ?>><a href="<?php echo Mage::getBaseUrl(); ?>upcoming-deals.html" ><?php echo $this->__('PRODUCTS') ?></a>
+                    </li>
+                    <?php }?>
+                    <li <?php if (Mage::getSingleton('cms/page')->getIdentifier() == 'works')
+                                echo 'class="active"'; ?>><a href="<?php echo Mage::getBaseUrl(); ?>works" ><?php echo $this->__('HOW IT WORKS') ?></a>
+                    </li>                
+            </ul>
+            <!--ul class="floginul">
+
+
+                <?php $loggedIn = $this->helper("customer")->isLoggedIn(); //place the output in a var ?>
+                <?php
+                                //  $key = Mage::app()->getRequest()->getCookie('fbs_'.Mage::getSingleton('facebook/config')->getApiKey(), false);
+                                if ($loggedIn) {
+                                    if (isset($_COOKIE['fbs_' . Mage::getSingleton('facebook/config')->getApiKey()])) {
+                ?>
+                                        <li><div id="facebookimage"></div></li>
+                                        <li><a href="<?php echo Mage::getBaseUrl() . "customer/account/logout/" ?>"  title="Facebook Connect"  rel="facebook-connect"><img src="<?php echo $this->getSkinUrl('images/flogout.jpg') ?>" id="facebooklogout" class="facebooklogout" alt="facebook logout" /></a></li>
+                <?php
+                                    }
+                                } else {
+                ?>
+<!--                                     <li><a href="<?php echo Mage::getBaseUrl() . "twitter/index/twitter/" ?>"  title="Twitter Login" ><img src="<?php echo $this->getSkinUrl('images/twitter_login.png') ?>" id="twitter" alt="Twitter login" /></a></li>
+                                    <li class="or"><?php echo $this->__('or'); ?></li>>
+                                    <li><a href="#"  title="Facebook Connect"  rel="facebook-connect"><img src="<?php echo $this->getSkinUrl('images/flogin.jpg') ?>" id="facebook" alt="facebook login" /></a></li>                                    
+                                    <li class="or"><?php echo $this->__('or'); ?></li>
+                                    <li><a href="<?php echo Mage::getBaseUrl() . "customer/account/login/" ?>"  title="Sign in" class="clsflogin"   ><?php echo $this->__('Sign In'); ?></a></li>
+                <?php } ?>
+
+                            </ul-->
+            <div class="clear"></div>
+        
+    </div>
+</div>
+<!-- Menu Navigation -->	
+            
+                 <!--div class="city-left floatleft"></div><div class="city_middle">
+                    <ul class='toggles'>
+                        <li class='drawer_toggle' id='division_drawer_anchor'>
+                            <a href="#" onclick="Effect.toggle('toggle_blind', 'blind',{  duration: 0.1 }); return false;" class="clsmore ">
+                                <span class="clsmore"><?php echo $this->__('Visit More Cities'); ?></span>
+                                <img src="<?php echo $this->getSkinUrl('images/nc.png') ?>" id="image1" class="clsvisitmorimg"  alt="cities" />
+                            </a></li><li><img src="<?php echo $this->getSkinUrl('images/citydivider.jpg') ?>" alt="More Cities" title="More Cities" /></li>
+                        <?php echo $this->getChildHtml('topLinks'); ?>
+                        <li><a href="<?php echo $this->getUrl("contacts"); ?>"><?php echo $this->__('Contact us'); ?></a></li></ul></div>
+                 <div class="city-right floatleft"></div-->
+           </div>
+           <!-- Cities panel End-->
+        
+            <div class="multi-store">
+                <?php echo $this->getChildHtml('store_language') ?>
+            </div>
+             <div class="clearright"></div>
+
+            <!-- subscriber panel starts-->
+            <div class="clsmailing" >
+                <form action="<?php echo $this->getUrl('newsletter/subscriber/new') ?>" method="post" id="newsletter-validate-detail">
+                    <div class="clearfix">
+	                     <div class="selectcity botHLeftBox">
+                     		<div style="padding-left:8px;padding-right:8px;">
+                            	<div class="title-h">Chọn thành phố:</div>
+                                <div class="divSelect">
+                                   <script type="text/javascript"><!--//--><![CDATA[//><!--
+										sfHover = function() {
+											var sfEls = document.getElementById("select-city").getElementsByTagName("LI");
+											for (var i=0; i<sfEls.length; i++) {
+												sfEls[i].onmouseover=function() {
+													this.className+=" sfhover";
+												}
+												sfEls[i].onmouseout=function() {
+													this.className=this.className.replace(new RegExp(" sfhover\\b"), "");
+												}
+											}
+										}
+										if (window.attachEvent) window.attachEvent("onload", sfHover);
+										 
+										//--><!]]></script> 
+										
+										<div class="city-nav">
+											<ul id="select-city"> 
+												<li>
+													<a href="javascript:void(0);" style="line-height:30px;">
+														<span class="label-select left"><?php echo $final[Mage::getSingleton('core/session')->getCity()]; ?></span>
+														<span style="float:left;position:relative;top:5px;"><img src="<?php echo $this->getSkinUrl('images/jquery.selectBox-arrow.gif') ?>" id="image1" class="clsvisitmorimg"  alt="cities" /></span>
+													</a>
+														<div  class="city-name">
+															<ul>
+																<?php foreach($final as $key=>$item): if($item!=""): ?>
+																<li>
+																	<a href="<?php echo $city[$item]; ?>"><?php echo $item;  ?></a>
+																</li>
+																	<?php endif ;
+																endforeach; ?>
+															</ul> 
+														</div>
+												</li> 
+											</ul>
+										</div>
+                                 </div>
+                           </div>	
+    	                 </div>
+                        <div class="searchinput botHLeftBox">
+                        	<div class="title-h">Nhận deal mới:</div>
+                        	<div class="left">&nbsp;&nbsp;
+                            	<input name="email" type="text" id="newsletter1" class="searchinput1 validate-email required-entry" value="<?php echo $this->__('Nhập địa chỉ mail...') ;?>" onfocus="if (this.value == '<?php echo $this->__('Nhập địa chỉ mail...') ;?>') {this.value = '';this.style.color ='black';}" onblur="if (this.value == '') {this.style.color ='black';this.value = '<?php echo $this->__('Nhập địa chủ mail...') ;?>';}"  />
+                                <input type="hidden" id="city" name="city"  value="<?php echo $final[Mage::getSingleton('core/session')->getCity()];?>	" />
+                            </div>
+                            <div class="left btSearch"> <input type="submit"   value="<?php echo $this->__('Đăng ký') ;?>" class="dangky"/></div>
+                        </div>
+                       </div>
+
+                </form>
+                <script type="text/javascript">
+                    //<![CDATA[
+                    var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+                    //]]>
+                </script>
+            </div>
+            <!-- subscriber panel end-->
+        
+    </div>
+</div>
+
+<div class="clear"></div>
+
+
+

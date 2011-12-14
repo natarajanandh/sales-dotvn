@@ -1,0 +1,8 @@
+﻿"Invalid country code: %s","Mã quốc gia không hợp lệ: %s"
+"State/Province","Tỉnh thành"
+"Undefined rate from ""%s-%s""","Mức không xác định từ ""%s-%s"""
+"Cannot retrieve rate from %s","Không thể lấy ra mức từ %s"
+"Currency","Loại tiền"
+"Your current currency is: %s","Loại tiền hiện hành của bạn là: %s"
+"Continue &raquo;","Tiếp tục &raquo;"
+"Select Your Currency","Chọn loại tiền"

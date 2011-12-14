@@ -1,0 +1,113 @@
+<!--
+Created by Contussupport
+www.contussupport.com
+-->
+
+<?php
+/* Condition for displaying the sidedeal in the main deal page */
+$cid = Mage::app()->getRequest()->getParam('cid');
+$id  = Mage::app()->getRequest()->getParam('id');
+$catId = 7; // put your category ID in here
+$title = "Today's Side Deal";
+if(isset($cid)) {
+    $catId = 6;
+    $title = "Today's Main Deal"; // put your category ID in here
+}
+
+$cities =array();
+$desc ='';
+$baseUrl= Mage::getBaseUrl();
+$dealsCity= Mage::getSingleton('core/session')->getCity();
+//getting the current city
+$Totalcities = Mage::getSingleton('core/session')->getTotalCities();
+$dealsCityName = $Totalcities[$dealsCity];
+
+$products =  Mage::getResourceModel('catalog/product_collection')
+        ->addAttributeToSelect('image')
+        ->addCategoryFilter(Mage::getModel('catalog/category')->load($catId));
+$products->addAttributeToFilter('Cities',array('eq'=>$dealsCity));
+$products->addFieldToFilter(array(
+        array('attribute'=>'Status','eq'=>'1'),
+));
+
+$currentTime =  Mage_Core_Model_Locale::date(null, null ,"en_US",true);
+
+foreach ($products as $_product){
+    $model = Mage::getModel('catalog/product'); //getting product model
+    $_product = $model->load($_product->getId());
+    $city= $_product->getAttributeText('cities');
+    $ProductToDate  = $_product->getResource()->formatDate($_product->getspecial_to_date(),false);
+    $ToDate = strtotime($ProductToDate);
+    if($city == $dealsCityName ) {
+        if(strtotime(date("Y-m-d",$ToDate).' '.$_product->getTime()) >= strtotime($currentTime)) {
+            $productId=$_product->getId();
+            $images = $this->helper('catalog/image')->init($_product, 'image');
+            $desc=$_product->getName();
+            //break;
+            if($flag==1){
+                $title = "Extra Side Deal";
+            }
+            $flag=1;
+
+if(isset($cid)) {
+    $URL = $baseUrl;
+}else {
+    $URL = $baseUrl.'?cid='.$catId.'&id='.$productId;
+}
+if($desc!='') {
+    ?>
+<!-- SIDE DEAL BLOCK STARTS HERE-->
+<div class="side-block">
+    <div class="block-title"><?php echo $this->__($title); ?></div>
+    <div class="block-content">
+                <a href="<?php echo $URL; ?>" ><img src="<?php echo $images; ?>" width="205" height="140" alt="sidedeal"/></a>
+                <div class="deal_content"><?php echo $desc;?></div>
+
+    </div><img src="<?php echo $this->getSkinUrl('images/bottom-curve.png') ?>" alt="bottom curve" />
+</div>
+<!-- SIDE DEAL BLOCK ENDS HERE-->
+    <?php
+}
+  }
+}
+}
+?>
+
+
+<!-- FOLLOW US BLOCK STARTS  HERE-->
+
+<div  class="side-block" id ="share">
+
+    <?php
+    $title =  Mage::getSingleton('core/layout')->getBlock('head')->getTitle();
+    $sharelinks = Mage_Page_Block_Html_Head::getsharelinks();
+    $facebook = $sharelinks['facebook'];
+    $twitter = $sharelinks['twitter'];
+    $linkedin = $sharelinks['linkedin'];
+    $facebookfans =  $sharelinks['facebookfans'];
+
+    ?>
+    <div class="block-title"><?php echo $this->__('Follow Us On')?></div>
+    <div class="block-content">
+        <div class="midpix" style="padding:0 0 0 5px;">
+            <div class="clsmailform">
+                <div class="clsbottomimg"><img src="<?php echo $this->getSkinUrl('images/shareicontop.jpg') ?>" width="193" height="5" alt="share"/></div>
+                <ul class="sharelink clearfix">
+                    <li><a href="<?php echo $facebook; ?>" target="_blank"><img src="<?php echo $this->getSkinUrl('images/facebook.jpg') ?>" width="32" height="32" alt="facebook" title="facebook"/></a></li>
+                    <li><a href="<?php echo $twitter; ?>" target="_blank"><img src="<?php echo $this->getSkinUrl('images/twitter.jpg') ?>" width="32" height="32" alt="twitter" title="twitter"/></a></li>
+                    <li><a href="<?php echo $linkedin; ?>" target="_blank"><img src="<?php echo $this->getSkinUrl('images/linkedin.png') ?>" width="32" height="32" alt="linkedin" title="linkedin"/></a></li>
+                </ul><div class="clsbottomimg"><img src="<?php echo $this->getSkinUrl('images/shareiconbottom.jpg') ?>" width="193" height="5" alt="share" /></div>
+            </div></div>
+
+    </div><img src="<?php echo $this->getSkinUrl('images/bottom-curve.png')?>"  alt="bottom curve"/>
+</div>
+<!-- FOLLOW US BLOCK ENDS  HERE-->
+
+
+<!--FACEBOOK BLOCK FANS STARTS HERE-->
+<?php
+if($facebookfans != '0' ) { ?>
+<iframe src="http://www.facebook.com/plugins/likebox.php?id=<?php echo $facebookfans; ?>&amp;width=225&amp;connections=10&amp;stream=false&amp;header=true&amp;height=360" scrolling="no" frameborder="0"  class="clsfans">
+</iframe>
+    <?php } ?>
+<!--FACEBOOK BLOCK ENDS  HERE-->
