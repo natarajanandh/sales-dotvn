@@ -2,18 +2,18 @@
 .leftcontent .topcontent h1 {font-size:27px;display:block;font-family:Arial, Helvetica, sans-serif;line-height:35px;color:#1D91A9;font-weight:700;margin:0;padding:0 0 10px;}
 .leftcontent .topcontent h1 span {font-family:Arial;font-size:27px;color:#1C404D;margin:0;}
 /***** LEFT COLUMN CSS *****/
-.left_column {float:left;width:180px;}
+.left_column {float:left;width:170px;}
 .leftbox_middle {}
 .clsspace{font-size: 0px;height:10px;}
 .buynow_value {height:100px;margin-top:-5px;padding:0; z-index:4;overflow:hidden;}
-.price_value {color:#f05c0e;font-size:25px;font-family:Arial;width:100px;display:block;text-align:left;float:left;font-weight:bold;}
-.price_old {font-size:20px;font-family:Arial, Helvetica, sans-serif;text-align:left;font-weight:bold;text-decoration:line-through;line-height:30px;}
+.price_value {color:#f05c0e;font-size:18px;font-family:Arial;width:100px;display:block;text-align:center;float:left;font-weight:bold;}
+.price_old {font-size:15px;font-family:Arial, Helvetica, sans-serif;text-align:center;font-weight:bold;text-decoration:line-through;line-height:30px;padding-left:5px;}
 .buynowbtn {display:block;padding:5px 0 0 0px;text-align:center;}
 
 .dicount-boxes {padding:85px 10px 0;}
-.clsdiscount_prices {width:88px;text-align:center;float:left;color:#545454;background:url(../images/line1.jpg) no-repeat right center;padding:0 0 0px;}
+.clsdiscount_prices {width:78px;text-align:center;float:left;color:#545454;background:url(../images/line1.jpg) no-repeat right center;padding:0 0 0px;}
 .clsdiscount_prices h3 {text-align:center;font-size:12px;}
-.clsdiscount_prices span {font-weight:bold;font-size:17px;}
+.clsdiscount_prices span {font-weight:bold;font-size:16px;}
 .gift_box {padding:10px 0 0;}
 .gift_box img {float:left;display:block;padding-right:5px;}
 .buy_friend .clsbuyfriend {display: block;font-size:15px;color:#0981BE;font-family:Georgia, 'Arial', Times, serif;font-weight:700;vertical-align:middle;text-decoration:none;cursor:pointer;padding:10px 0 0;}
@@ -21,20 +21,20 @@
 .dealstatus {background:#CFEEF6;border-left:1px solid #7CCCF6;border-right:1px solid #7CCCF6;text-align:center;width:224px;}
 .statusimg {padding-bottom:7px;}
 .clsstatus{font-size:13px;color:#000;padding:5px 0 0 0;}
-.timerbg_middle {height:80px;}
-.deal_statusnew h4 {font-family:'Arial', Times, serif;font-size:14px;color:#000;padding:10px 0 10px 0px;text-align: left;}
+.timerbg_middle {height:70px;}
+.deal_statusnew h4 {font-family:Arial, Times, serif;font-size:12px;color:#000;padding:5px 0 5px 0px;text-align: left;}
 .timerbox ul li{width:60px;float:left;list-style:none;text-align:center;margin-right:10px;padding:2px 0 0;color: #999;}
 .timerulbox {padding:0 0 5px 13px;}
 .viraiterbg {height:45px;width:181px;}
 .totalcount {font-size:16px;color:#000;font-family:Arial;font-weight:700;padding:0 0 5px;}
-.hour {display:block;font-size:25px;letter-spacing:2px;line-height:100% !important;position:absolute;text-align:center;width:60px;border:1px solid #d5d5d5;padding:5px;padding-left:0px;padding-right:0px;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
-.min,.sec {display:block;font-size:25px;letter-spacing:2px;line-height:100% !important;position:absolute;text-align:center;width:45px;border:1px solid #d5d5d5;padding:5px;padding-left:0px;padding-right:0px;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
+.hour {display:block;font-size:20px;letter-spacing:2px;line-height:100% !important;position:absolute;text-align:center;width:50px;border:1px solid #d5d5d5;padding:5px;padding-left:0px;padding-right:0px;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
+.min,.sec {display:block;font-size:20px;letter-spacing:2px;line-height:100% !important;position:absolute;text-align:center;width:40px;border:1px solid #d5d5d5;padding:5px;padding-left:0px;padding-right:0px;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
 .cntdwn {color:#6b6b6b;height:36px;position:absolute;width:192px;margin:0 auto;}
 /***** RIGHT COLUMN CSS *****/
-.right_column {float:left;width:500px;font-family:Arial;}
+.right_column {float:left;width:513px;font-family:Arial;}
 .bottom{width:440px; background-color: #E8E8E8;}
-.spread {float:right;color:#333;font-family:'Arial', sans-serif;font-size:16px;font-weight:700;height:30px;line-height:31px;padding:0 0 0 5px;}
-.spread .sharelinks {display: block; padding:7px 0 0 8px; float: left;}
+.spread {float:right;padding:0 0 0 5px;position:relative;bottom:5px;}
+.spread .sharelinks {display: block;  float: left;}
 .spread .sharelinks .links{margin: 0 0 0 5px; display: block; float: left;}
 .switch{float:right; cursor: pointer;}
 .switch .change{background-color:#ED6502;color:#FFFFFF; width: 50px; height: 30px; border:none;}
@@ -59,6 +59,7 @@
 .company-details h3 {font-size:16px;color:#000;font-family:'arial';margin:0 0 10px 0; padding:0;}
 .hidemore{float:right; background: #0981BE; border: 1px solid #0981BE; padding:2px 3px; cursor: pointer; border-radius:4px; -webkit-border-radius:4px;-moz-border-radius:4px; margin: 5px 0 5px 5px; color:#FFF;}
 .showmore{float:right; padding:2px 3px; cursor: pointer; margin: 5px 0 5px 5px; color:#1560c6;}
-.discount {background:url(../images/discount.png) no-repeat top right;position:absolute;height:90px;width:100px;margin-top:-230px;margin-left:190px;color:#fff;padding-top:28px;}
+.discount {background:url(../images/discount.png) no-repeat top right;position:absolute;height:90px;width:100px;margin-top:-220px;margin-left:185px;color:#fff;padding-top:28px;}
+.twitter {background:url(../images/widget35_32x32_top.png) no-repeat;width:32px;height:32px;background-position:0px -640px;}
 
 
