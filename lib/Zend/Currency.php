@@ -195,7 +195,8 @@ class Zend_Currency
             }
         }
 
-        $value = str_replace('¤', $sign, $value);
+        //$value = str_replace('¤', $sign, $value);
+		$value = str_replace('¤', "<span class='currency-code'>".$sign."</span>", $value);
         return $value;
     }
 
