@@ -166,6 +166,10 @@ li.clearfix {
 /* Global Styles ========================================================================= */
 /* Form Elements */
 input, select, button { font:12px Arial, Helvetica, sans-serif;  }
+select{
+	border:1px solid #89B4D6;
+	height:25px;
+}
 /*input.input-text, select, textarea { border:1px solid #888; }*/
 input.input-text:focus, select:focus, textarea:focus {}
 input.input-text, textarea { padding:2px; }
@@ -780,9 +784,11 @@ margin: 0px 0px 10px;}
 
 /* Form lists */
 /* Grouped fields */
-/*.form-list { width:535px; margin:0 auto; overflow:hidden; }*/
+/*.form-list { width:535px; margin:0 auto; overflow:hidden; }
 
-.form-list label { float:left; color:#666; font-weight:bold; position:relative; z-index:0;;display:block;}
+.form-list label { float:left; color:#666; font-weight:bold; position:relative; z-index:0;;display:block;}*/
+/*hanhdt */
+.form-list label { float:left; color:#666;  position:relative; z-index:0;display:block;}
 .form-list label.required {margin-top: 7px;}
 /*.form-list label.required em { float:right; font-style:normal; color:#eb340a;  top:10px; right:50px;position:absolute }*/
 
@@ -792,7 +798,7 @@ margin: 0px 0px 10px;}
 .form-list li.control input.checkbox { margin-right:6px; }
 .form-list li.control .input-box label{color:red; clear:none; display:inline; width:auto; }
 /*.form-list li.fields { margin-right:-15px; }*/
-.form-list .input-box input{ display:block; float:left; width:150px;border:1px solid #ccc;padding:6px 5px; }
+.form-list .input-box input{ display:block; float:left; width:246px;border:1px solid #89B4D6;padding:6px 5px; }
 .form-list #check input{ display:block; float:left; width:20px;border:none;height:17px;margin:0px;padding:0px }
 .form-list .news-letter{font-size:11px;}
 /*.form-list .field { float:left; width:275px; }*/
@@ -867,7 +873,7 @@ margin: 0px 0px 10px;}
 .form-list .customer-dob .dob-day input.input-text,
 .form-list .customer-dob .dob-month input.input-text { width:46px; }
 .form-list .customer-dob .dob-year { width:140px; }
-.form-list .customer-dob .dob-year input.input-text { width:134px; }
+.form-list .customer-dob .dob-year input.input-text { width:129px; }
 
 
 
@@ -937,9 +943,10 @@ margin: 0px 0px 10px;}
 
 
 
-/* Account Login/Create Pages ============================================================ */
-.account-login .content { min-height:240px; padding:14px 21px; background:#faf7ee url(../images/bkg_login-box.gif) 0 0 repeat-x; border:1px solid #bbb6a5; border-bottom:0; }
-.account-login .content h2 { font-weight:bold; font-size:13px; margin:0 0 14px; padding:0 0 5px 23px; border-bottom:1px solid #ddd; background-position:0 1px; background-repeat:no-repeat; text-transform:uppercase; color:#e76200; }
+/* Account Login/Create Pages ============================================================ 
+hanhdt
+*/
+.account-login .content { min-height:240px; padding:14px 21px; background:#ffffff url(../images/bkg_login-box.gif) 0 0 repeat-x; border:1px solid #bbb6a5; border-bottom:0; }.account-login .content h2 { font-weight:bold; font-size:13px; margin:0 0 14px; padding:0 0 5px 23px; border-bottom:1px solid #ddd; background-position:0 1px; background-repeat:no-repeat; text-transform:uppercase; color:#e76200; }
 .account-login .new-users h2 { background-image:url(../images/i_page1.gif)}
 .account-login .registered-users h2 { background-image:url(../images/i_page2.gif); }
 .account-login .buttons-set { border:1px solid #bbb6a5; border-top:0; margin:0; padding:8px 13px; background:#dee5e8 url(../images/bkg_buttons-set1.gif) 0 0 repeat-x; }
@@ -1063,33 +1070,43 @@ fieldset.group-select .legend { float:left; font-weight:bold; font-size:13px; bo
 .onepagepadding{}
 
 /*login page css*/
-.page-title h1{font-family:Georgia;font-size:27px;color:#00A0C8;padding-bottom:5px;}
+/*hanhdt title login*/
+.page-title h1{font-family:Arial;font-size:9.6 pt;color:#57891c;padding-bottom:5px;}
 .logintoptxt{padding:15px 0;color:#58595B;font-size:15px;font-weight:bold;font-family:Arial, Helvetica, sans-serif;}
 .login-divider{background:url(../images/login-divider.jpg) no-repeat;float:left;width:1px;height:200px;}
 .crateactbtn{/*background:url(../images/createan-accountbtn.jpg) no-repeat;width:152px;height:27px;*/border:none;margin:30px 0 0 0px;cursor:pointer;}
-.logintxtbox{display:block;width:195px;border:1px solid #bfbfbf;padding:6px 5px;}
+/*hanhdt text*/
+.logintxtbox{display:block;width:355px;border:1px solid #89b4d6;padding:6px 5px;}
 .loginsubmitbtn{background:url(../images/loginbtn.jpg) no-repeat;width:82px;height:27px;border:none;margin:0px 0px 0 20px;cursor:pointer;}
 .loginreq  { color:#FF8719;border:none;padding:0;}
-.login-rightcol .form-list label { float:left; color:#666; font-weight:bold; position:relative; z-index:0;width:100px;display:block;margin-right:0px; }
+/*hanhdt color label*/
+.login-rightcol .form-list label { float:left; color:#57891c; position:relative; z-index:0;width:100px;display:block;margin-right:0px; }
 .login-rightcol .form-list{padding:10px 0  0 0;}
 .login-rightcol .form-list li{padding:0 0 10px 0;}
 
+/*hanhdt */
+.label{font-size:12px;color:#b3b3b3;font-weight:bold; text-decoration:none; font-style:italic}
+.forgot-pass{font-size:12px;color:#b3b3b3;font-weight:bold; text-decoration:none; font-style:italic; }
+.forgot-pass:hover{text-decoration:underline;}
 
-.forgot-pass{font-size:12px;color:#0099CC;font-weight:bold;}
 .account-login .validation-advice { clear:both; min-height:13px; margin:3px 0 0 110px; padding-left:17px; font-size:10px; line-height:13px; background:url(../images/validation_advice_bg.gif) 2px 1px no-repeat; color:#f00; }
 #contact-page .validation-advice { clear:both; min-height:13px; margin:3px 0 0 312px; padding-left:17px; font-size:10px; line-height:13px; background:url(../images/validation_advice_bg.gif) 2px 1px no-repeat; color:#f00; }
 
 .login-leftcolumn{width:280px;float:left;padding:20px;}
 .content-title{font-size:15px;color:#2d2d2d;padding-bottom:10px;}
 .login-leftcolumn  .create-txt{font-size:13px;color:#696969;line-height:140%; text-align: justify;}
-.login-rightcol{float:left;width:310px;padding:20px 0 20px 30px;}
+/*hanhdt sua chieu dai khung*/
+.login-rightcol{float:left;width:610px;padding:20px 0 20px 30px;}
 .login-rightcol .loginlabel{display:block;float:left;width:110px;padding-top:3px;color:#58595B;font-size:13px;}
-.forgottxt{ width: 207px; float: right; padding-right: 3px;}
-.field label{float:left;margin:0 15px 10px 0;width:150px;}
+/*hanhdt sua chieu dai label trong form login*/
+.forgottxt{ width: 507px; float: left; padding-left: 103px;}
+.btsubmit{ width: 507px; float: left; padding-left: 103px;}
+.field label{float:left;margin:0 15px 10px 0;width:150px; text-align:right;}
 .field .input-box{float:left;}
 .accountsubmit{/*background:url(../images/submitbtn.jpg) no-repeat;width:82px;height:27px;border:none;*/cursor:pointer}
-.account-toptxt{padding:10px 0 10px 0;color: #58595B;font-family: Arial, Helvetica, sans-serif;font-size: 15px;font-weight: bold;}
-.account-toptxt span.requiredfield{color:#FF8719;float:right;font-size:11px;}
+/*hanhdt sua font chu thong bao cac thong tin bat buoc*/
+.account-toptxt{padding:10px 0 10px 0;color: #ccc;font-family: Arial, Helvetica, sans-serif;font-size: 15px;font-weight: bold;}
+.account-toptxt span.requiredfield{color:#ccc;float:left;font-size:11px; padding-left:165px; font-style:italic;}
 #account-page em{color:#FF8719;}
 #account-page {color:#FF8719;margin:0 auto;width:550px;}
 /*#account-page .validation-advice { clear:both; min-height:13px; margin:3px 0 0 0px; padding-left:17px; font-size:10px; line-height:13px; background:url(../images/validation_advice_bg.gif) 2px 1px no-repeat; color:#f00; }*/

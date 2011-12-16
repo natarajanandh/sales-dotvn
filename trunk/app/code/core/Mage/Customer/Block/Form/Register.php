@@ -44,6 +44,7 @@ class Mage_Customer_Block_Form_Register extends Mage_Directory_Block_Data
      */
     public function getPostActionUrl()
     {
+	
         return $this->helper('customer')->getRegisterPostUrl();
     }
 
@@ -68,6 +69,7 @@ class Mage_Customer_Block_Form_Register extends Mage_Directory_Block_Data
      */
     public function getFormData()
     {
+	
         $data = $this->getData('form_data');
         if (is_null($data)) {
             $data = new Varien_Object(Mage::getSingleton('customer/session')->getCustomerFormData(true));
@@ -112,6 +114,18 @@ class Mage_Customer_Block_Form_Register extends Mage_Directory_Block_Data
      */
     public function isNewsletterEnabled()
     {
+	
         return !Mage::getStoreConfigFlag('advanced/modules_disable_output/Mage_Newsletter');
     }
+	
+	/* Retrieve view privacy policy	
+		@author:hanhdt
+	*/
+	public function getPrivacyPolicy(){
+		$url = $this->getData('show_privacy_policy');
+		if (is_null($url)){
+			$url = $this->helper('customer')->getPrivacyPolicyUrl();
+		}
+		return $url;
+	}
 }

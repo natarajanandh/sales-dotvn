@@ -43,7 +43,7 @@
                      <host><![CDATA[localhost]]></host>
                     <username><![CDATA[root]]></username>
                     <password><![CDATA[]]></password>
-                    <dbname><![CDATA[sales_new]]></dbname>
+                    <dbname><![CDATA[sales]]></dbname>
                     <active>1</active>
                 </connection>
             </default_setup>
