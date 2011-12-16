@@ -42,6 +42,10 @@
                         <title>Create customer</title>
                         <acl>customer/create</acl>
                     </create>
+					<create translate="title" module="customer">
+                        <title>privacypolicy</title>
+                        <acl>customer/privacypolicy</acl>
+                    </create>
                     <info translate="title" module="customer">
                         <title>Retrieve customer data</title>
                         <acl>customer/info</acl>
@@ -98,6 +102,10 @@
                     <create translate="title" module="customer">
                         <title>Create customer address</title>
                         <acl>customer/address/create</acl>
+                    </create> 
+					<create translate="title" module="customer">
+                        <title>Create customer address</title>
+                        <acl>customer/address/privacypolicy</acl>
                     </create>
                     <info translate="title" module="customer">
                         <title>Retrieve address data</title>

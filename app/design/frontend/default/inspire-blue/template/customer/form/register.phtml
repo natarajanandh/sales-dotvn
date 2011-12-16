@@ -1,4 +1,4 @@
-    <?php
+﻿    <?php
 /**
  * Magento
  *
@@ -32,18 +32,11 @@
  */
 ?>
 <div class="account-create">
-    <div class="page-title">
+    <div class="page-title account-page " style="padding-left:60px;">
         <h1><?php echo $this->__('Create an Account') ?></h1>
-         <div class="titlebot"></div>
+        
     </div>
-
-    <div  class="account-toptxt clearfix">
-
-     <span class="requiredfield "><?php echo $this->__('* Required Fields') ?></span>
-    </div>
-   
-           
-            <!--<p class="back-link"><a href="<?php //echo $this->getBackUrl() ?>" class="back-link"><small>&laquo; </small><?php //echo $this->__('Back') ?></a></p>-->
+    <!--<p class="back-link"><a href="<?php //echo $this->getBackUrl() ?>" class="back-link"><small>&laquo; </small><?php //echo $this->__('Back') ?></a></p>-->
             
         
 
@@ -56,37 +49,52 @@
             <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
          
             <ul class="form-list">
-                <li class="fields">
-                    <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getFormData())->toHtml() ?>
-                </li>
+               
                 <li class="field">
                     <label for="email_address" class="required"><?php echo $this->__('Email Address') ?><em>*</em></label>
                     <div class="input-box" id="emailaddress">
-                        <input type="text" name="email" id="email_address" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text validate-email required-entry" />
+                        <input type="text" name="email" id="email_address" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="logintxtbox required-entry"/>
                     </div>
+                </li>
+				 <li class="fields">
+                    <div class="field">
+                        <label for="password" class="required"><?php echo $this->__('Password') ?><em>*</em></label>
+                        <div class="input-box">
+                            <input type="password" name="password" id="password" title="<?php echo $this->__('Password') ?>" class="input-text required-entry validate-password" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="confirmation" class="required"><?php echo $this->__('Confirm Password') ?><em>*</em></label>
+                        <div class="input-box">
+                            <input type="password" name="confirmation" title="<?php echo $this->__('Confirm Password') ?>" id="confirmation" class="input-text required-entry validate-cpassword" />
+                        </div>
+                    </div>
+                    
                 </li>
                 <?php if ($this->isNewsletterEnabled()): ?>
                
                 <?php endif ?>
             <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
             <?php if ($_dob->isEnabled()): ?>
-                <li><?php echo $_dob->setDate($this->getFormData()->getDob())->toHtml() ?></li>
+                <li class="field"><?php echo $_dob->setDate($this->getFormData()->getDob())->toHtml() ?></li>
             <?php endif ?>
             <?php $_taxvat = $this->getLayout()->createBlock('customer/widget_taxvat') ?>
             <?php if ($_taxvat->isEnabled()): ?>
-                <li><?php echo $_taxvat->setTaxvat($this->getFormData()->getTaxvat())->toHtml() ?></li>
+                <li class="field"><?php echo $_taxvat->setTaxvat($this->getFormData()->getTaxvat())->toHtml() ?></li>
             <?php endif ?>
             <?php $_gender = $this->getLayout()->createBlock('customer/widget_gender') ?>
             <?php if ($_gender->isEnabled()): ?>
-                <li><?php echo $_gender->setGender($this->getFormData()->getGender())->toHtml() ?></li>
+                <li class="field"><?php echo $_gender->setGender($this->getFormData()->getGender())->toHtml() ?></li>
             <?php endif ?>
+			
             </ul>
-      
+			
     <?php if($this->getShowAddressFields()): ?>
     
             <input type="hidden" name="create_address" value="1" />
         
             <ul class="form-list">
+				 
                 <li class="fields">
                     <div class="field">
                         <label for="company"><?php echo $this->__('Company') ?></label>
@@ -156,29 +164,47 @@
       
     <?php endif; ?>
 
-
+                   <div id="clsclear"></div>
+	<div class="page-title account-page" style="padding-top:20px;">
+        <h1><?php echo $this->__('Thông tin giao hàng') ?></h1>        
+    </div>
             <ul class="form-list">
-                <li class="fields">
-                    <div class="field">
-                        <label for="password" class="required"><?php echo $this->__('Password') ?><em>*</em></label>
-                        <div class="input-box">
-                            <input type="password" name="password" id="password" title="<?php echo $this->__('Password') ?>" class="input-text required-entry validate-password" />
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label for="confirmation" class="required"><?php echo $this->__('Confirm Password') ?><em>*</em></label>
-                        <div class="input-box">
-                            <input type="password" name="confirmation" title="<?php echo $this->__('Confirm Password') ?>" id="confirmation" class="input-text required-entry validate-cpassword" />
-                        </div>
-                    </div>
-                    
+               
+            
+				<!--hanhdt edit form register-->
+				<li class="fields">
+                    <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getFormData())->toHtml() ?>
                 </li>
-                 
-                 <li class="control">
-
-                     <?php if($this->getLayout()->createBlock('cms/block')->setBlockId('privacypolicy')->toHtml()){ ?>
+			
+				
+                <li class="control" id="showcity" style="display:none; padding:10px 0 0 0;">
+					<div class="field">
+                        <label  class="required" style="vertical-align:top;"><?php echo $this->__('City') ?><em>*</em></label>
+                        <select id="city" name="city" >
+                             <?php echo   Mage::getSingleton('core/session')->getCitydropdown(); ?>
+                        </select>
+                    </div>
+                </li>
+				<li>
+                <div class="field">
+                    <label for="code"  class="required"><?php echo Mage::helper('customer')->__('Enter the code') ?> <em>*</em></label>
+					<div style="padding-left:160px;">
+						<script type="text/javascript">
+							var RecaptchaOptions = {
+								theme : 'white'
+							};
+						</script>                   
+                        <?php
+                            require_once('recaptchalib.php');
+                            $publickey = "6LdGMr8SAAAAAPXwsXi8jHx7iDbHvQ6-V6P7W5kb"; // you got this from the signup page
+                            echo recaptcha_get_html($publickey);
+                        ?>
+					</div>
+                </div>
+				</li>				
+				 <!-- <?php if($this->getLayout()->createBlock('cms/block')->setBlockId('privacypolicy')->toHtml()){ ?>
                       <li class="fields">
-                    <div class="field">
+                   <div class="field">
                       <label for="Privacy Policy" class="required"><?php echo $this->__('Privacy Policy') ?><em>*</em></label>
                       <div class="input-box">
                        <textarea rows="10" cols="5" name="privacypolicy" id="privacypolicy" title="<?php echo strip_tags($this->__('Privacy Policy')); ?>"  class="txtarea" readonly="true" style="resize: none;">
@@ -186,37 +212,25 @@
                        </textarea></div>
                    </div>
                    </li>
-                     <li class="control" style="padding-bottom:5px;">
-
-
-                   <div id="clsclear">
-                       
+                  
+                <?php }?>-->
+				
+				 <li class="control" style="padding-bottom:5px;">
+						<div id="clsclear">                       
                         <input type="checkbox" name="privacypolicy" title="<?php echo $this->__('Privacy Policy') ?>" value="1" id="privacypolicy"<?php if($this->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox required-entry" />
-
-                        <span for="privacypolicy" style="vertical-align:top;"><?php echo $this->__('I accept the privacy policy') ?></span></div>
-
-                </li>
-                <?php }?>
-                <li class="control">
-
-
-                   <div id="clsclear">
+                        <span for="privacypolicy" style="vertical-align:top;"><?php echo $this->__('I accept') ?><a href="<?php echo $this->getPrivacyPolicy(); ?>"><?php echo $this->__('Privacy Policy') ?></a></span></div>
+					</li>
+				<li class="control">
+                    <div id="clsclear">
                         <input type="checkbox" name="is_subscribed" title="<?php echo $this->__('Sign Up for Newsletter') ?>" value="1" onClick="showcity(this.checked)" id="is_subscribed"<?php if($this->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox" />
-
-                      <span for="is_subscribed" style="vertical-align:top;"><?php echo $this->__('Sign Up for Newsletter') ?></span></div>
-
-                </li>
-                <li class="control" id="showcity" style="display:none; padding:10px 0 0 0;">
-                <div class="field">
-                        <label  class="required" style="vertical-align:top;"><?php echo $this->__('City') ?><em>*</em></label>
-                        <select id="city" name="city" >
-                             <?php echo   Mage::getSingleton('core/session')->getCitydropdown(); ?>
-                        </select>
-                    </div>
-                </li>
+                        <span for="is_subscribed" style="vertical-align:top;"><?php echo $this->__('Sign Up for Newsletter') ?></span></div>
+				</li>
                 <li>
+				 <div  class="account-toptxt clearfix">
+				 <span class="requiredfield "><?php echo $this->__('* Required Fields') ?></span>
+				</div>
 <!--                    <div style="margin:10px 0 0 162px"><button type="submit" title="<?php echo $this->__('Submit') ?>" class="button accountsubmit"></button></div>-->
-<div style="margin:10px 0 0 162px"><button type="submit" title="<?php echo $this->__('Submit') ?>" class="btnnew accountsubmit"><span><?php echo $this->__('Submit') ?></span></button></div>
+<div style="margin:10px 0 0 162px"><button type="submit" title="<?php echo $this->__('Submit') ?>" class="btnsubmit"><span><?php echo $this->__('Submit') ?></span></button></div>
                 </li>
             </ul>
        

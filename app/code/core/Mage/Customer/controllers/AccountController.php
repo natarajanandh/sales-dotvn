@@ -38,6 +38,7 @@ class Mage_Customer_AccountController extends Mage_Core_Controller_Front_Action
      *
      * @var array
      */
+	
     protected $_cookieCheckActions = array('loginPost', 'create');
 
     /**
@@ -47,6 +48,7 @@ class Mage_Customer_AccountController extends Mage_Core_Controller_Front_Action
      */
     protected function _getSession()
     {
+	
         return Mage::getSingleton('customer/session');
     }
 
@@ -66,7 +68,7 @@ class Mage_Customer_AccountController extends Mage_Core_Controller_Front_Action
         }
 
         $action = $this->getRequest()->getActionName();
-        if (!preg_match('/^(create|login|logoutSuccess|forgotpassword|forgotpasswordpost|confirm|confirmation)/i', $action)) {
+        if (!preg_match('/^(create|login|logoutSuccess|forgotpassword|forgotpasswordpost|confirm|confirmation)|privacypolicy/i', $action)) {
             if (!$this->_getSession()->authenticate($this)) {
                 $this->setFlag('', 'no-dispatch', true);
             }
@@ -91,6 +93,7 @@ class Mage_Customer_AccountController extends Mage_Core_Controller_Front_Action
      */
     public function indexAction()
     {
+	
         $this->loadLayout();
         $this->_initLayoutMessages('customer/session');
         $this->_initLayoutMessages('catalog/session');
@@ -213,6 +216,16 @@ class Mage_Customer_AccountController extends Mage_Core_Controller_Front_Action
             ->setBeforeAuthUrl(Mage::getUrl());
 
         $this->_redirect('*/*/logoutSuccess');
+    }
+ /**
+     * Customer privacypolicy action
+	 @hanhdt
+     */
+    public function privacypolicyAction()
+    {
+        $this->loadLayout();
+		 $this->_initLayoutMessages('customer/session');
+        $this->renderLayout();
     }
 
     /**

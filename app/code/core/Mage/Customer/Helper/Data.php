@@ -268,4 +268,11 @@ class Mage_Customer_Helper_Data extends Mage_Core_Helper_Abstract
         Mage::dispatchEvent('customer_registration_is_allowed', array('result' => $result));
         return $result->getIsAllowed();
     }
+	/* show Privacy Policy
+	 * @Return url
+	*/
+	public function getPrivacyPolicyUrl(){
+		 return $this->_getUrl('customer/account/privacypolicy');
+		// return $this->_getUrl('customer/account/create');
+	}
 }
