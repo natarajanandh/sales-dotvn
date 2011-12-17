@@ -116,7 +116,6 @@ if ($catId == 6) {
 }
 
 $products = Mage::getModel('deal/deal')->getDealCollectionsRadom($dealsCity);
-		
 $productCount = 0;
 $title = $this->__('Todays Side Deal');
 $currentTime = Mage_Core_Model_Locale::date(null, null, "en_US", true);
