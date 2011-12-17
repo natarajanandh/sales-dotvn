@@ -33,7 +33,7 @@ p {margin:0;padding:0;}
 .notice-msg { border-color:#fcd344; background-color:#fafaec; background-image:url(../images/note_msg_icon.gif); color:#3d6611; }
 
 /* Form Validation */
-.validation-advice { clear:both; min-height:13px; margin:3px 0 5px; padding-left:17px; font-size:10px; line-height:13px; background: url(../images/validation_advice_bg.gif) 2px 1px no-repeat; color:#f00;}
+.validation-advice { display:none; clear:both; min-height:13px; margin:3px 0 5px; padding-left:17px; font-size:10px; line-height:13px; background: url(../images/validation_advice_bg.gif) 2px 1px no-repeat; color:#f00;}
 #checkout-step-billing .validation-advice { clear:both; min-height:13px; margin:0px; padding-left:17px; font-size:10px; line-height:13px; background:url(../images/validation_advice_bg.gif) 2px 1px no-repeat; color:#f00; }
 .validation-failed { border:1px dashed #f00 !important; background:#faebe7 !important; }
 .validation-passed {}
