@@ -120,7 +120,7 @@ function recaptcha_get_html ($pubkey, $error = null, $use_ssl = false)
            $errorpart = "&amp;error=" . $error;
         }
         return '<script type="text/javascript" src="'. $server . '/challenge?k=' . $pubkey . $errorpart . '"></script>
-
+		
 	<noscript>
   		<iframe src="'. $server . '/noscript?k=' . $pubkey . $errorpart . '" height="200" width="300" frameborder="0"></iframe><br/>
   		<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>

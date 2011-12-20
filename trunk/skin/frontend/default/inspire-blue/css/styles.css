@@ -1210,7 +1210,7 @@ td.subtotal{padding:8px 58px 0px 0 ;border-top:none;border-left:1px solid #ccc;b
 
 #edit-account ul.form-list li .input-box{padding-bottom:10px;}
 #checkout-step-billing ul li .input-box{margin-bottom:10px;}
-#account-page ul li .input-box{padding-bottom:10px;}
+#account-page ul li .input-box{padding-bottom:6px;}
 #account-page ul li #password{}
 #account-page #clsclear{margin-left:165px;}
 
@@ -1357,3 +1357,4 @@ td.subtotal{padding:8px 58px 0px 0 ;border-top:none;border-left:1px solid #ccc;b
 .content-feed-text{margin-left: 50px;}
 .content-feed-text em{display:block}
 .content-feed-text .content-category {color: #ED6502;}
+.page-title account-page{padding-left:23px;}

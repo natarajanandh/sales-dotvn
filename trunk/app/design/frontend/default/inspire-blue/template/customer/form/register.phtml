@@ -32,14 +32,12 @@
  */
 ?>
 <div class="account-create">
-    <div class="page-title account-page " style="padding-left:60px;">
+    <div class="page-title account-page " style="padding-left:23px;">
         <h1><?php echo $this->__('Create an Account') ?></h1>
-        
+       <?php echo $this->__('If you have an account with us, please log in'); ?> <a href="<?php echo $this->helper('customer')->getLoginUrl() ?>" style="text-decoration: none; color:#2671d0">Tại đây</a>
     </div>
     <!--<p class="back-link"><a href="<?php //echo $this->getBackUrl() ?>" class="back-link"><small>&laquo; </small><?php //echo $this->__('Back') ?></a></p>-->
-            
-        
-
+ 
 <div id="account-page" style="">
     <?php echo $this->getChildHtml('form_fields_before')?>
     <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
@@ -86,7 +84,14 @@
             <?php if ($_gender->isEnabled()): ?>
                 <li class="field"><?php echo $_gender->setGender($this->getFormData()->getGender())->toHtml() ?></li>
             <?php endif ?>
-			
+			<li class="control" id="showcity" style=" padding:10px 0 0 0;">
+					<div class="field">
+                        <label  class="required" style="vertical-align:top;"><?php echo $this->__('City') ?><em>*</em></label>
+                        <select id="city" name="city" >
+                             <?php echo   Mage::getSingleton('core/session')->getCitydropdown(); ?>
+                        </select>
+                    </div>
+                </li>
             </ul>
 			
     <?php if($this->getShowAddressFields()): ?>
@@ -102,12 +107,7 @@
                             <input type="text" name="company" id="company" value="<?php echo $this->htmlEscape($this->getFormData()->getCompany()) ?>" title="<?php echo $this->__('Company') ?>" class="input-text" />
                         </div>
                     </div>
-                    <div class="field">
-                        <label for="telephone" class="required"><?php echo $this->__('Telephone') ?><em>*</em></label>
-                        <div class="input-box">
-                            <input type="text" name="telephone" id="telephone" value="<?php echo $this->htmlEscape($this->getFormData()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" />
-                        </div>
-                    </div>
+                   
                 </li>
                 <li class="wide">
                     <label for="street_1" class="required"><?php echo $this->__('Street Address') ?><em>*</em></label>
@@ -165,7 +165,7 @@
     <?php endif; ?>
 
                    <div id="clsclear"></div>
-	<div class="page-title account-page" style="padding-top:20px;">
+	<div class="page-title account-page" style="padding-top:20px; margin-left:-45px;">
         <h1><?php echo $this->__('Thông tin giao hàng') ?></h1>        
     </div>
             <ul class="form-list">
@@ -175,31 +175,29 @@
 				<li class="fields">
                     <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getFormData())->toHtml() ?>
                 </li>
-			
-				
-                <li class="control" id="showcity" style="display:none; padding:10px 0 0 0;">
-					<div class="field">
-                        <label  class="required" style="vertical-align:top;"><?php echo $this->__('City') ?><em>*</em></label>
-                        <select id="city" name="city" >
-                             <?php echo   Mage::getSingleton('core/session')->getCitydropdown(); ?>
-                        </select>
+				<li>
+					 <div class="field">
+                        <label for="telephone" class="required"><?php echo $this->__('Telephone') ?><em>*</em></label>
+                        <div class="input-box">
+                            <input type="text" name="telephone" id="telephone" value="<?php echo $this->htmlEscape($this->getFormData()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" />
+                        </div>
                     </div>
-                </li>
+				</li>
+				
 				<li>
                 <div class="field">
-                    <label for="code"  class="required"><?php echo Mage::helper('customer')->__('Enter the code') ?> <em>*</em></label>
-					<div style="padding-left:160px;">
-						<script type="text/javascript">
-							var RecaptchaOptions = {
-								theme : 'white'
-							};
-						</script>                   
-                        <?php
-                            require_once('recaptchalib.php');
-                            $publickey = "6LdGMr8SAAAAAPXwsXi8jHx7iDbHvQ6-V6P7W5kb"; // you got this from the signup page
-                            echo recaptcha_get_html($publickey);
-                        ?>
-					</div>
+						<?php echo @$_SESSION['ctform']['captcha_error'] ?>
+						<label for="code"  class="required"><?php echo Mage::helper('customer')->__('Enter the code') ?> <em>*</em></label>
+						 <div class="input-box">
+						 
+					<p>
+						<img id="siimage" style="border: 1px solid #000; margin-right: 15px" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);?>/captcha/securimage_show.php?sid=<?php echo md5(uniqid()) ?>" alt="CAPTCHA Image" align="left">
+   						<a tabindex="-1" style="border-style: none;" href="#" title="Refresh Image" onclick="document.getElementById('siimage').src = '<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);?>/captcha/securimage_show.php?sid=' + Math.random(); this.blur(); return false">
+						<img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);?>/captcha/images/refresh.png" alt="Reload Image" onclick="this.blur()" align="bottom" border="0"></a><br />
+					</p><br>	
+							<input type="text" name="ct_captcha"  maxlength="8" class="input-text required-entry validate-cpassword"/>
+						</div>
+					
                 </div>
 				</li>				
 				 <!-- <?php if($this->getLayout()->createBlock('cms/block')->setBlockId('privacypolicy')->toHtml()){ ?>
@@ -215,19 +213,19 @@
                   
                 <?php }?>-->
 				
-				 <li class="control" style="padding-bottom:5px;">
+				 <li class="control" style="padding-bottom:5px; padding-top:5px;">
 						<div id="clsclear">                       
                         <input type="checkbox" name="privacypolicy" title="<?php echo $this->__('Privacy Policy') ?>" value="1" id="privacypolicy"<?php if($this->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox required-entry" />
-                        <span for="privacypolicy" style="vertical-align:top;"><?php echo $this->__('I accept') ?><a href="<?php echo $this->getPrivacyPolicy(); ?>"><?php echo $this->__('Privacy Policy') ?></a></span></div>
+                        <span for="privacypolicy" style="vertical-align:top;"><?php echo $this->__('I accept') ?> <a href="<?php echo $this->getPrivacyPolicy(); ?>"><?php echo $this->__('Privacy Policy') ?></a></span></div>
 					</li>
 				<li class="control">
                     <div id="clsclear">
-                        <input type="checkbox" name="is_subscribed" title="<?php echo $this->__('Sign Up for Newsletter') ?>" value="1" onClick="showcity(this.checked)" id="is_subscribed"<?php if($this->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox" />
-                        <span for="is_subscribed" style="vertical-align:top;"><?php echo $this->__('Sign Up for Newsletter') ?></span></div>
+                        <input type="checkbox" name="is_subscribed" title="<?php echo $this->__('Sign Up for Newsdeal') ?>" value="1" onClick="showcity(this.checked)" id="is_subscribed"<?php if($this->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox" />
+                        <span for="is_subscribed" style="vertical-align:top;"><?php echo $this->__('Sign Up for Newsdeal') ?></span></div>
 				</li>
                 <li>
 				 <div  class="account-toptxt clearfix">
-				 <span class="requiredfield "><?php echo $this->__('* Required Fields') ?></span>
+				 <span class="requiredfield "><font style="color:red">* </font><?php echo $this->__('Required Fields') ?></span>
 				</div>
 <!--                    <div style="margin:10px 0 0 162px"><button type="submit" title="<?php echo $this->__('Submit') ?>" class="button accountsubmit"></button></div>-->
 <div style="margin:10px 0 0 162px"><button type="submit" title="<?php echo $this->__('Submit') ?>" class="btnsubmit"><span><?php echo $this->__('Submit') ?></span></button></div>

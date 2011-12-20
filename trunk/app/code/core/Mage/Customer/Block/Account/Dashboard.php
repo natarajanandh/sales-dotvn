@@ -124,4 +124,15 @@ class Mage_Customer_Block_Account_Dashboard extends Mage_Core_Block_Template
         }
         return $this->getUrl('customer/account/');
     }
+	/*
+	
+	*/
+	public function getCaptcharUrl()
+    {
+        // the RefererUrl must be set in appropriate controller
+        if ($this->getRefererUrl()) {
+            return $this->getRefererUrl();
+        }
+        return Mage::getUrl('customer/model/CaptchaSecurityImages', array());
+    }
 }
