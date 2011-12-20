@@ -162,7 +162,7 @@ h4, a{text-align: left;}
 /*button style by : sathish on : 13.01.2011 */
 input[type="button"], input[type="submit"], input[type="reset"], button {border:none;}
 /*hanhdt button submit login*/
-button.btnsubmit {border-radius:4px 4px 4px 4px;  height:34px; padding:2px 10px; background:#719f39 url(../images/btn_submit.gif) repeat-x 0 100%; color:#fff; font:bold 14px Verdana, helvetica, sans-serif; cursor:pointer; text-align:center !important; white-space:nowrap; }
+button.btnsubmit {border-radius:4px 4px 4px 4px;  height:36px; width:114px; padding:2px 10px; background:#719f39 url(../images/dangky.png) no-repeat 0 100%; color:#fff; font:bold 14px Verdana, helvetica, sans-serif; cursor:pointer; text-align:center !important; white-space:nowrap; }
 
 button.btnnew { border-width:1px; border-style:solid; border-color:#ed6502 #a04300 #a04300 #ed6502; padding:2px 10px; background:#ffac47 url(../images/btn_bg.gif) repeat-x 0 100%; color:#fff; font:bold 12px arial, helvetica, sans-serif; cursor:pointer; text-align:center !important; white-space:nowrap; }
 button.btnnew:hover { background:#f77c16 url(../images/btn_over_bg.gif) repeat-x 0 0; }
