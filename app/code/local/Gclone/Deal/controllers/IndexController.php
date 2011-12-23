@@ -18,12 +18,10 @@ class Gclone_Deal_IndexController extends Mage_Core_Controller_Front_Action {
             $this->getLayout()->getBlock('head')->setTitle(htmlspecialchars($_product->getMetaTitle()));
             $this->getLayout()->getBlock('head')->setKeywords(htmlspecialchars($_product->getMetaKeyword()));
             $this->getLayout()->getBlock('head')->setDescription(htmlspecialchars($_product->getMetaDescription()));
+
         } else {
             $this->getLayout()->getBlock('head')->setTitle("Today's Deal");
         }
-		
-		
-		
         $this->renderLayout();
     }
 
