@@ -56,7 +56,7 @@ NOTE: Regarding styles - if we leave it this way, we'll move it to boxes.css
 		<SELECT id ="year"  style="width:115px;"   name="'<?php echo $this->getFieldName('year') ?>'" value="' <?php echo $this->getYear()  ?> '" title="' <?php echo $this->__('Year') ?> '"><option>--</option></SELECT>
 <script type="text/javascript">date_populate("date", "month", "year");</script>
 
-<?php/*
+<?php /*
     $this->setDateInput('d',
         '<div class="dob-day">
              <input type="text" id="' . $this->getFieldId('day') . '" name="' . $this->getFieldName('day') . '" value="' . $this->getDay() . '" title="' . $this->__('Day') . '" class="input-text validate-custom" ' . $this->getFieldParams() . ' />
