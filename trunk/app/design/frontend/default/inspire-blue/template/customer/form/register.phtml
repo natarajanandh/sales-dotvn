@@ -46,15 +46,14 @@
             <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
             <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
          
-            <ul class="form-list">
-               
+            <ul class="form-list">               
                 <li class="field">
                     <label for="email_address" class="required"><?php echo $this->__('Email Address') ?><em>*</em></label>
                     <div class="input-box" id="emailaddress">
                         <input type="text" name="email" id="email_address" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="logintxtbox required-entry"/>
                     </div>
                 </li>
-				 <li class="fields">
+				<li class="fields">
                     <div class="field">
                         <label for="password" class="required"><?php echo $this->__('Password') ?><em>*</em></label>
                         <div class="input-box">
@@ -66,11 +65,9 @@
                         <div class="input-box">
                             <input type="password" name="confirmation" title="<?php echo $this->__('Confirm Password') ?>" id="confirmation" class="input-text required-entry validate-cpassword" />
                         </div>
-                    </div>
-                    
+                    </div>                    
                 </li>
-                <?php if ($this->isNewsletterEnabled()): ?>
-               
+                <?php if ($this->isNewsletterEnabled()): ?>               
                 <?php endif ?>
             <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
             <?php if ($_dob->isEnabled()): ?>
@@ -85,29 +82,26 @@
                 <li class="field"><?php echo $_gender->setGender($this->getFormData()->getGender())->toHtml() ?></li>
             <?php endif ?>
 			<li class="control" id="showcity" style=" padding:10px 0 0 0;">
-					<div class="field">
-                        <label  class="required" style="vertical-align:top;"><?php echo $this->__('City') ?><em>*</em></label>
-                        <select id="city" name="city" >
-                             <?php echo   Mage::getSingleton('core/session')->getCitydropdown(); ?>
-                        </select>
-                    </div>
-                </li>
+				<div class="field">
+					<label  class="required" style="vertical-align:top;"><?php echo $this->__('City') ?><em>*</em></label>
+					<select id="city" name="city" >
+						 <?php echo   Mage::getSingleton('core/session')->getCitydropdown(); ?>
+					</select>
+				</div>
+            </li>
             </ul>
 			
     <?php if($this->getShowAddressFields()): ?>
     
-            <input type="hidden" name="create_address" value="1" />
-        
-            <ul class="form-list">
-				 
+            <input type="hidden" name="create_address" value="1" />        
+            <ul class="form-list">				 
                 <li class="fields">
                     <div class="field">
                         <label for="company"><?php echo $this->__('Company') ?></label>
                         <div class="input-box">
                             <input type="text" name="company" id="company" value="<?php echo $this->htmlEscape($this->getFormData()->getCompany()) ?>" title="<?php echo $this->__('Company') ?>" class="input-text" />
                         </div>
-                    </div>
-                   
+                    </div>                   
                 </li>
                 <li class="wide">
                     <label for="street_1" class="required"><?php echo $this->__('Street Address') ?><em>*</em></label>
@@ -154,7 +148,7 @@
                     <div class="field">
                         <label for="country" class="required"><?php echo $this->__('Country') ?><em>*</em></label>
                         <div class="input-box">
-                            <?php echo $this->getCountryHtmlSelect() ?>
+                            <?php echo $this->getCountryHtmlSelect(); ?>
                         </div>
                     </div>
                 </li>
@@ -173,21 +167,21 @@
             
 				<!--hanhdt edit form register-->
 				<li class="fields">
-                    <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getFormData())->toHtml() ?>
+                    <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getFormData())->toHtml(); ?>
                 </li>
 				<li>
 					 <div class="field">
                         <label for="telephone" class="required"><?php echo $this->__('Telephone') ?><em>*</em></label>
                         <div class="input-box">
-                            <input type="text" name="telephone" id="telephone" value="<?php echo $this->htmlEscape($this->getFormData()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" />
+                            <input type="text" name="telephone" id="telephone" value="<?php echo $this->htmlEscape($this->getFormData()->getTelephone()); ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" />
                         </div>
                     </div>
 				</li>
 				
 				<li>
                 <div class="field">
-						<?php echo @$_SESSION['ctform']['captcha_error'] ?>
-						<label for="code"  class="required"><?php echo Mage::helper('customer')->__('Enter the code') ?> <em>*</em></label>
+						<?php echo @$_SESSION['ctform']['captcha_error']; ?>
+						<label for="code"  class="required"><?php echo Mage::helper('customer')->__('Enter the code'); ?> <em>*</em></label>
 						 <div class="input-box">
 						 
 					<p>

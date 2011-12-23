@@ -32,5 +32,13 @@ class Mage_Customer_Block_Account_Dashboard_Hello extends Mage_Core_Block_Templa
     {
         return Mage::getSingleton('customer/session')->getCustomer()->getName();
     }
-
+	
+	/*
+		author:hanhdt
+		get avatar of account
+	*/
+	public function getCustomerAvatar()
+	{
+		return Mage::getSingletom('customer/session')->getCustomer()->getAvatar();
+	}
 }

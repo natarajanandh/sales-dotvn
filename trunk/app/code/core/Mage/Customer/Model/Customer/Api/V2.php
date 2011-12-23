@@ -50,7 +50,6 @@ class Mage_Customer_Model_Customer_Api_V2 extends Mage_Customer_Model_Customer_A
 
     /**
      * Create new customer
-     *
      * @param array $customerData
      * @return int
      */
