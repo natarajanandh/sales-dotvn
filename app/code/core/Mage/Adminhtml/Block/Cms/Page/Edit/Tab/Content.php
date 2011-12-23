@@ -67,6 +67,7 @@ class Mage_Adminhtml_Block_Cms_Page_Edit_Tab_Content
         $form->setHtmlIdPrefix('page_');
 
         $fieldset = $form->addFieldset('content_fieldset', array('legend'=>Mage::helper('cms')->__('Content'),'class'=>'fieldset-wide'));
+		//$fieldset->addField('content', 'editor', array('name'      => 'content','label'     => Mage::helper('cms')->__('Content'),'title'     => Mage::helper('cms')->__('Content'),'style'     => 'height:36em;','wysiwyg'   => true,'theme' => 'advanced','required'  => true,));
 
         $wysiwygConfig = Mage::getSingleton('cms/wysiwyg_config')->getConfig(
             array('tab_id' => $this->getTabId())

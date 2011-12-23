@@ -537,8 +537,18 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action {
                 $this->getOnepage()->getQuote()->getPayment()->importData($data);
             }
             $this->getOnepage()->saveOrder();
-            $redirectUrl = $this->getOnepage()->getCheckout()->getRedirectUrl();
-            $result['success'] = true;
+			$redirectUrl = $this->getOnepage()->getCheckout()->getRedirectUrl();
+			if($data['method']== 'nganluong')
+			{
+				include_once('app/code/local/TTS/Nganluong/Block/Nganluong.php');
+				$block = new TTS_Nganluong_Block_Nganluong;  
+				
+                $redirectUrl = $block->thanhtoannganluong();
+				die('kaka');
+				print_r($redirectUrl);die;
+            }
+			
+		    $result['success'] = true;
             $result['error'] = false;
         } catch (Mage_Core_Exception $e) {
             Mage::logException($e);
@@ -577,7 +587,7 @@ class Mage_Checkout_OnepageController extends Mage_Checkout_Controller_Action {
         if (isset($redirectUrl)) {
             $result['redirect'] = $redirectUrl;
         }
-
+		
         $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($result));
     }
 
