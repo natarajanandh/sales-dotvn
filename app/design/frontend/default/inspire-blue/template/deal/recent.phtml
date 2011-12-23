@@ -51,8 +51,7 @@ if (count($products) > 0 && $recentEnabled == 1) {
             $ProductFromDate = $_product->getResource()->formatDate($_product->getspecial_from_date(), false);
             $Fromtime = strtotime($ProductFromDate);
             if (strtotime($currentTime) > strtotime($ProductToDate . ' ' . $_product->getTime())) {
-?>
-<?php
+
                 if (!$_product->isGrouped()) {
                     $count = $count +1;
                     echo '<div class="clsrecentbox" style="margin: 10px 0px 0px 15px;">';

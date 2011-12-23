@@ -8,7 +8,7 @@ class Mage_Voucher_Helper_Data extends Mage_Core_Helper_Abstract
     {
         return Mage::getStoreConfig( self::XML_PATH_ENABLED );
     }
-
+/*
     public function getUserName()
     {
         if (!Mage::getSingleton('customer/session')->isLoggedIn()) {
@@ -25,5 +25,5 @@ class Mage_Voucher_Helper_Data extends Mage_Core_Helper_Abstract
         }
         $customer = Mage::getSingleton('customer/session')->getCustomer();
         return $customer->getEmail();
-    }
+    }*/
 }
