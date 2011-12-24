@@ -67,18 +67,15 @@ class Mage_Voucher_IndexController extends Mage_Core_Controller_Front_Action {
 				
 				// check codevoucher
 				$codevoucher = Mage::getModel('voucher/voucher')->getOrderCode($code);
-				//echo $codevoucher;					die;
+				//echo $codevoucher;	die;
 				// check mail and numbervoucher 
 				$checkcustomer = Mage::getModel('voucher/voucher')->checkCustomer($email,$numbervoucher);
 				//$codevoucher==2 voucher not use
-				if($codevoucher==2 && !$checkcustomer){		
-				
+				if($codevoucher==2 && !$checkcustomer){						
 					//Mage::getModel('voucher/voucher')->updateCodeOrder(trim($post['code']));	
 					$data = Mage::getModel('voucher/voucher')->getInformation($email,$numbervoucher);	
-				
-					Mage::getModel('voucher/voucher')->setData('data', $data);
-					Mage::getSingleton('customer/session')->addSuccess(Mage::helper('voucher')->__('Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.'));					
-					
+					Mage::getSingleton('voucher/session')->setData('data',$data);
+					Mage::getSingleton('customer/session')->addSuccess(Mage::helper('voucher')->__('Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.'));										
 				}elseif($codevoucher==2){				
 					Mage::getSingleton('customer/session')->addError(Mage::helper('voucher')->__('Mã Voucher đã được sử dụng'));
 				}elseif($codevoucher==3){
