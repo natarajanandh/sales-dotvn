@@ -279,10 +279,7 @@ p.required { font-size:10px;  }
 
 /* Data Table */
 
-.data-table th { border: 1px solid #DDD;
-                 font-weight: bold;
-                 padding: 5px;
-                 white-space: nowrap;}
+.data-table th { border: 1px solid #DDD;white-space: nowrap;color:#fff;}
 .data-table tr.newid  th{border-left:none;border-right:none;border-bottom: 1px solid #DDD;border-top:none;
                          font-weight: bold;
                          padding: 5px;
@@ -292,10 +289,10 @@ p.required { font-size:10px;  }
                          font-weight: bold;
                          padding: 5px;
 }
-.data-table td { padding:5px; border:1px solid #ddd; }
-.data-table thead { background-color:#f2f2f2; }
-.data-table tbody {}
-.data-table tfoot {}
+.data-table td { padding:5px;color:#fff;font-size:14px;}
+.data-table thead {background:#57891c;color:#fff;}
+.data-table tbody {width:300px;}
+.data-table tfoot {background:#ecf9dd;}
 .data-table tr.first {}
 .data-table tr.last {}
 .data-table tr.odd {}
@@ -576,9 +573,9 @@ a.minimal-price-link .price { font-weight:normal; }
 /* -------------------------------------- */
 /* RECENT DEALS */
 /* -------------------------------------- */
-.col-main .clsrecentbox{ width:207px; color:#333333; float:left; margin:0 0 0 15px;display:inline;}
+.col-main .clsrecentbox{ width:327px; color:#333333; float:left; margin:0 0 0 15px;display:inline;}
 .col-main .clsrecentbox h2{ font-size:12px; margin:0px; padding:0 0 5px 0;}
-.col-main .clsrecentbox .clsbord{ border:#DFDFDF solid 1px; padding:9px; width:189px; text-align: center}
+.col-main .clsrecentbox .clsbord{width:300px; text-align: center;}
 .col-main .clsrecentbox .clsbord h3{ font-size:12px; font-weight:bold; padding:8px 0 0 0;}
 .col-main .clsrecentbox .clsbord h3 span{ color:#FF7710; font-size:20PX;}
 .col-main .clsrecentbox .clsbord .clsgrid{ border:1px solid #ccc; background:#fbfbfb; margin:10px 0 0 0;}
@@ -638,7 +635,7 @@ ol.one-page-checkout li  .col-2 ul li label{font-weight: bold;}
 
 .one-page-checkout li.section { position:relative; }
 .one-page-checkout .group-select { margin-right:0; }
-.one-page-checkout .a-item { border:1px solid #bbb6a5; border-top:0; padding:15px 20px; background:#faf7ee; height:100%;}
+.one-page-checkout .a-item {  padding:15px 20px; height:100%;}
 .one-page-checkout .step-title {_width:666px;margin-bottom:0; padding:4px 8px 6px 8px; background-color: #eee; border-width:0 1px 0 1px; border-color:#D9DDE3; border-style:solid; border-top:1px solid #fff;}
 .one-page-checkout .tool-tip { right:8px; }
 .one-page-checkout .step-title a { display:none; }  /* Hide Edit button in step header */
@@ -656,7 +653,7 @@ ol.one-page-checkout li  .col-2 ul li label{font-weight: bold;}
 .one-page-checkout .active h3 { color:#FFF; position:relative; z-index:2; }
 .one-page-checkout .allow .step-count { background:#dbe6eb; }
 .one-page-checkout .active .step-count { color:#000; border:1px solid #000; background:#FFF; }
-.one-page-checkout .active .a-item { display:block; border-color:#CCCCCC; background:#FBFAF6 url(../images/multi_address_box_bg.gif) 0 0 repeat-x; }
+.one-page-checkout .active .a-item { display:block;}
 .one-page-checkout dd .form-list ul { margin:5px 17px 15px 17px; }
 .one-page-checkout .checkmo-mailing-address { padding-left:20px; }
 .one-page-checkout-progress .page-head { margin-bottom:1em; }
@@ -1152,7 +1149,8 @@ fieldset.group-select .legend { float:left; font-weight:bold; font-size:13px; bo
 
 .col-main .clsterms p  strong{margin-right:10px;}
 /*cart css*/
-.product-description{float:left;display:block;width:200px;margin:10px  0 0 0 ;font-size:13px;color:#787878;line-height:140%;font-weight:normal;font-family:Arial;}
+.product-description{float:left;display:block;margin:10px  0 0 0 ;font-size:13px;color:#000;line-height:140%;font-weight:normal;font-family:Arial;}
+.newid .cart-price .price {color:#000}
 .cart-price .price{font-size:13px;color:#58595B;font-family:Arial;font-weight:normal;}
 
 .data-table tr.newid td.qualitybox input{text-align:center;border:1px solid #999999;font-weight:bold;font-size:13px;}
@@ -1181,10 +1179,10 @@ td.subtotal{padding:8px 58px 0px 0 ;border-top:none;border-left:1px solid #ccc;b
 .coupontxtbox{padding:7px 5px 8px 5px;border-top:1px solid #ccc;border-left:1px solid #ccc;border-bottom:1px solid #ccc;width:180px;border-right:none;margin:0px;}
 .applybtns{cursor:pointer}
 .data-table tr.newid th.clsremove{font-family:Georgia;color:#58595B;font-size:15px;padding:5px 15px;border:none;}
-.clsproduct{font-family:Georgia;color:#58595B;font-size:15px;border:none;}
+.clsproduct{font-family:Arial, Helvetica, sans-serif;color:#fff;font-size:15px;border:none;}
 .clscartprice{font-family:Georgia;color:#58595B;font-size:15px;}
 .clscartquantity{font-family:Georgia;color:#58595B;font-size:15px;}
-.data-table tr.newid th.clscarttotal{  font-family:Georgia;color:#58595B;font-size:15px;}
+.data-table tr.newid th.clscarttotal{  font-family:Arial, Helvetica, sans-serif;color:#fff;font-size:14px;}
 .data-table tr.newid td.removeborder{width:115px;}
 .productimg{float:left;display:block;margin:0 10px 0 0 ;}
 .clssearch{float:right;padding:3px 0 0 10px;margin-left: 5px;}
@@ -1328,7 +1326,7 @@ td.subtotal{padding:8px 58px 0px 0 ;border-top:none;border-left:1px solid #ccc;b
 #gift-deleteform {position: absolute;z-index: 99999;}
 #gift-deleteform .modal_window345 {position: relative;background-color: white;z-index: 99999;}
 
-.grandtotal { width: 880px; margin: 0 auto;}
+.grandtotal { margin: 0 auto;}
 .clsborder{ float: left;}
 .page-head h3{ font-size: 20px;}
 

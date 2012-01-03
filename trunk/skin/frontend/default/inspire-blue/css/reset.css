@@ -49,6 +49,7 @@ table       { border:0; border-collapse:collapse; border-spacing:0; empty-cells:
 th          { vertical-align:top; text-align:left; font-weight:normal; }
 td          { vertical-align:top; }
 table#my-orders-table{width:100%;}
+#shopping-cart-table, .data-table  {width:685px;}
 
 /* Content */
 address     { font-style:normal; }

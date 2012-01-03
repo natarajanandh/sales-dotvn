@@ -104,16 +104,16 @@ color:#F00;
 .floginul li a {height:auto;}
 .floginul li span {color:#000;font-size:13px;padding-left:10px;font-weight:700;}
 .floginul li.or { padding:2px 0 0 15px;}
-.content {padding:0 15px 20px;overflow:hidden;width:100%;}
+.content {padding:0 15px 20px;overflow:hidden;width:975px;}
 
 /*side bar css*/
-.col2-left-layout .col-main,.col-right {float:left;margin-top:8px;width:255px;padding-left:17px;}
+.col2-left-layout .col-main,.col-right {float:left;margin-top:8px;width:255px;padding-left:14px;}
 .col4-set .col-1,.col4-set .col-3 {float:left;width:23.5%;}
 .clsleftimg {position:absolute;margin-left:-27px;margin-top:45px;}
 .join-discussion {float:right;color:#06C;font-family:Arial;font-size:12px;}
 .clscomments_count{margin-top:5px;}
 .cmt-count {float:left;font-family:Arial;font-size:12px;}
-.side-block {width:250px;position:relative;border-top:none;margin-bottom:8px;}
+.side-block {width:250px;position:relative;border-top:none;}
 .side-block .block-title {position:relative;width:210px;height:24px;text-align:left;width:255px;color:#fff;font-family:Helvetica, sans-serif;font-weight:700;font-size:17px;display:block;background-image:url('../images/discuss-the-deal.png');background-repeat:no-repeat;line-height:18px;padding-top:10px;}
 .block-content{background:#fff;padding:10px 10px 0 10px;width:233px;}
 .clsdealcomment p{color: #58595B;float: left;font-family: Arial;font-size: 13px;line-height: 18px;padding: 0px 0px 0px 10px;text-align: left;width: 160px;}
@@ -321,3 +321,42 @@ li.active a {background:url(../images/Active.png) no-repeat right -49px;color:#F
 #nav1 {margin:0px;padding:0px;color:#fff;}
 #nav1 li { outline-style:none;float:left;padding-left:10px;padding-right:10px;background:url(../images/line.gif) no-repeat center right;}
 #nav1 li a {color:#fff;font-weight:bold;text-decoration:none;}
+.inner-progess-bar {
+    background: url(../images/progess-bar.png) no-repeat;
+    float: left;
+    height: 18px;
+    padding: 0 7px;
+    width: 169px;
+	background-position: -600px 0;
+	margin-left:22px;
+}
+.progess{font-size:0;float:left;height:10px;margin:4px 0 0;position:relative;background-image:url(http://www.mjgroup.com.vn/images_v2/progess.gif);	background-position:right -45px;}
+.border-radium{-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
+.border-radium1{-webkit-border-radius: 7px;-moz-border-radius: 7px;border-radius: 7px;}
+.deal_content {position:relative;margin-top:-20px;color:#fff;background:#2671d0;line-height:30px;width:233px;}
+
+.border-bottom-radius {-webkit-border-bottom-right-radius: 5px;-webkit-border-bottom-left-radius: 5px;-moz-border-radius-bottomright: 5px;-moz-border-radius-bottomleft: 5px;border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;}
+.border-bottom-radius1 {-webkit-border-bottom-right-radius: 7px;-webkit-border-bottom-left-radius: 7px;-moz-border-radius-bottomright: 7px;-moz-border-radius-bottomleft: 7px;border-bottom-right-radius: 7px;border-bottom-left-radius: 7px;}
+.deal_content .price {font-weight:bold;font-size:15px;padding-left:10px;}
+.deal_content_top {position:absolute;line-height:30px;width:233px;background:url(../images/bg1.png) repeat-x top;-webkit-border-top-left-radius: 5px;
+-webkit-border-top-right-radius: 5px;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-topright: 5px;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;color:#fff;font-weight:bold;font-size:14px;}
+.deal_content_top h1{color:#fff;}
+.sale-off {background:url(../images/sale-off.png) no-repeat top right;position:relative;height:62px;width:64px;top:80px;left:177px;z-index:10}
+.sidebar_discount {background: url(../images/sale-off.png) no-repeat scroll 0 0 transparent;position: absolute;font-family: Arial, Helvetica, sans-serif;display: block;float: left;padding-top: 6px;text-align: center;width: 64px;height:62px;margin:110px 0 0 180px;z-index:100;color:#fff;}
+.sidebar_discount span {font-weight:bold;font-size:16px;}
+.bgRecent {background:url(../images/bg_sale.png) repeat-x top;height:65px;position:absolute;bottom:0px;width:325px;margin-bottom:-12px;}
+.info-recent {float:left;width:230px;color:#fff;padding-top:7px;padding-left:10px;}
+.info-recent span {float:left;clear:both;line-height:22px;font-size:14px;font-weight:bold;}
+.info-price {float:left;color:#fff;padding-top:10px;}
+.info-price span {clear:both;float:left;line-height:21px;}
+.info-price span.currency-code {float:none;}
+.detail-recent {background:url(../images/bg_sale.png) repeat-x; width:325px;position:absolute;height:66px;margin-top:-68px;}
+.title-cart{background:url(../images/icon_cart.jpg) no-repeat top left;padding-bottom:10px;color:#F05C0E}
+.boxStep {height:34px;line-height:30px;background:#e7e7e7;}
+.boxStep .step {float:left;width:170px;text-align:center;color:#fff;font-weight:bold;line-height:34px;}
+.boxStep .stepActive {background:url(../images/step1.png) no-repeat top right #fb4e2c;height:34px;}
+.boxStep .stepNone {background:url(../images/step2.png) no-repeat top right;height:34px;color:#000;}
