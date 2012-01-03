@@ -53,18 +53,27 @@ Accordion.prototype = {
             this.closeExistingSection();
             this.currentSection = section.id;
             $(this.currentSection).addClassName('active');
+			var act = 'act'+this.currentSection.substr(3);
+			$(act).removeClassName('stepNone');
+			$(act).addClassName('stepActive');
+			
             var contents = Element.select(section, '.a-item');
             contents[0].show();
             //Effect.SlideDown(contents[0], {duration:.2});
 
             if (this.disallowAccessToNextSections) {
+				
                 var pastCurrentSection = false;
+				
                 for (var i=0; i<this.sections.length; i++) {
+					
                     if (pastCurrentSection) {
+						
                         Element.removeClassName(this.sections[i], 'allow')
                     }
                     if (this.sections[i].id==section.id) {
                         pastCurrentSection = true;
+						
                     }
                 }
             }
@@ -73,13 +82,18 @@ Accordion.prototype = {
 
     closeSection: function(section) {
         $(section).removeClassName('active');
+		var act = 'act'+this.currentSection.substr(3);
+		$(act).removeClassName('stepActive');
+		$(act).addClassName('stepNone');
         var contents = Element.select(section, '.a-item');
         contents[0].hide();
         //Effect.SlideUp(contents[0]);
     },
 
     openNextSection: function(setAllow){
+		
         for (section in this.sections) {
+			
             var nextIndex = parseInt(section)+1;
             if (this.sections[section].id == this.currentSection && this.sections[nextIndex]){
                 if (setAllow) {
