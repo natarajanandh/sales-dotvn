@@ -1,16 +1,23 @@
-
+<?php
+ $customer = Mage::getSingleton('customer/session')->getCustomer()->getData();
+ //echo "<pre>";
+//print_r($customer);
+//echo "</pre>";
+?>
 <div class="MenuTop">
 	<div class="left"></div>
     <div style="float:right;">
+    
 		<ul id="nav1">
+        	
 			<li><a href="<?php echo Mage::getBaseUrl() . "customer/account/create/" ?>" >Đăng ký</a></li>
             <li style="background:none;"><a href="<?php echo Mage::getBaseUrl() . "customer/account/login/" ?>" >Đăng nhập</a></li>
         </ul>
     </div>
 </div>
 
-<!--ul id="nav1">
+<ul id="nav1">
 		<?php foreach ($this->getStoreCategories() as $_category): ?>
             <?php echo $this->drawItem($_category) ?>
         <?php endforeach ?>
-        </ul-->
+        </ul>
