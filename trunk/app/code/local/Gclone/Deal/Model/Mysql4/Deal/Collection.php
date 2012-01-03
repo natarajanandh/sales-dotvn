@@ -25,6 +25,6 @@ class Gclone_Deal_Model_Mysql4_Deal_Collection extends Mage_Catalog_Model_Resour
     }
     public function addAttributeToSect($attribute, $joinType = false)
     {
-        echo "testest";exit;
+        exit;
     }
 }

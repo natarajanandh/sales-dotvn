@@ -29,13 +29,16 @@
                   $products[0] = $id;
               } else {
                   $_productCollection = Mage::getmodel("catalog/product")->getCollection();
+				  $_productCollection->getSelect()->join(array('items'=>'magentocatalog_product_flat_1'),'items.entity_id=e.entity_id',array('special_from_date' => 'special_from_date','special_to_date'=>'special_to_date'));
                   $_productCollection->addFieldToFilter(array(
                       array(
                           "attribute" => "Status",
                           "eq" => "1"
-                      )
+                      ),
+					  
                   ));
-                  $currentTime = Mage_Core_Model_Locale::date(null, null, "en_US", true);
+				  $_productCollection->setOrder('special_from_date','DESC');
+                  $currentTime = Mage_Core_Model_Locale::date(null, null, "vi_VN", true);
                   $_productCollection->addAttributeToFilter("City", array(
                       "finset" => $cityId
                   ));
@@ -149,19 +152,24 @@
 	  public function getDealCollectionsRadom($dealsCity)
       {
           if ($this->isLicense() === true) {
+			  $currentTime = Mage_Core_Model_Locale::date(null, null, "vi_VN", true);
+			  $today = date('Y-m-d').' 00:00:00';
+			  //echo $today;
               $products = Mage::getresourcemodel("catalog/product_collection")->addAttributeToSelect("image");
+			  $products->getSelect()->join(array('items'=>'magentocatalog_product_flat_1'),'items.entity_id=e.entity_id',array('special_from_date' => 'special_from_date','special_to_date'=>'special_to_date'));
 			  $products->getSelect()->order('rand()');
               $products->addAttributeToFilter("City", array(
                   "finset" => $dealsCity
               ));
+			  $products->addAttributeToFilter('special_from_date', array("to" =>  $today, "datetime" => true));
+			  $products->addAttributeToFilter('special_to_date', array("from" =>  $today, "datetime" => true));
               $products->addFieldToFilter(array(
                   array(
                       "attribute" => "Status",
                       "eq" => "1"
                   )
               ));
-
-			  
+			  $products->setPageSize(4);
               return $products;
           }
       }
