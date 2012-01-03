@@ -119,10 +119,11 @@ if (empty($productIds)) {
         $inif = '0';
         $model = Mage::getModel('catalog/product'); //getting product model
         $_product = $model->load($productId);
-        $inif = '1';
+		
         $currencySymbol = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
         $dealstatus = $_product->getDealStatus();
         $discussionId = $_product->getIdentifier();
+		
 
         $productCity = $_product->getCity();
         $cities = Mage::getSingleton('core/session')->getTotalCities();
@@ -186,23 +187,27 @@ if (empty($productIds)) {
 							<?php
 							if (!$_product->isGrouped()) {
 								$resultQuantity = $this->getQuantityPurchase($_product);
-								$quantity = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product)->getQty();
-								echo $quantity;
+								$quantity =(int) Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product)->getQty();
+								$section =  ($resultQuantity[0]*100)/$quantity;
 							}
                             ?>
                         <div style="height:10px;">&nbsp;</div>
                         <div class="dealstatus">
                         	<div class="row-deital">
 	                        	<div class="totalcount" style="float:left;"><?php echo $this->__('Đã mua'); ?>:&nbsp;<span style="color:#f2854c;font-size:16px;"><?php echo $resultQuantity[0]; ?></span></div>
-                                <div class="totalcount" style="float:left;">&nbsp;&nbsp;&nbsp;&nbsp;Còn lại:&nbsp;<span style="color:#f2854c;font-size:16px;"><?php echo $resultQuantity[0]; ?></span></div>
+                                <div class="totalcount" style="float:left;">&nbsp;&nbsp;&nbsp;&nbsp;Còn lại:&nbsp;<span style="color:#f2854c;font-size:16px;"><?php echo ($quantity - $resultQuantity[0]); ?></span></div>
                             </div>
                             
                             <div class="deal_status" id ="deal_status-<?php echo $count; ?>">
-                                <img src="<?php echo $this->getSkinUrl('images/' . $resultQuantity[1] . '.png') ?>"  width="180" height="16" alt="Rate" title="Rate"  class="statusimg"/>
-                                <div class="clsstatus">
+                            	<div class="inner-progess-bar">
+                                	<span style="width:<?php echo isset($section) ? $section:0 ?>%" class="progess"><em class="progess-arrow"></em></span>
+                                </div>
+                              
+                                <div class="clsstatus" style="float:left;width:220px;"><?php echo $this->__($resultQuantity[2]); ?></div>
+                                <!--div class="clsstatus">
                                 	<div style="float:left;width:60px;color:#57891c;font-size:16px;"><strong><?php echo $resultQuantity[0]; ?></strong></div>
                                     <div style="float:right;width:60px;color:#57891c;font-size:16px;"><strong>160</strong></div>
-                                </div>
+                                </div-->
                             </div>
                             
                         </div>
@@ -513,7 +518,7 @@ if (empty($productIds)) {
             ForeColor= "black";
 
             if (typeof(DisplayFormat)=="undefined")
-            DisplayFormat = "<span class='hour' style='margin:2px 0 0 0'>%%H%%</span><span class='min'  style='margin:2px 0 0 78px'>%%M%%</span><span class='sec' style='margin:2px 0 0 149px'>%%S%%</span>";
+            DisplayFormat = "<span class='hour' style='margin:2px 0 0 0'>%%H%%</span><span class='min'  style='margin:2px 0 0 60px'>%%M%%</span><span class='sec' style='margin:2px 0 0 110px'>%%S%%</span>";
             if (typeof(CountActive)=="undefined")
             CountActive = true;
             if (typeof(FinishMessage)=="undefined")
