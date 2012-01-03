@@ -3,7 +3,6 @@
 class Gclone_Deal_IndexController extends Mage_Core_Controller_Front_Action {
 
     public function indexAction() {
-		//print_r('xxxxxxxxxxxxxxxxxx');die;
         $cityId = Mage::getModel('deal/deal')->fetchCity();
         $productIds = Mage::getModel('deal/deal')->fetchDeals($cityId);
         Mage::getSingleton('core/session')->setProductIds($productIds);
