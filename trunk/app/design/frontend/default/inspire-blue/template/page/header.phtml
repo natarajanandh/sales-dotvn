@@ -150,19 +150,6 @@ foreach ($manufac as $man) {
 $final=array_unique($cities);
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="topmenubg">
     <div id="toggle_blind"style="display:none;">
         <div class='container_16 clearfix' id='drawer_inner'>
@@ -183,17 +170,9 @@ $final=array_unique($cities);
         </div>
     </div>
 </div>
-
-
-
-
 <div class="clsbg ">
 
     <div class="header clearfix">
-
-
-
-
         <?php $page=$_SERVER['REQUEST_URI'];
         function curPageURL() {
             $pageURL = '';
@@ -306,7 +285,7 @@ $final=array_unique($cities);
                         </li>
                         <li <?php if($page == 'recent-deals') echo 'class="active"' ; ?>><a href="<?php echo Mage::getBaseUrl();
 ?>recent-deals" >
-                                <p align="center"><?php echo $this->__('RECENT DEALS')?></p></a>
+                                <p align="center"><?php echo $this->__('Giá tốt gần đây')?></p></a>
                         </li>
                         <li <?php if($page == 'works') echo 'class="active"' ; ?>><a href="<?php echo Mage::getBaseUrl(); ?>works" >
                                 <p align="center"><?php echo $this->__('HOW IT WORKS')?></p></a>
