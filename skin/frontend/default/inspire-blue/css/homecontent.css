@@ -32,7 +32,7 @@
 .gift_box img {float:left;display:block;padding-right:5px;}
 .buy_friend .clsbuyfriend {display: block;font-size:15px;color:#0981BE;font-family:Georgia, 'Arial', Times, serif;font-weight:700;vertical-align:middle;text-decoration:none;cursor:pointer;padding:10px 0 0;}
 .clsbottomspace {font-size:0;padding:0 0 10px;}
-.dealstatus {background:#F4F4F4;border:1px solid #D1D1D1;text-align:center;}
+.dealstatus {background:#F4F4F4;border:1px solid #D1D1D1;text-align:center;overflow:hidden;}
 .statusimg {padding-bottom:0px;}
 .clsstatus{font-size:13px;color:#000;padding:0px 0 0 0;line-height:30px;overflow:hidden;}
 .timerbg_middle {height:70px;}
@@ -40,7 +40,7 @@
 .timerbox ul li{width:60px;float:left;list-style:none;text-align:center;margin-right:10px;padding:2px 0 0;color: #999;}
 .timerulbox {padding:0 0 5px 13px;}
 .viraiterbg {height:45px;width:181px;}
-.totalcount {font-size:12px;color:#464443;font-family:Arial;font-weight:700;padding:0 0 5px 15px;}
+.totalcount {font-size:12px;color:#464443;font-family:Arial;font-weight:700;padding:0 0 5px 25px;}
 .row-deital {line-height:22px;height:22px;padding-top:5px;}
 .hour {display:block;font-size:20px;letter-spacing:2px;line-height:100% !important;position:absolute;text-align:center;width:50px;border:1px solid #d5d5d5;padding:5px;padding-left:0px;padding-right:0px;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
 .min,.sec {display:block;font-size:20px;letter-spacing:2px;line-height:100% !important;position:absolute;text-align:center;width:40px;border:1px solid #d5d5d5;padding:5px;padding-left:0px;padding-right:0px;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
@@ -55,12 +55,12 @@
 .switch .change{background-color:#ED6502;color:#FFFFFF; width: 50px; height: 30px; border:none;}
 .switch .change:hover{background-color: #0981BE;cursor: pointer;border:none;}
 .banner_middle {}
-.clsfineprint {width:348px;float:left;padding:0px 0 0 15px; line-height:18px;border-left:1px solid #ccc;}
+.clsfineprint {width:348px;float:left;padding:0px 0 0 15px; line-height:18px;}
 .clsfineprint h3 {font-size:16px;color:#1560C6;font-family:'arial';margin:0px 0 10px 0;}
 .clsfineprint span{ text-align: justify; width:220px;}
 
 .highlights h3 {font-size:16px;color:#1560C6;font-family:'arial';margin:0px 0 10px 0;}
-.highlights{float:left;width:310px; padding:0px 10px 0 0; line-height:18px;}
+.highlights{float:left;width:310px; padding:0px 10px 0 0; line-height:18px;border-right:1px solid #ccc;}
 .highlights ul li {list-style:disc;font-size:12px;font-family:Arial;padding:0 0 5px;}
 .highlights ul {padding:0 0 0 20px;}
 .bottombox {background:#fff;padding:10px;}
