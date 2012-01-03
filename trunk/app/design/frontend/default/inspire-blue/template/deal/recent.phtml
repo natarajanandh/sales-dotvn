@@ -1,6 +1,6 @@
 <?php
 $products = array();
-$currentTime = Mage_Core_Model_Locale::date(null, null, "en_US", true);
+$currentTime = Mage_Core_Model_Locale::date(null, null, "vi_VN", true);
 $i = 0;
 $limit = $_GET['limit'];
 
@@ -12,7 +12,7 @@ if ($p != "") {
 }
 $products = $this->getFeaturedProduct($limit, $start);
 ?>
-<h1 class="recenttitle"><?php echo $this->__('Recent Deals'); ?> :</h1><div class="titlebot"></div><br/>
+
 <?php
 $recentEnabled=Mage::getStoreConfig('deal/recent/as_recent');
 $resource = Mage::getSingleton('core/resource');
@@ -40,7 +40,7 @@ foreach ($attribute->getSource()->getAllOptions(true, true) as $option) {
 }
 $count = 0;
 if (count($products) > 0 && $recentEnabled == 1) {
-    foreach ($products as $_product) {
+    foreach ($products as $key=>$_product) {
         $status = $_product->getStatus();
         if ($status == 1) {
         $cities =explode(',',$_product->getcity());   
@@ -51,10 +51,20 @@ if (count($products) > 0 && $recentEnabled == 1) {
             $ProductFromDate = $_product->getResource()->formatDate($_product->getspecial_from_date(), false);
             $Fromtime = strtotime($ProductFromDate);
             if (strtotime($currentTime) > strtotime($ProductToDate . ' ' . $_product->getTime())) {
-
+?>
+<?php
                 if (!$_product->isGrouped()) {
                     $count = $count +1;
-                    echo '<div class="clsrecentbox" style="margin: 10px 0px 0px 15px;">';
+                   // echo '<div class="clsrecentbox">';
+				  
+					if($i==0) {
+						
+                    	echo '<div class="clsrecentbox" style="margin:0 0 0 7px;">';
+					}
+					else {
+						//echo "22222";
+						echo '<div class="clsrecentbox">';
+					}
                     $current_product = Mage::getModel('deal/deal')->getProductUrl($_product->getId());
                     $productId = $_product->getId();
                     $todayDate = $_product->getResource()->formatDate($_product->getspecial_from_date(), false);
@@ -85,6 +95,7 @@ if (count($products) > 0 && $recentEnabled == 1) {
                     //echo $select;
                     if (count($orders_list) > 0) {
 
+
                         foreach ($orders_list as $rows) {
                             $order_id = $rows['entity_id'];
                             $order = Mage::getModel('sales/order')->load($order_id);
@@ -106,44 +117,32 @@ if (count($products) > 0 && $recentEnabled == 1) {
                         }
                     }
 ?>
-                    <h2 class="floatright"><?php echo $this->__('%s', $this->formatDate($_product->getspecial_to_date(), 'long')) ?></h2>
+                    <!--h2 class="floatright"><?php echo $this->__('%s', $this->formatDate($_product->getspecial_to_date(), 'long')) ?></h2-->
                     <div class="clear"></div>
                     <div class="clsbord">
                         <form name="recentForm<?php echo $count;?>" method="post">
                             <input type="hidden" value="1" name="recent"/>
                         </form>
-                        <a href="<?php echo $URL; ?>" style="text-decoration: none;" onclick="javascript:document.recentForm<?php echo $count;?>.submit();">
-                            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(404, 276); ?>" width="178" height="130" alt="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" title="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>"/>
-                            <h3 align="center"><span><?php echo Mage::helper('core')->currency($_product->getSpecialPrice(), true, false) ?></span></h3><p class="recent-txt"><?php echo substr($this->htmlEscape($_product->getName()), 0, 25) . "..." ?></p>
-                            <div class="clsgrid clearfix">
-                                <ul class="clsgridul">
-                                    <li class="clearfix clsbord-bot"><h5><?php echo $this->__('Value'); ?>:  </h5><h6><?php echo Mage::helper('core')->currency($_product->getPrice(), true, false) ?></h6></li>
-                                    <li class="clearfix clsbord-bot"><h5><?php echo $this->__('Savings'); ?>:  </h5><h6><?php echo Mage::helper('core')->currency($discount_price, true, false) ?></h6></li>
-                                    <li class="clearfix"><h5><?php echo $this->__('Discount'); ?>:  </h5><h6><?php echo $discount . "%"; ?></h6></li>
-                                </ul>
-                                <ul class="floatleft dealstatus">
-                                    <li>
-                                        <p align="center" class="clsratecont">
-                                            <span>
-<?php
-                    if ($_product->gettarget_number() <= $quantity[0]) {
-                        echo "<img src='" . Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . "frontend/default/inspire-blue/images/Tick_32.png'>";
-                    } else {
-                        echo "<img src='" . Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . "frontend/default/inspire-blue/images/Cross-32.png'>";
-                    }
-?>
-                        </span>
-                    <br/><div style="width:50px; font-size: 10px; text-align: center;"><?php
-                            if ($_product->gettarget_number() <= $quantity[0]) {
-                                echo $this->__('Deal Achieved');
-                            } else {
-                                echo $this->__('Deal Not Achieved');
-                            } ?></div></p></li>
-                </ul>
-            </div>
-        </a>
-    </div>
-    </div>
+                        
+                        <a href="#">
+                            <div>	
+                                <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(404, 276); ?>" width="325" height="213" alt="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" class="border-radium1" />
+                                <div class="detail-recent border-bottom-radius1">
+                                	<div class="info-recent">
+                                        <span><?php echo substr($this->htmlEscape($_product->getName()), 0, 25) . "..." ?></span>
+                                        <span style="font-size:14px;font-weight:normal;color:#dbdbdb;">Phieu du lich</span>
+                                    </div>
+                                    <div class="info-price">
+                                        <span style="font-size:14px;color:#dbdbdb;text-decoration:line-through;"><?php echo Mage::helper('core')->currency($_product->getPrice(), true, false) ?></span>	
+                                        <span style="font-size:16px;color:#ef5506;text-shadow:1px 1px 1px #FFFFFF;"><strong><?php echo Mage::helper('core')->currency($_product->getSpecialPrice(), true, false) ?></strong></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>	
+                        
+                      
+        	        </div>
+                </div>
 <?php
                         }
                         $i = $i + 1;
