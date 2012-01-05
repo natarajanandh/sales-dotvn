@@ -575,7 +575,7 @@ a.minimal-price-link .price { font-weight:normal; }
 /* -------------------------------------- */
 .col-main .clsrecentbox{ width:327px; color:#333333; float:left; margin:0 0 0 15px;display:inline;}
 .col-main .clsrecentbox h2{ font-size:12px; margin:0px; padding:0 0 5px 0;}
-.col-main .clsrecentbox .clsbord{width:300px; text-align: center;}
+.col-main .clsrecentbox .clsbord{width:325px;height:213px;}
 .col-main .clsrecentbox .clsbord h3{ font-size:12px; font-weight:bold; padding:8px 0 0 0;}
 .col-main .clsrecentbox .clsbord h3 span{ color:#FF7710; font-size:20PX;}
 .col-main .clsrecentbox .clsbord .clsgrid{ border:1px solid #ccc; background:#fbfbfb; margin:10px 0 0 0;}
@@ -1356,3 +1356,4 @@ td.subtotal{padding:8px 58px 0px 0 ;border-top:none;border-left:1px solid #ccc;b
 .content-feed-text em{display:block}
 .content-feed-text .content-category {color: #ED6502;}
 .page-title account-page{padding-left:23px;}
+.field em {color:#F00}
