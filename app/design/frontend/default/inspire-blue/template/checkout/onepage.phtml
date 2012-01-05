@@ -8,15 +8,11 @@
 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
 <script type="text/javascript">countryRegions = <?php echo $this->helper('directory')->getRegionJson() ?></script>
 <div class="one-page-checkout" id="checkoutSteps"> 
-	<div class="boxStep">
-   
-		<?php 
-		
-		$i=0; foreach($this->getSteps() as $_stepId => $_stepInfo): 
-		
-		?>
+	<div class="boxStep" id="boxStep">
+
+	<?php $i=0; foreach($this->getSteps() as $_stepId => $_stepInfo): 	?>
         <?php if (!$this->getChild($_stepId) || !$this->getChild($_stepId)->isShow()): continue; endif; $i++ ?>
-   			<div class="step stepNone" id="act-<?php echo $_stepId ?>"><?php echo $_stepInfo['label'] ?></div>
+   			<div  id="act-<?php echo $_stepId ?>">&nbsp;</div>
 		<?php endforeach ?>    
      </div>
      <?php $j=0; foreach($this->getSteps() as $_stepId => $_stepInfo): ?>

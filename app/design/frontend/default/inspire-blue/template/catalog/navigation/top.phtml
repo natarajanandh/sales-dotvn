@@ -9,9 +9,18 @@
     <div style="float:right;">
     
 		<ul id="nav1">
-        	
-			<li><a href="<?php echo Mage::getBaseUrl() . "customer/account/create/" ?>" >Đăng ký</a></li>
-            <li style="background:none;"><a href="<?php echo Mage::getBaseUrl() . "customer/account/login/" ?>" >Đăng nhập</a></li>
+        	<?php 
+				if(!empty($customer['entity_id']) && !empty($customer['email'])){
+			?>
+           		<li><a href="<?php echo Mage::getBaseUrl() . "customer/account/" ?>" ><?php echo $customer['email']; ?></a></li>
+    	        <li style="background:none;"><a href="<?php echo Mage::getBaseUrl() . "customer/account/logout/" ?>" >Đăng xuất</a></li>
+            <?php
+				}
+				else {
+			?>
+				<li><a href="<?php echo Mage::getBaseUrl() . "customer/account/create/" ?>" >Đăng ký</a></li>
+    	        <li style="background:none;"><a href="<?php echo Mage::getBaseUrl() . "customer/account/login/" ?>" >Đăng nhập</a></li>
+            <?php } ?>
         </ul>
     </div>
 </div>

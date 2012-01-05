@@ -1,10 +1,30 @@
-﻿<?php if ($this->getMethod()->getMailingAddress()): ?>
-    <ul class="form-list checkmo-list" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+﻿<fieldset class="form-list">
+<?php if ($this->getMethod()->getMailingAddress()): ?>
+ <?php $_code=$this->getMethodCode() ?>
+    <ul  id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
         <?php if ($this->getMethod()->getMailingAddress()): ?>
-        <li>
-            <label><?php echo Mage::helper('payment')->__('Tài khoản thụ hưởng:') ?></label>
+        <li style="padding-left:10px;width:600px;">
+           - <?php echo Mage::helper('payment')->__('Sale.vn chỉ chấp nhận hình thức <font color="#0099FF"><b>Thanh Toán Ngay</b></font>,&nbsp; <font color="#FF0000"><b>Không chấp nhận hình thức Thanh toán tạm giữ</b></font>') ?></li> 
+        
+        <li style="padding-left:10px;width:600px;">
+           - <?php echo Mage::helper('payment')->__('Thẻ tín dụng và ghi nợ quốc tế:') ?></li>
+         <li>   
+            <img src="<?php echo $this->getSkinUrl('images/the-tin-dung.jpg') ?>" width="315" height="31" style="padding-left:20px; padding-top:5px; padding-bottom:5px;" alt="2columns-right"  />
+         </li>
+         <li style="padding-left:10px;">
+            - <?php echo Mage::helper('payment')->__('Thẻ ATM:') ?><br />
+            <img src="<?php echo $this->getSkinUrl('images/atm.jpg') ?>" width="553" height="35" style="padding-left:20px; padding-top:5px; padding-bottom:5px;" alt="2columns-right"  />
+         </li>
+         <li style="padding-left:15px;">
+           - <?php echo Mage::helper('payment')->__('Internet-Banking:') ?><br />
+            <img src="<?php echo $this->getSkinUrl('images/internetbanking.jpg') ?>" width="562" height="80" style="padding-left:20px; padding-top:5px; padding-bottom:5px;" alt="2columns-right"  />
+         </li>
+          <li>
+         Bạn có thể tham khảo tài liệu hướng dẫn thanh toán qua thẻ Ngân Lượng <a href="http://help.nganluong.vn/sale.vn.html" target="_blank">tại đây</a>
+         </li>
+         <li>   
            <address class="checkmo-mailing-address">
-              <?php echo nl2br($this->getMethod()->getMailingAddress());?>   
+              <?php //mail nhan cua nguoi mua hang: echo nl2br($this->getMethod()->getMailingAddress());?>   
               <?php $_SESSION['receiver']  = nl2br($this->getMethod()->getMailingAddress());?>
               
               <?php $_SESSION['url_checkout'] = $this->getMethod()->getCheckout();?>
@@ -22,3 +42,30 @@
         <?php endif; ?>
     </ul>
 <?php endif; ?>
+</fieldset>
+<!--
+
+<?php ///if ($this->getMethod()->getMailingAddress()): ?>
+    <ul class="form-list checkmo-list" id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+        <?php //if ($this->getMethod()->getMailingAddress()): ?>
+        <li>
+            <label><?php //echo Mage::helper('payment')->__('Tài khoản thụ hưởng:') ?></label>
+           <address class="checkmo-mailing-address">
+              <?php //echo nl2br($this->getMethod()->getMailingAddress());?>   
+              <?php //$_SESSION['receiver']  = nl2br($this->getMethod()->getMailingAddress());?>
+              
+              <?php //$_SESSION['url_checkout'] = $this->getMethod()->getCheckout();?>
+              <?php //$_SESSION['merchantID']= nl2br($this->getMethod()->getMerchantSite()); ?>
+              
+              <?php //$_SESSION['mabaomat']  = nl2br($this->getMethod()->getSecureCode());  
+			  //var_dump($this->getMethod()->getCheckout().nl2br($this->getMethod()->getMerchantSite()).nl2br($this->getMethod()->getSecureCode()));
+			  ?>
+              
+              <?php //$_SESSION['return_url']= nl2br($this->getMethod()->getReturnUrl());?>
+              <?php //$_SESSION['affilatecode']= nl2br($this->getMethod()->getAffilateCode());?>
+              <?php //$_SESSION['fee_cal']= nl2br($this->getMethod()->getFeeCal());?>
+            </address>
+        </li>
+        <?php// endif; ?>
+    </ul>
+<?php //endif; ?>-->
