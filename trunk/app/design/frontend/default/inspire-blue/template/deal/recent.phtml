@@ -57,13 +57,17 @@ if (count($products) > 0 && $recentEnabled == 1) {
                     $count = $count +1;
                    // echo '<div class="clsrecentbox">';
 				  
-					if($i==0) {
+					if($i==0 ) {
 						
-                    	echo '<div class="clsrecentbox" style="margin:0 0 0 7px;">';
+                    		echo '<div class="clsrecentbox" style="margin:0 0 0 7px;">';
+						
 					}
 					else {
-						//echo "22222";
-						echo '<div class="clsrecentbox">';
+						if($i%2 ==0){
+							echo '<div class="clsrecentbox" style="margin:10px 0 0 7px;">';
+						}else {
+							echo '<div class="clsrecentbox">';
+						}
 					}
                     $current_product = Mage::getModel('deal/deal')->getProductUrl($_product->getId());
                     $productId = $_product->getId();
