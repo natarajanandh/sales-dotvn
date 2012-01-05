@@ -349,14 +349,16 @@ border-top-right-radius: 5px;color:#fff;font-weight:bold;font-size:14px;}
 .sidebar_discount {background: url(../images/sale-off.png) no-repeat scroll 0 0 transparent;position: absolute;font-family: Arial, Helvetica, sans-serif;display: block;float: left;padding-top: 6px;text-align: center;width: 64px;height:62px;margin:110px 0 0 180px;z-index:100;color:#fff;}
 .sidebar_discount span {font-weight:bold;font-size:16px;}
 .bgRecent {background:url(../images/bg_sale.png) repeat-x top;height:65px;position:absolute;bottom:0px;width:325px;margin-bottom:-12px;}
-.info-recent {float:left;width:230px;color:#fff;padding-top:7px;padding-left:10px;}
+.info-recent {float:left;width:230px;color:#fff;padding-top:5px;padding-left:10px;}
 .info-recent span {float:left;clear:both;line-height:22px;font-size:14px;font-weight:bold;}
-.info-price {float:left;color:#fff;padding-top:10px;}
+.info-price {float:left;color:#fff;padding-top:5px;}
 .info-price span {clear:both;float:left;line-height:21px;}
 .info-price span.currency-code {float:none;}
-.detail-recent {background:url(../images/bg_sale.png) repeat-x; width:325px;position:absolute;height:66px;margin-top:-68px;}
+.detail-recent {background:url(../images/bg_sale.png) repeat-x; width:325px;position:absolute;margin-top:-51px;}
 .title-cart{background:url(../images/icon_cart.jpg) no-repeat top left;padding-bottom:10px;color:#F05C0E}
-.boxStep {height:34px;line-height:30px;background:#e7e7e7;}
-.boxStep .step {float:left;width:170px;text-align:center;color:#fff;font-weight:bold;line-height:34px;}
+.boxStep {height:34px;line-height:30px;background:url(../images/step1.png) no-repeat top left;margin-left:-11px;width:704px;}
+.step2 {background:url(../images/step2.png) no-repeat top left;}
+.step3 {background:url(../images/step3.png) no-repeat top left;}
+.step4 {background:url(../images/step4.png) no-repeat top left;}
 .boxStep .stepActive {background:url(../images/step1.png) no-repeat top right #fb4e2c;height:34px;}
 .boxStep .stepNone {background:url(../images/step2.png) no-repeat top right;height:34px;color:#000;}
