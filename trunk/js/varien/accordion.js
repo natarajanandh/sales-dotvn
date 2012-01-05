@@ -54,8 +54,15 @@ Accordion.prototype = {
             this.currentSection = section.id;
             $(this.currentSection).addClassName('active');
 			var act = 'act'+this.currentSection.substr(3);
-			$(act).removeClassName('stepNone');
-			$(act).addClassName('stepActive');
+			//$(act).removeClassName('stepNone');
+			alert(this.currentSection);
+			if(this.currentSection=='opc-payment'){
+				$('boxStep').addClassName('step2');
+			}else if(this.currentSection=='opc-review'){
+				$('boxStep').removeClassName('step2');
+				$('boxStep').addClassName('step3');
+			}
+			
 			
             var contents = Element.select(section, '.a-item');
             contents[0].show();
@@ -83,8 +90,8 @@ Accordion.prototype = {
     closeSection: function(section) {
         $(section).removeClassName('active');
 		var act = 'act'+this.currentSection.substr(3);
-		$(act).removeClassName('stepActive');
-		$(act).addClassName('stepNone');
+		//$(act).removeClassName('stepActive');
+		//$(act).addClassName('stepNone');
         var contents = Element.select(section, '.a-item');
         contents[0].hide();
         //Effect.SlideUp(contents[0]);
