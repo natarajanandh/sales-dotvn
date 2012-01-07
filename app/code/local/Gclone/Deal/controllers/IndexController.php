@@ -41,5 +41,19 @@ class Gclone_Deal_IndexController extends Mage_Core_Controller_Front_Action {
         $this->getLayout()->getBlock('head')->setTitle($this->__('Upcoming Deals'));
         $this->renderLayout();
     }
+    
+	public function tourAction()
+    {
+    	$this->loadLayout();
+        $this->getLayout()->getBlock('head')->setTitle($this->__('Tour Deals'));
+        $this->renderLayout();
+    }
+    
+    public function productsAction()
+    {
+    	$this->loadLayout();
+        $this->getLayout()->getBlock('head')->setTitle($this->__('Products'));
+        $this->renderLayout();
+    }
 
 }
