@@ -31,6 +31,7 @@ if(Mage::getSingleton('core/session')->getBackground() == 'no'){
 $page=$_SERVER['REQUEST_URI'];
 $page=explode('/',$page);
 $pageUrl=$page[2];
+$pageUrl=($pageUrl == '' ? $page[1] : $pageUrl);
 
 $recent=Mage::getStoreConfig('deal/recent/as_recent');
 $active=Mage::getStoreConfig('deal/active/as_active');
@@ -68,13 +69,13 @@ $upcoming=Mage::getStoreConfig('deal/upcoming/as_upcoming');
                     </li>
                     <?php }?>
                     <?php if($active == 1){?>
-                <li <?php if ($pageUrl == 'active-deals.html')
-                                echo 'class="active"'; ?>><a href="<?php echo Mage::getBaseUrl(); ?>active-deals.html" ><?php echo $this->__('TOUR') ?></a>
+                <li <?php if ($pageUrl == 'du-lich.html')
+                                echo 'class="active"'; ?>><a href="<?php echo Mage::getBaseUrl(); ?>du-lich.html" ><?php echo $this->__('TOUR') ?></a>
                     </li>
                     <?php }?>
                     <?php if($upcoming == 1){?>
-                <li <?php if ($pageUrl == 'upcoming-deals.html')
-                                echo 'class="active"'; ?>><a href="<?php echo Mage::getBaseUrl(); ?>upcoming-deals.html" ><?php echo $this->__('PRODUCTS') ?></a>
+                <li <?php if ($pageUrl == 'san-pham.html')
+                                echo 'class="active"'; ?>><a href="<?php echo Mage::getBaseUrl(); ?>san-pham.html" ><?php echo $this->__('PRODUCTS') ?></a>
                     </li>
                     <?php }?>
                     <li <?php if (Mage::getSingleton('cms/page')->getIdentifier() == 'works')
