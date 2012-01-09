@@ -159,6 +159,7 @@
             </action>
         </reference>
         <remove name="left"/>
+        
         <reference name="content">
             <block type="deal/products" name="products" template="deal/products.phtml" />
         </reference>
