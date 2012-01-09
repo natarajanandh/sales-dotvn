@@ -47,6 +47,40 @@ class Gclone_Deal_Block_Tour extends Mage_Core_Block_Template
 		return $data;
     }
     
+	public function getTourByCity($catId, $dealsCity,$current_page = 1,$limit = 5)
+	{
+		$data = array();
+		
+		$stockCollection = Mage::getModel('cataloginventory/stock_item')->getCollection()->addFieldToFilter('is_in_stock', 1);
+    	$productIds = array();
+            
+	    foreach ($stockCollection as $item) {
+	        $productIds[] = $item->getOrigData('product_id');
+	    }
+	    
+	    //print_r($productIds);die();
+        //$products = Mage::getresourcemodel("catalog/product_collection")->addAttributeToSelect("image")->addCategoryFilter(Mage::getmodel("catalog/category")->load($catId));
+        $products = Mage::getresourcemodel("catalog/product_collection")->addCategoryFilter(Mage::getmodel("catalog/category")->load($catId));
+        $products->addAttributeToFilter("City", array(
+        	"finset" => $dealsCity
+        ));
+        $products->addFieldToFilter(array(
+        	array(
+            	"attribute" => "Status",
+                "eq" => "1"
+            )
+        ));
+        
+        $products->addIdFilter($productIds);
+        //$product->joinField('inventory_in_stock', 'cataloginventory_stock_item', 'is_in_stock', 'product_id=entity_id','is_in_stock>=0', 'left');
+        $data['num_rows']	=	$products->getSize();
+        $products->setPage($current_page,$limit);
+        //echo '<pre>';
+        $data['products']	=	$products;
+        //var_dump($products);die();
+        return $data;
+	}
+    
 	public function pagination($url = '', $num_rows = 100, $limit = 10, $cur_page = 1, $show_num = 'yes'){
 		$pagination = '';
 		$total = ceil($num_rows/$limit);

@@ -123,7 +123,27 @@
         <reference name="head">
             <action method="removeItem">
                 <type>skin_css</type>
+                <name>css/styles.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
                 <name>css/homecontent.css</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/jquery.orbit.min.js</name>
+            </action>
+            <action method="removeItem">
+                <type>js</type>
+                <name>lib/ds-sleight.js</name>
+                <params/>
+                <if>lt IE 7</if>
+            </action>
+            <action method="removeItem">
+                <type>js</type>
+                <name>varien/iehover-fix.js</name>
+                <params/>
+                <if>lt IE 7</if>
             </action>
         </reference>
         <reference name="root">
@@ -149,7 +169,7 @@
             </action>
             <action method="addItem">
                 <type>skin_css</type>
-                <name>css/sale.css</name>
+                <name>css/pagination.css</name>
             </action>
             <remove name="topMenu"/>
         </reference>
