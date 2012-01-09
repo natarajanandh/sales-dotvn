@@ -17,6 +17,11 @@
                         <?php 
                         	$model = Mage::getModel('catalog/product');
                         	$_product = $model->load($_product->getId());
+                        	//echo '<pre>';
+                        	$URL = Mage::getModel('deal/deal')->getProductUrl($_product->getId());
+                        	$quantity =(int) Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product)->getQty();
+                        	//die($quantity.'aaaaaaaaaaaaaaaa'); 
+                        	//print_r($_product->getData());die();
                         ?>
                     <div class="clsrecentbox" style="margin:0px 5px 15px 8px;">
                         <!--h2 class="floatright"><?php echo $this->__('%s', $this->formatDate($_product->getspecial_to_date(), 'long')) ?></h2-->
@@ -26,7 +31,7 @@
 	                            <input type="hidden" value="1" name="recent"/>
 	                        </form>
 	                        
-	                        <a href="#">
+	                        <a href="<?php echo $URL;?>">
 	                            <div>	
 	                                <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(404, 276); ?>" width="325" height="213" alt="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" class="border-radium1" />
 	                                <div class="detail-recent border-bottom-radius1">
