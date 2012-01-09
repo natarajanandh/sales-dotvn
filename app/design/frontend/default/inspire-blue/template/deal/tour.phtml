@@ -1,0 +1,221 @@
+
+<style>
+.pagging-result {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #E0EFF4;
+    border-color: #CAE2EA;
+    border-style: solid;
+    border-width: 1px 0;
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.pagging-result ul{
+	float:left;
+	list-style-type:none;
+	
+}
+
+.pagging-result ul li{
+	float:left;
+	padding-left:10px;
+}
+
+.pagging-result ul li a{
+	text-decoration: none;
+}
+
+.pagging-result ul li a:HOVER{
+	text-decoration: underline;
+	color:#ffffff;
+}
+
+.pagging-result ul li a.current{
+	text-decoration: underline;
+	font-weight:bold;
+	color:#ffffff;
+}
+
+.pagging-result span.left {
+    float: left;
+    padding-left: 10px;
+}
+.pagging-result span.right {
+    float: right;
+    padding: 0 15px 0 10px;
+}
+.pagging-result span.right a {
+    color: #0373BC;
+    padding: 0 3px;
+    text-decoration: none;
+}
+.pagging-result span.right a:hover, .pagging-result span.right a.current {
+    color: #FFA300;
+    text-decoration: none;
+}
+
+.line-sp {
+    float: left;
+    margin-top: 22px;
+    width: 100%;
+}
+.line-sp img.thumb {
+    float: left;
+    padding: 0 20px;
+    width: 100px;
+}
+.line-sp .sp-r {
+    float: left;
+    width: 470px;
+}
+.line-sp .sp-r h2 {
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    width: 100%;
+}
+.line-sp .sp-r ul li {
+    float: left;
+    margin-top: 5px;
+    width: 49%;
+}
+.line-sp .price {
+    float: left;
+    line-height: 18px;
+    text-align: center;
+    width: 160px;
+}
+.line-sp .price font.pr {
+    color: #EF270B;
+    font-weight: bold;
+}
+.line-sp .price p {
+    padding-top: 12px;
+    width: 100%;
+}
+.line-sp .price a.btn-dat {
+    background: none repeat scroll 0 0 #037C01;
+    border-radius: 2px 2px 2px 2px;
+    color: #FFFFFF;
+    padding: 3px 8px;
+    text-decoration: none;
+}
+.sp-r{
+	padding-left:10px;
+}
+</style>
+<?php 
+//echo Mage::getSingleton('core/session')->getCity();
+$cat_id = $this->getCategoryId();
+$dealsCity = Mage::getSingleton('core/session')->getCity();
+$dealsCity = intval($dealsCity);
+$cat_id = intval($cat_id);
+$limit = 2;
+$p = (isset($_GET['p']) ? $_GET['p'] : 1);
+$offset = ($p-1)*$limit;
+$_data = $this->getTours($offset,$limit);
+$_products = $_data['rows'];
+$pagnav = $this->pagination('',$_data['total'],$limit,$p);
+
+//echo $cat_id;
+//echo count($_products);
+//var_dump($_products);
+if($_products){
+foreach($_products as $_product){
+	$current_product = $_product->getID();
+	$URL = Mage::getModel('deal/deal')->getProductUrl($_product->getId());
+	
+?>
+					<div class="line-sp">    
+                    		<a href="<?php echo $URL; ?>" style="text-decoration: none;" onclick="javascript:document.recentForm<?php echo $count;?>.submit();">                	
+	                    		<img src="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" width="178" height="130" alt="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" title="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>"/>
+	                    	</a>
+	                        <div class="sp-r">
+	                        	<h2 class="floatright">
+	                        		<a href="<?php echo $URL; ?>" style="text-decoration: none;" onclick="javascript:document.recentForm<?php echo $count;?>.submit();">
+	                        			<?php echo substr($this->htmlEscape($_product->getName()), 0, 25) . "..." ?>
+	                        		</a>
+	                        	</h2>
+	                        	<span><?php echo $this->__('%s', $this->formatDate($_product->getspecial_to_date(), 'long')) ?></span>
+	                            <ul class="clsgridul">
+                                    <li><h5><?php echo $this->__('Value'); ?>:  <?php echo Mage::helper('core')->currency($_product->getPrice(), true, false) ?></h5></li>
+                                    <li><h5><?php echo $this->__('Savings'); ?>:  <?php echo Mage::helper('core')->currency($discount_price, true, false) ?></h5></li>
+                                    <li><h5><?php echo $this->__('Discount'); ?>:  <?php echo $discount . "%"; ?></h5></li>
+                                </ul>
+                                <ul class="floatleft dealstatus">
+                                    <li>
+                                        <p align="center" class="clsratecont">
+                                            <span>
+<?php
+                    if ($_product->gettarget_number() <= $quantity[0]) {
+                        echo "<img src='" . Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . "frontend/default/inspire-blue/images/Tick_32.png'>";
+                    } else {
+                        echo "<img src='" . Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . "frontend/default/inspire-blue/images/Cross-32.png'>";
+                    }
+?>
+                        </span>
+                    <br/><div style="width:50px; font-size: 10px; text-align: center;"><?php
+                            if ($_product->gettarget_number() <= $quantity[0]) {
+                                echo $this->__('Deal Achieved');
+                            } else {
+                                echo $this->__('Deal Not Achieved');
+                            } ?></div></p></li>
+                </ul>
+	                        </div>
+	                                             
+                    </div>
+
+<!-- 
+<h2 class="floatright"><?php echo $this->__('%s', $this->formatDate($_product->getspecial_to_date(), 'long')) ?></h2>
+                    <div class="clear"></div>
+                    <div class="clsbord">
+                        <form name="recentForm<?php echo $count;?>" method="post">
+                            <input type="hidden" value="1" name="recent"/>
+                        </form>
+                        <a href="<?php echo $URL; ?>" style="text-decoration: none;" onclick="javascript:document.recentForm<?php echo $count;?>.submit();">
+                            <img style="float:left;" src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(404, 276); ?>" width="178" height="130" alt="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" title="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>"/>
+                            <h3 align="center"><span><?php echo Mage::helper('core')->currency($_product->getSpecialPrice(), true, false) ?></span></h3><p class="recent-txt"><?php echo substr($this->htmlEscape($_product->getName()), 0, 25) . "..." ?></p>
+                            <div class="clsgrid clearfix">
+                                <ul class="clsgridul">
+                                    <li class="clearfix clsbord-bot"><h5><?php echo $this->__('Value'); ?>:  </h5><h6><?php echo Mage::helper('core')->currency($_product->getPrice(), true, false) ?></h6></li>
+                                    <li class="clearfix clsbord-bot"><h5><?php echo $this->__('Savings'); ?>:  </h5><h6><?php echo Mage::helper('core')->currency($discount_price, true, false) ?></h6></li>
+                                    <li class="clearfix"><h5><?php echo $this->__('Discount'); ?>:  </h5><h6><?php echo $discount . "%"; ?></h6></li>
+                                </ul>
+                                <ul class="floatleft dealstatus">
+                                    <li>
+                                        <p align="center" class="clsratecont">
+                                            <span>
+<?php
+                    if ($_product->gettarget_number() <= $quantity[0]) {
+                        echo "<img src='" . Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . "frontend/default/inspire-blue/images/Tick_32.png'>";
+                    } else {
+                        echo "<img src='" . Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . "frontend/default/inspire-blue/images/Cross-32.png'>";
+                    }
+?>
+                        </span>
+                    <br/><div style="width:50px; font-size: 10px; text-align: center;"><?php
+                            if ($_product->gettarget_number() <= $quantity[0]) {
+                                echo $this->__('Deal Achieved');
+                            } else {
+                                echo $this->__('Deal Not Achieved');
+                            } ?></div></p></li>
+                </ul>
+            </div>
+        </a>
+    </div> -->
+<?php 
+}
+}
+else
+{
+	
+}
+?>
+<div class="pagging-result"><?php echo $pagnav;?></div>

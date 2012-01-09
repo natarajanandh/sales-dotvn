@@ -1,0 +1,50 @@
+					<?php 
+						$currentPage = (int) $this->getRequest()->getParam('p', 1);
+
+						$pageSize = 2;
+						//die($this->getRequest()->getParam('cat'));
+						$cat_id = (int) $this->getRequest()->getParam('cat');
+						$dealsCity = Mage::getSingleton('core/session')->getCity();;
+						//$products = Mage::getModel('deal/deal')->getDealCollections($catId, $dealsCity);
+						$data = $this->getProducts($cat_id, $dealsCity,$currentPage,$pageSize);
+						$products	=	$data['products'];
+						//$toolbar = Mage::getBlockSingleton('catalog/product_list')->getToolbarBlock();
+						//$toolbar->setCollection($products);
+						//echo $toolbar->toHtml();
+						//echo count($_products);
+					?>
+                        <?php foreach($products as $_product):?>
+                        <?php 
+                        	$model = Mage::getModel('catalog/product');
+                        	$_product = $model->load($_product->getId());
+                        ?>
+                    <div class="clsrecentbox" style="margin:0px 5px 15px 8px;">
+                        <!--h2 class="floatright"><?php echo $this->__('%s', $this->formatDate($_product->getspecial_to_date(), 'long')) ?></h2-->
+	                    <div class="clear"></div>
+	                    <div class="clsbord">
+	                        <form name="recentForm<?php echo $count;?>" method="post">
+	                            <input type="hidden" value="1" name="recent"/>
+	                        </form>
+	                        
+	                        <a href="#">
+	                            <div>	
+	                                <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(404, 276); ?>" width="325" height="213" alt="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" class="border-radium1" />
+	                                <div class="detail-recent border-bottom-radius1">
+	                                	<div class="info-recent">
+	                                        <span><?php echo substr($this->htmlEscape($_product->getName()), 0, 25) . "..." ?></span>
+	                                        <span style="font-size:14px;font-weight:normal;color:#dbdbdb;">Phieu du lich</span>
+	                                    </div>
+	                                    <div class="info-price">
+	                                        <span style="font-size:14px;color:#dbdbdb;text-decoration:line-through;"><?php echo Mage::helper('core')->currency($_product->getPrice(), true, false) ?></span>	
+	                                        <span style="font-size:16px;color:#ef5506;text-shadow:1px 1px 1px #FFFFFF;"><strong><?php echo Mage::helper('core')->currency($_product->getSpecialPrice(), true, false) ?></strong></span>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </a>	
+	                        
+	                      
+	        	        </div>
+                	</div>
+                        <?php endforeach;?>
+                        <?php echo $this->pagination('',$data['num_rows'],$pageSize,$currentPage);?>
+                        <?php echo $this->getPagerHtml();?>
